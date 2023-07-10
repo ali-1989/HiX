@@ -2,9 +2,8 @@
 # Dart: 3.0.0        old:
 # Java: 17
 
-name: app     		  # hi_x
-description: Female app.
-homepage: https://iris.ir
+name: app     		  # Hi_X
+description: Females app.
 #repository: https://github.com/...
 
 publish_to: 'none'
@@ -32,32 +31,37 @@ dependencies:
   community_material_icon: ^5.9.55      # https://materialdesignicons.com/
   device_info_plus: ^9.0.2
   platform_device_id: ^1.0.1
-  permission_handler: ^10.3.0            # NoWeb
-  video_player: ^2.6.1
-  chewie: ^1.5.0
+  permission_handler: ^10.4.2            # NoWeb
+  video_player: ^2.7.0
+  chewie: ^1.7.0
   audioplayers: ^4.1.0
-  http: ^1.0.0
+  http: ^1.1.0
   dio: ^5.2.1+1
   connectivity_plus: ^4.0.1
-  url_launcher: ^6.1.11
+  url_launcher: ^6.1.12
   material_dialogs: ^1.1.4
-  awesome_notifications: ^0.7.4+1                 # can not upgrade to new, occur error, 0.6.21
+  awesome_notifications: 0.6.21                 # can not upgrade to new, occur error, 0.6.21
   popover: ^0.2.8+2
   flutter_spinkit: ^5.2.0
-  stop_watch_timer: ^2.0.0
-  iris_notifier: ^0.0.4
+  stop_watch_timer: ^3.0.0
+  iris_notifier: ^0.0.7
   numberpicker: ^2.1.2
   toggle_switch: ^2.1.0
-  image_picker: ^0.8.9
+  image_picker: ^1.0.0
   file_picker: ^5.3.2
-  firebase_messaging: ^14.6.3
+  firebase_messaging: ^14.6.4
   firebase_core: ^2.14.0
   simple_animations: ^5.0.2
   animate_do: ^3.0.2                   # https://animate.style/
+  jwt_decoder: ^2.0.1
+  dart_jsonwebtoken: ^2.8.2
   badges: ^3.1.1
   photo_view: ^0.14.0                   # image view gallery
-  pin_code_fields: ^7.4.0
+  pin_code_fields: ^8.0.1
   shaped_bottom_bar: ^1.1.0
+  simple_html_css: ^4.0.0
+  flutter_svg: ^2.0.7
+  vector_graphics_compiler: ^1.1.7
 
 
   iris_tools:
@@ -81,13 +85,13 @@ dependency_overrides:
   flutter_svg: 1.1.6
   flutter_math_fork: 0.7.1
   file: ^7.0.0  # audioplayers
-  http: ^1.0.0  # audioplayers
+  http: ^1.1.0  # audioplayers
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.2
 
 
 flutter:
@@ -98,26 +102,18 @@ flutter:
     - assets/images/
     - assets/locales/
     - assets/audio/
-    - assets/raw/
+    - assets/svg/
 
 
   #style: italic  weight: 700
   fonts:
-    - family: OpenSans
+    - family: shabnam
       fonts:
-        - asset: assets/fonts/OpenSans.ttf
-    - family: Nazanin # base-sub
+      - asset: assets/fonts/ShabnamMediumFD.ttf
+    - family: shabnam_bold
       fonts:
-        - asset: assets/fonts/nazanin-base-sub.ttf
-    - family: Sans # sub
-      fonts:
-        - asset: assets/fonts/sans-sub.ttf
-    - family: IranSans # any
-      fonts:
-        - asset: assets/fonts/iran-sans.ttf
-    - family: Icomoon # any
-      fonts:
-        - asset: assets/fonts/icomoon.ttf
+      - asset: assets/fonts/ShabnamBoldFD.ttf
+
 
 
 flutter_icons:

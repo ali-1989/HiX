@@ -57,7 +57,6 @@ class _HomePageState extends StateBase<HomePage> {
 
   void requestData() async {
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'get_home_page_data';
     js[Keys.requesterId] = SessionService.getLastLoginUser()?.userId;
 
     requester.httpRequestEvents.onFailState = (req, r) async {
@@ -72,7 +71,7 @@ class _HomePageState extends StateBase<HomePage> {
     };
 
     requester.bodyJson = js;
-    requester.prepareUrl();
+
     requester.request(context);
   }
 }

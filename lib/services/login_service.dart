@@ -40,11 +40,8 @@ class LoginService {
   static void sendLogoffState(UserModel user){
     if(AppBroadcast.isNetConnected){
       final reqJs = <String, dynamic>{};
-      reqJs[Keys.requestZone] = 'Logoff_user_report';
       reqJs[Keys.requesterId] = user.userId;
       reqJs[Keys.forUserId] = user.userId;
-
-      DeviceInfoTools.attachApplicationInfo(reqJs, curUser: user);
 
       final info = HttpItem();
       info.fullUrl = '${SettingsManager.localSettings.httpAddress}/graph-v1';
@@ -109,12 +106,10 @@ class LoginService {
     final result = Completer<Map?>();
 
     final js = {};
-    js[Keys.requestZone] = 'send_otp';
     js[Keys.mobileNumber] = phoneNumber;
     js.addAll(countryModel.toMap());
-    DeviceInfoTools.attachApplicationInfo(js);
 
-    http.fullUrl = ApiManager.graphApi;
+    http.fullUrl = ApiManager.serverApi;
     http.method = 'POST';
     http.setBodyJson(js);
 
@@ -144,14 +139,12 @@ class LoginService {
     final result = Completer<TwoStateReturn<Map, Exception>>();
 
     final js = {};
-    js[Keys.requestZone] = 'verify_otp';
     js[Keys.mobileNumber] = phoneNumber;
     js['code'] = code;
     js.addAll(countryModel.toMap());
     js.addAll(DeviceInfoTools.mapDeviceInfo());
-    DeviceInfoTools.attachApplicationInfo(js);
 
-    http.fullUrl = ApiManager.graphApi;
+    http.fullUrl = ApiManager.serverApi;
     http.method = 'POST';
     http.setBodyJson(js);
 
@@ -182,12 +175,10 @@ class LoginService {
     final result = Completer<TwoStateReturn<Map, Exception>>();
 
     final js = {};
-    js[Keys.requestZone] = 'verify_email';
     js['email'] = email;
     js.addAll(DeviceInfoTools.mapDeviceInfo());
-    DeviceInfoTools.attachApplicationInfo(js);
 
-    http.fullUrl = ApiManager.graphApi;
+    http.fullUrl = ApiManager.serverApi;
     http.method = 'POST';
     http.setBodyJson(js);
 

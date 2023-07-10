@@ -94,11 +94,6 @@ class _ProfilePageState extends StateBase<ProfilePage> {
   Widget buildBody(){
     return Stack(
       children: [
-        SizedBox.expand(
-            child: Image.asset(AppImages.background,
-              fit: BoxFit.fill,
-            )
-        ),
 
         Positioned(
           top: MathHelper.percent(AppSizes.instance.appHeight, 25),
@@ -365,12 +360,11 @@ class _ProfilePageState extends StateBase<ProfilePage> {
     final fileName = PathHelper.getFileName(filePath);
 
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'Update_profile_avatar';
+
     js[Keys.requesterId] = user.userId;
     js[Keys.forUserId] = user.userId;
     js[Keys.fileName] = fileName;
     js[Keys.partName] = partName;
-    DeviceInfoTools.attachApplicationInfo(js);
 
     requester.httpRequestEvents.onFailState = (req, r) async {
       await hideLoading();
@@ -381,7 +375,6 @@ class _ProfilePageState extends StateBase<ProfilePage> {
       afterUploadAvatar(filePath, data);
     };
 
-    requester.prepareUrl();
     requester.bodyJson = null;
     requester.httpItem.clearFormField();
     requester.httpItem.addFormField(Keys.jsonPart, JsonHelper.mapToJson(js));
@@ -395,7 +388,6 @@ class _ProfilePageState extends StateBase<ProfilePage> {
     AppSheet.closeSheet(context);
 
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'delete_profile_avatar';
     js[Keys.requesterId] = user.userId;
     js[Keys.forUserId] = user.userId;
 
@@ -416,14 +408,13 @@ class _ProfilePageState extends StateBase<ProfilePage> {
 
     showLoading();
     requester.bodyJson = js;
-    requester.prepareUrl();
+
 
     requester.request(context, false);
   }
   
   void uploadName(String name, String family){
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'update_user_nameFamily';
     js[Keys.requesterId] = user.userId;
     js[Keys.forUserId] = user.userId;
     js[Keys.name] = name;
@@ -449,14 +440,12 @@ class _ProfilePageState extends StateBase<ProfilePage> {
 
     showLoading(canBack: false);
     requester.bodyJson = js;
-    requester.prepareUrl();
 
     requester.request(context, false);
   }
 
   void uploadGender(int gender){
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'update_user_gender';
     js[Keys.requesterId] = user.userId;
     js[Keys.forUserId] = user.userId;
     js[Keys.sex] = gender;
@@ -479,14 +468,13 @@ class _ProfilePageState extends StateBase<ProfilePage> {
 
     showLoading(canBack: false);
     requester.bodyJson = js;
-    requester.prepareUrl();
 
     requester.request(context, false);
   }
 
   void uploadBirthdate(DateTime dt){
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'update_user_birthdate';
+
     js[Keys.requesterId] = user.userId;
     js[Keys.forUserId] = user.userId;
     js[Keys.date] = DateHelper.toTimestamp(dt);
@@ -509,7 +497,6 @@ class _ProfilePageState extends StateBase<ProfilePage> {
 
     showLoading(canBack: false);
     requester.bodyJson = js;
-    requester.prepareUrl();
 
     requester.request(context, false);
   }
@@ -522,7 +509,7 @@ class _ProfilePageState extends StateBase<ProfilePage> {
     }
 
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'get_profile_data';
+
     js[Keys.requesterId] = user.userId;
     js[Keys.forUserId] = js[Keys.requesterId];
 
@@ -538,7 +525,7 @@ class _ProfilePageState extends StateBase<ProfilePage> {
     };
 
     requester.bodyJson = js;
-    requester.prepareUrl();
+
     requester.request(context);
   }
 

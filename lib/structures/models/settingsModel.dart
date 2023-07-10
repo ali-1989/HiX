@@ -46,7 +46,7 @@ class SettingsModel {
     calendarType = CalendarTypeHelper.calendarTypeFrom(map['calendar_type_name']);
     dateFormat = map['date_format']?? defaultDateFormat;
     colorTheme = map[Keys.setting$colorThemeName];
-    lastToBackgroundTs = map[Keys.setting$toBackgroundTs];
+    lastToBackgroundTs = map[Keys.setting$lastForegroundTs];
     confirmOnExit = map[Keys.setting$confirmOnExit]?? true;
     httpAddress = map['http_address']?? defaultHttpAddress;
     wsAddress = map['ws_address']?? defaultWsAddress;
@@ -65,7 +65,7 @@ class SettingsModel {
     map['calendar_type_name'] = calendarType.name;
     map['date_format'] = dateFormat;
     map[Keys.setting$colorThemeName] = colorTheme;
-    map[Keys.setting$toBackgroundTs] = lastToBackgroundTs;
+    map[Keys.setting$lastForegroundTs] = lastToBackgroundTs;
     map[Keys.setting$confirmOnExit] = confirmOnExit;
     map[Keys.setting$currentVersion] = currentVersion;
     map['http_address'] = httpAddress;

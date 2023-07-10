@@ -83,7 +83,6 @@ class _AboutUsPageState extends StateBase<AboutUsPage> {
 
   void requestAboutUs() async {
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'get_about_us_data';
     js[Keys.requesterId] = SessionService.getLastLoginUser()?.userId;
 
     requester.bodyJson = js;
@@ -99,7 +98,6 @@ class _AboutUsPageState extends StateBase<AboutUsPage> {
       assistCtr.addStateAndUpdateHead(state$fetchData);
     };
 
-    requester.prepareUrl();
     requester.request(context);
   }
 }

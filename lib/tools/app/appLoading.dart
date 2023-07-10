@@ -165,26 +165,7 @@ class AppLoading {
               ),
             ),
             child: Center(
-              child: Lottie.asset(
-                AppImages.loadingLottie,
-                width: 200,
-                height: 200,
-                reverse: false,
-                animate: true,
-                fit: BoxFit.fill,
-                delegates: LottieDelegates(
-                  values: [
-                    ValueDelegate.strokeColor(
-                      ['heartStroke', '**'],
-                      value: lottieColor,
-                    ),
-                    ValueDelegate.color(
-                      ['heartFill', 'Group 1', '**'],
-                      value: lottieColor,
-                    ),
-                  ],
-                ),
-              ),
+              child: Text('loading'),
             )
         )
     );

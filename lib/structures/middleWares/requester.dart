@@ -1,4 +1,7 @@
 import 'package:app/managers/api_manager.dart';
+import 'package:app/services/jwt_service.dart';
+import 'package:app/services/session_service.dart';
+import 'package:app/system/commonHttpHandler.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,11 +10,8 @@ import 'package:iris_tools/api/helpers/jsonHelper.dart';
 import 'package:iris_tools/api/logger/logger.dart';
 import 'package:iris_tools/api/tools.dart';
 
-import 'package:app/system/commonHttpHandler.dart';
-import 'package:app/system/keys.dart';
 import 'package:app/tools/app/appHttpDio.dart';
 import 'package:app/tools/app/appSheet.dart';
-import 'package:app/tools/deviceInfoTools.dart';
 
 ///=============================================================================================
 enum MethodType {
@@ -50,26 +50,24 @@ class Requester {
   set bodyJson(Map<String, dynamic>? js) {
     _bodyJs = js;
 
-    if(js != null) {
-      DeviceInfoTools.attachApplicationInfo(_bodyJs!);
-    }
+    /*if(js != null) {
+      PublicAccess.addAppInfo(_bodyJs!);
+    }*/
   }
 
   void _prepareHttp(){
     _http = HttpItem();
     _http.setResponseIsPlain();
-    _http.fullUrl = ApiManager.graphApi;
+    _http.fullUrl = ApiManager.serverApi;
   }
 
-  void prepareUrl({String? fullUrl, String? pathUrl}){
-    if(fullUrl != null){
-      _http.fullUrl = fullUrl;
+  void prepareUrl({required String pathUrl, bool isFull = false}){
+    if(isFull){
+      _http.fullUrl = pathUrl;
       return;
     }
 
-    pathUrl ??= '';
-
-    _http.fullUrl = ApiManager.graphApi + pathUrl;
+    _http.fullUrl = ApiManager.serverApi + pathUrl;
   }
 
   void request([BuildContext? context, bool promptErrors = true]){
@@ -96,9 +94,9 @@ class Requester {
 
     AppHttpDio.cancelAndClose(_httpRequester);
 
-    /*if(Session.hasAnyLogin()) {
-      _http.headers.addAll({'authorization': 'Bearer ${Session.getLastLoginUser()!.token?.token}'});
-    }*/
+    if(SessionService.hasAnyLogin()) {
+      _http.headers.addAll({'authorization': 'Bearer ${SessionService.getLastLoginUser()!.token?.token}'});
+    }
 
     _httpRequester = AppHttpDio.send(_http);
 
@@ -124,20 +122,17 @@ class Requester {
         var request = '';
 
         if (_httpRequester.requestOptions?.data is String){
-          final str = _httpRequester.requestOptions!.data as String;
+          var str = _httpRequester.requestOptions!.data as String;
 
-          if(str.contains(Keys.requestZone)) {
-            int start = str.indexOf(Keys.requestZone)+15;
-
-            request = str.substring(start, start+15);
-          }
+          str = str.substring(0, 15);
         }
 
         Tools.verbosePrint('@@@>> [$url] [$request]  response ======= [${_httpRequester.responseData?.statusCode}] $val');
       }
 
-      /*if(_httpRequester.responseData?.statusCode == 401 && Session.getLastLoginUser() != null){
-        final getNewToken = await JwtService.requestNewToken(Session.getLastLoginUser()!);
+      if(_httpRequester.responseData?.statusCode == 401 && SessionService.getLastLoginUser() != null){
+        JwtService.stopRefreshService();
+        final getNewToken = await JwtService.requestNewToken(SessionService.getLastLoginUser()!);
 
         /// try request old api again
         if(getNewToken) {
@@ -149,7 +144,7 @@ class Requester {
         }
 
         return;
-      }*/
+      }
 
       await httpRequestEvents.onAnyState?.call(_httpRequester);
 
@@ -182,16 +177,14 @@ class Requester {
         return;
       }
 
-      final result = js[Keys.status]?? Keys.error;
-
-      if(result == Keys.ok) {
+      if(_httpRequester.responseData!.statusCode == 200) {
         await httpRequestEvents.onStatusOk?.call(_httpRequester, js);
       }
       else {
         await httpRequestEvents.onFailState?.call(_httpRequester, val);
 
         if(context != null && context.mounted) {
-          if (promptErrors && !CommonHttpHandler.handler(context, js)) {
+          if (promptErrors && !CommonHttpHandler.processCommonRequestError(context, _httpRequester, js)) {
             await AppSheet.showSheet$ServerNotRespondProperly(context);
           }
         }

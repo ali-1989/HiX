@@ -6,23 +6,37 @@ import 'package:app/pages/e404_page.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/pages/profile/profile_page.dart';
 import 'package:app/tools/app/appNavigator.dart';
+import 'package:iris_tools/api/stackList.dart';
 
 class RouteTools {
   static BuildContext? materialContext;
+  static final StackList<State> widgetStateStack = StackList();
 
   RouteTools._();
 
-  static prepareWebRoute(){
+  static prepareRoutes(){
     final aboutPage = IrisPageRoute.by((ProfilePage).toString(), ProfilePage());
     final homePage = IrisPageRoute.by((HomePage).toString(), HomePage());
-    final e404Page = WebRoute.by((E404Page).toString(), E404Page());
+    final e404Page = IrisPageRoute.by((E404Page).toString(), E404Page());
 
     IrisNavigatorObserver.notFoundHandler = (settings) => null;
-    IrisNavigatorObserver.webRoutes.add(aboutPage);
-    IrisNavigatorObserver.webRoutes.add(homePage);
-    IrisNavigatorObserver.webRoutes.add(e404Page);
+    IrisNavigatorObserver.allAppRoutes.add(aboutPage);
+    IrisNavigatorObserver.allAppRoutes.add(homePage);
+    IrisNavigatorObserver.allAppRoutes.add(e404Page);
 
     IrisNavigatorObserver.homeName = homePage.routeName;
+  }
+
+  static void addWidgetState(State state){
+    return widgetStateStack.push(state);
+  }
+
+  static State removeWidgetState(){
+    return widgetStateStack.pop();
+  }
+
+  static State getTopWidgetState(){
+    return widgetStateStack.top();
   }
 
   static BuildContext? getTopContext() {

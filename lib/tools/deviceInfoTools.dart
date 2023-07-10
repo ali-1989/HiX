@@ -9,10 +9,6 @@ import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/api/system.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
-import 'package:app/constants.dart';
-import 'package:app/services/firebase_service.dart';
-import 'package:app/services/session_service.dart';
-import 'package:app/structures/models/userModel.dart';
 import 'package:app/system/keys.dart';
 import 'package:app/tools/app/appDb.dart';
 
@@ -121,28 +117,5 @@ class DeviceInfoTools {
     }
 
     return js;
-  }
-
-  static Map<String, dynamic> mapApplicationInfo() {
-    final res = <String, dynamic>{};
-    res[Keys.deviceId] = deviceId;
-    res[Keys.appName] = Constants.appName;
-    res['app_version_code'] = Constants.appVersionCode;
-    res['app_version_name'] = Constants.appVersionName;
-
-    return res;
-  }
-
-  static Map attachApplicationInfo(Map src, {UserModel? curUser}) {
-    final token = curUser?.token ?? SessionService.getLastLoginUser()?.token;
-
-    src.addAll(mapApplicationInfo());
-
-    if (token?.token != null) {
-      src[Keys.token] = token?.token;
-      src['fcm_token'] = FireBaseService.token;
-    }
-
-    return src;
   }
 }

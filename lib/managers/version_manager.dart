@@ -1,24 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:iris_tools/api/helpers/urlHelper.dart';
-import 'package:iris_tools/api/system.dart';
-import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/api/helpers/mathHelper.dart';
 
 import 'package:app/constants.dart';
-import 'package:app/managers/settings_manager.dart';
-import 'package:app/structures/middleWares/requester.dart';
+import 'package:app/pages/new_version_page.dart';
 import 'package:app/structures/models/versionModel.dart';
-import 'package:app/system/keys.dart';
 import 'package:app/tools/app/appDb.dart';
-import 'package:app/tools/app/appDialogIris.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appMessages.dart';
 import 'package:app/tools/app/appThemes.dart';
-import 'package:app/tools/deviceInfoTools.dart';
 import 'package:app/tools/routeTools.dart';
+import '/managers/settings_manager.dart';
 
 class VersionManager {
   VersionManager._();
@@ -50,7 +42,7 @@ class VersionManager {
     }
   }
 
-  static Future<VersionModel?> requestGetLastVersion(BuildContext context, Map<String, dynamic> data) async {
+  /*static Future<VersionModel?> requestGetLastVersion(BuildContext context, Map<String, dynamic> data) async {
     final res = Completer<VersionModel?>();
     final requester = Requester();
 
@@ -71,13 +63,13 @@ class VersionManager {
     data[Keys.requestZone] = 'last_version';
 
     requester.bodyJson = data;
-    requester.prepareUrl();
+    requester.prepareUrl(pathUrl: '');
     requester.request(context, false);
 
     return res.future;
-  }
+  }*/
 
-  static void checkAppHasNewVersion(BuildContext context) async {
+  /*static void checkAppHasNewVersion(BuildContext context) async {
     final deviceInfo = DeviceInfoTools.mapDeviceInfo();
 
     final vm = await requestGetLastVersion(context, deviceInfo);
@@ -98,9 +90,9 @@ class VersionManager {
         }
       }
     }
-  }
+  }*/
 
-  /*static void checkAppHasNewVersion(BuildContext context, VersionModel serverVersion) async {
+  static void checkAppHasNewVersion(BuildContext context, VersionModel serverVersion) async {
     var v = serverVersion.newVersionName;
     v = v.replaceAll('.', '');
 
@@ -108,11 +100,11 @@ class VersionManager {
       existNewVersion = true;
       showUpdateDialog(context, serverVersion);
     }
-  }*/
+  }
 
   static void showUpdateDialog(BuildContext context, VersionModel vm) {
-    
-    void closeApp(ctx){
+    RouteTools.pushPage(context, NewVersionPage(versionModel: vm));
+    /*void closeApp(ctx){
       System.exitApp();
     }
 
@@ -131,10 +123,10 @@ class VersionManager {
       decoration: decoration,
       yesText: vm.restricted ? AppMessages.exit : AppMessages.later,
       yesFn: vm.restricted ? closeApp: null,
-    );
+    );*/
   }
 
-  static Widget _buildView(VersionModel vm){
+  /*static Widget _buildView(VersionModel vm){
     final msg = vm.description?? AppMessages.newAppVersionIsOk;
 
     void onDirectClick(){
@@ -213,15 +205,5 @@ class VersionManager {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: views,
     );
-  }
+  }*/
 }
-
-/*
-newVersionModel = VersionModel();
-      newVersionModel!.directLink = 'http://www.google.com';
-      newVersionModel!.description = 'نسخه ی جدید اپلیکیشن رسید. \n\n ویژگی ها:\n\n 1(پاهر جدید\n2( کلاس کلاس کلاس کلاس کلاس کلاس کلاس کلاس هست کلاس نیست دانلودپد لل\n یبل للا';
-      newVersionModel!.newVersionCode = 100;
-      newVersionModel!.newVersionName = '1.1.1';
-      newVersionModel!.restricted = true;
-      newVersionModel!.markets = {'دانلود از مایکت':'http://x.com', 'دانلود از بازار':'http://y.com'};
- */

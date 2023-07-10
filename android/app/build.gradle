@@ -40,7 +40,7 @@ if (targetSdkVersionVal == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace "ir.iris.hi_x"
@@ -62,12 +62,6 @@ android {
     }
 
     signingConfigs {
-        debug {
-            storeFile file('E:\\Programming\\Projects\\FlutterProjects\\VosateZehn\\VosateZehn\\android\\app\\key.keystore')
-            keyAlias 'b4a'
-            keyPassword 'a6987@7896b'
-            storePassword 'a6987@7896b'
-        }
 
         release {
             storeFile file('E:\\Programming\\Projects\\FlutterProjects\\VosateZehn\\VosateZehn\\android\\app\\key.keystore')
@@ -109,7 +103,6 @@ android {
             zipAlignEnabled true
             ext.enableCrashlytics = false
             ext.alwaysUpdateBuildId = false
-            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -129,6 +122,4 @@ flutter {
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.2.2')
-    //implementation 'androidx.annotation:annotation:1.4.0'
-    //implementation 'androidx.multidex:multidex:2.0.1'
 }

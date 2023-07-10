@@ -3,16 +3,11 @@
 class Keys {
   Keys._();
 
-  static const requestZone = 'request_zone';
-  static const status = 'status';
-  static const command = 'command';
-  static const section = 'section';
   static const ok = 'ok';
   static const error = 'error';
   static const cause = 'cause';
   static const causeCode = 'cause_code';
   static const deviceId = 'device_id';
-  static const userId = 'user_id';
   static const forUserId = 'for_user_id';
   static const userName = 'user_name';
   static const password = 'password';
@@ -25,11 +20,13 @@ class Keys {
   static const appName = 'app_name';
   static const value = 'value';
   static const name = 'name';
-  static const key = 'key';
-  static const iso = 'iso';
   static const family = 'family';
+  static const firstName = 'firstName';
+  static const key = 'key';
+  static const lastName = 'lastName';
+  static const userId = 'id';
   static const sex = 'sex';
-  static const birthdate = 'birthdate';
+  static const birthdate = 'birthDate';
   static const title = 'title';
   static const type = 'type';
   static const domain = 'domain';
@@ -55,28 +52,22 @@ class Keys {
   static const url = 'url';
   static const id = 'id';
   static const description = 'description';
-  static const searchFilter = 'search_filter';
-  static const nodeName = 'node_name';
-  static const extraJs = 'extra_js';
-  static const sortOrder = 'sort_order';
-  static const toast = 'toast';
+  static const message = 'message';
   //----- common settings key -----------------------------------------------------------------
   static const setting$lastLoginDate = 'last_login_date';
-  static const setting$lastRouteName = 'Last_route_name';
   static const setting$appSettings = 'app_settings';
   static const setting$fontThemeData = 'font_theme_data';
   static const setting$colorThemeName = 'color_theme_name';
-  static const setting$toBackgroundTs = 'to_background_ts';
+  static const setting$lastForegroundTs = 'last_foreground_ts';
   static const setting$confirmOnExit = 'confirm_on_exit';
   static const setting$notificationChanelKey = 'notification_chanel_key';
   static const setting$notificationChanelGroup = 'notification_chanel_group';
   static const setting$notificationModel = 'notification_model';
   static const setting$currentVersion = 'current_version';
   static const setting$webDeviceId = 'web_device_id';
-  static const setting$userMessageIds = 'user_messages_ids';
-  //----- app key -----------------------------------------------------------------
-  static const setting$bucketType = 'bucket_type';
-  static const setting$textOfDayGetPreMonth = 'text_of_day_get_pre_month';
+  //----- app settings key -----------------------------------------------------------------
+  static const setting$registerPhoneNumber = 'register_phone_number';
+  static const setting$registerPhoneNumberTs = 'register_phone_number_ts';
   static const setting$lastAidDialogShowTime = 'last_aid_dialog_show_time';
   static const setting$dailyIdsList = 'daily_ids_show';
   static const setting$notificationDailyText = 'notification_daily_text';

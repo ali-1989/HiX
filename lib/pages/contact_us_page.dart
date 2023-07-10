@@ -108,7 +108,6 @@ class _ContactUsPageState extends StateBase<ContactUsPage> {
     final txt = textCtr.text.trim();
 
     final js = <String, dynamic>{};
-    js[Keys.requestZone] = 'send_ticket_data';
     js[Keys.requesterId] = SessionService.getLastLoginUser()?.userId;
     js[Keys.data] = txt;
 
@@ -129,7 +128,6 @@ class _ContactUsPageState extends StateBase<ContactUsPage> {
     };
 
     showLoading();
-    requester.prepareUrl();
     requester.request(context);
   }
 }
