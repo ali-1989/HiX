@@ -38,8 +38,8 @@ dependencies:
   audioplayers: ^4.1.0
   http: ^1.0.0
   dio: ^5.2.1+1
-  url_launcher: ^6.1.11
   connectivity_plus: ^4.0.1
+  url_launcher: ^6.1.11
   material_dialogs: ^1.1.4
   awesome_notifications: ^0.7.4+1                 # can not upgrade to new, occur error, 0.6.21
   popover: ^0.2.8+2
@@ -137,7 +137,6 @@ import_sorter:
   comments: false
 
 
-
   # ** packages that for iOS needs additional code:
   # https://pub.dev/packages/just_audio#ios
   # https://pub.dev/packages/url_launcher#ios
@@ -145,6 +144,7 @@ import_sorter:
   # https://pub.dev/packages/awesome_notifications#-configuring-ios
   # https://pub.dev/packages/video_player#ios
   # https://pub.dev/packages/image_picker#ios
+  # https://pub.dev/packages/flutter_local_auth_invisible#ios-integration
 
   # ** packages that for Android needs additional code:
   # https://pub.dev/packages/url_launcher#android

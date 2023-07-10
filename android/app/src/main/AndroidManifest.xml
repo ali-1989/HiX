@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="ir.vosatezehn.com"
+          package="ir.iris.hi_x"
           android:installLocation="auto">
     <!-- ================================
       installLocation: auto | preferExternal
@@ -132,7 +132,7 @@
            -->
 
     <application
-        android:label="hi_x"
+        android:label="HiX"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"

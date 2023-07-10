@@ -13,10 +13,11 @@ class RouteTools {
   RouteTools._();
 
   static prepareWebRoute(){
-    final aboutPage = WebRoute.by((ProfilePage).toString(), ProfilePage());
-    final homePage = WebRoute.by((HomePage).toString(), HomePage());
+    final aboutPage = IrisPageRoute.by((ProfilePage).toString(), ProfilePage());
+    final homePage = IrisPageRoute.by((HomePage).toString(), HomePage());
     final e404Page = WebRoute.by((E404Page).toString(), E404Page());
 
+    IrisNavigatorObserver.notFoundHandler = (settings) => null;
     IrisNavigatorObserver.webRoutes.add(aboutPage);
     IrisNavigatorObserver.webRoutes.add(homePage);
     IrisNavigatorObserver.webRoutes.add(e404Page);
