@@ -42,7 +42,7 @@ class SplashPageState extends StateBase<SplashPage> {
   static bool _callLazyInit = false;
   static bool _isInit = false;
   static bool _isInLoadingSettings = true;
-  bool _isConnectToServer = false;
+  bool _isConnectToServer = true;
   int splashWaitingMil = 4000;
   Timer? timer;
 
@@ -156,7 +156,7 @@ class SplashPageState extends StateBase<SplashPage> {
 
       if(context != null && context.mounted){
         RouteTools.prepareRoutes();
-        AppCache.screenBack = const AssetImage(AppImages.splashBackgroundPlus);
+        AppCache.screenBack = const AssetImage(AppImages.backgroundPlus);
         await precacheImage(AppCache.screenBack!, context);
       }
 

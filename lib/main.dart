@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/managers/font_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -152,6 +153,7 @@ class MyApp extends StatelessWidget {
         testCodes(localContext);
 
         double factor = PlatformDispatcher.instance.textScaleFactor.clamp(0.85, 2.0);
+        FontManager.instance.detectDeviceFontSize(localContext);
 
         return MediaQuery(
           data: MediaQuery.of(localContext).copyWith(textScaleFactor: factor),

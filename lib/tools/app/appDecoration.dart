@@ -7,10 +7,21 @@ import 'package:iris_tools/api/helpers/colorHelper.dart';
 class AppDecoration {
   AppDecoration._();
 
-  static Color mainColor = Colors.amber;
-  static Color secondColor = Colors.orange;
-  static Color differentColor = const Color(0xFFFF006E);
-  static Color orange = const Color(0xFFFF006E);
+  static Color mainColor = const Color(0xff3c0df9);
+  static Color secondColor = const Color(0xffe6f2ff);
+  static Color darkColor = const Color(0xff001949);
+  static Color danger = const Color(0xFFf0134d);
+  static Color success = const Color(0xFF00D971);
+  static Color info = const Color(0xFF79DAE8);
+  static Color warning = const Color(0xFFFF5C00);
+
+  static String get morabbaFont {
+    return 'morabba';
+  }
+
+  static String get shabnamFont {
+    return 'Shabnam';
+  }
 
   static TextStyle infoHeadLineTextStyle() {
     return AppThemes.instance.themeData.textTheme.headlineSmall!.copyWith(

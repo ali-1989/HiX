@@ -85,10 +85,14 @@ class AppThemes {
 		{
 			final mainTheme = ColorTheme(
 					AppDecoration.mainColor, AppDecoration.secondColor,
-					AppDecoration.differentColor, Colors.black);
+					AppDecoration.darkColor, Colors.black);
 
 			mainTheme.themeName = 'Main';
 			mainTheme.appBarItemColor = Colors.black.withAlpha(180);
+			mainTheme.warningColor = AppDecoration.warning;
+			mainTheme.infoColor = AppDecoration.info;
+			mainTheme.successColor = AppDecoration.secondColor;
+			mainTheme.errorColor = AppDecoration.danger;
 
 			AppThemes._instance.themeList[mainTheme.themeName] = mainTheme;
 

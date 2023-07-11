@@ -1,8 +1,5 @@
+import 'package:app/tools/app/appSizes.dart';
 import 'package:flutter/material.dart';
-
-import 'package:animate_do/animate_do.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lottie/lottie.dart';
 
 import 'package:app/tools/app/appImages.dart';
 
@@ -13,68 +10,71 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         child: SizedBox.expand(
-            child: buildBody()
+            child: buildBody(context)
         )
     );
   }
 
- /* Widget buildBody(){
-    return SizedBox.expand(
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(AppImages.logoSplash),
-              fit: BoxFit.fill,
-            )
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+ Widget buildBody(BuildContext context){
+    return Stack(
+      fit: StackFit.expand,
+      children: [
 
-            FadeIn(
-              duration: const Duration(milliseconds: 700),
-              child: Image.asset(AppImages.appIcon,
-                width: 100,
-                height: 100,
+        const DecoratedBox(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFFE2DBFF), Color(0xFF3C0DF9)],
+                  begin: FractionalOffset.topLeft,
+                  end: Alignment(0.9, 0.9)
+                )
+            ),
+        ),
+
+        CustomPaint(
+          painter: MakeCircle(),
+        ),
+
+        Positioned(
+          top: AppSizes.getScreenHeight(context)/4,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: const DecoratedBox(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(AppImages.backgroundPlus),
+                    fit: BoxFit.fill,
+                  )
               ),
             ),
+        ),
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+
+            Image.asset(AppImages.splashWelcome,
+              width: 85,
+              height: 85,
+            )
           ],
         ),
-      ),
-    );
-  }*/
-
-  Widget buildBody(){
-    return Stack(
-      children: [
-
-        SizedBox.expand(
-          child:ColoredBox(color: Colors.red,)
-        ),
-        SvgPicture(
-          ExactAssetPicture('assets/splash.svg.vec'),
-          fit: BoxFit.fill,
-          allowDrawingOutsideViewBox: true,
-          alignment: Alignment.center,
-        ),
       ],
     );
   }
+}
+///=====================================================================
+class MakeCircle extends CustomPainter {
 
-  Widget buildBody2(){
-    return Stack(
-      children: [
-
-        SizedBox.expand(
-          child:ColoredBox(color: Colors.red,)
-        ),
-        SvgPicture.asset(
-            AppImages.splash,
-          fit: BoxFit.fill,
-          allowDrawingOutsideViewBox: true,
-          alignment: Alignment.center,
-        ),
-      ],
-    );
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+    paint.color = Colors.white12;
+    var position = Offset(size.width /2, 100);
+    canvas.drawCircle(position, size.width, paint);
   }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

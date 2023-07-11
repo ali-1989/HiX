@@ -14,6 +14,7 @@ class FontManager {
   static late final FontManager _instance;
   static bool useFlutterFontSize = true;
   static const double defaultFontSize = 13;
+  static double deviceFontSize = 13;
 
   static final List<Font> _fontList = [];
   static late Font _platformDefaultFont;
@@ -39,6 +40,27 @@ class FontManager {
 
   ThemeData get rawThemeData => _rawThemeData;
   TextTheme get rawTextTheme => _rawTextTheme;
+
+  List<Font> fontList(){
+    return _fontList;
+  }
+
+  void detectDeviceFontSize(BuildContext context){
+    final theme = Theme.of(context);
+    Future.delayed(const Duration(milliseconds: 500), (){
+      deviceFontSize = theme.textTheme.bodyMedium?.fontSize?? defaultFontSize;
+    });
+  }
+
+  Font? fontByFamily(String family){
+    for (final font in _fontList) {
+      if(font.family == family){
+        return font;
+      }
+    }
+
+    return null;
+  }
 
   String getPlatformFontFamily(){
     BuildContext? context;
@@ -130,7 +152,8 @@ class FontManager {
       return;
     }
 
-    /// family: any-name   fileName: font name in [pubspec.yaml]
+    /// family: family name in [pubspec.yaml]   *** family match is important, case insensitive
+    /// fileName: asset in [pubspec.yaml]       not important
 
     /*final atlanta = Font.bySize()
         ..family = 'Atlanta'
@@ -142,26 +165,52 @@ class FontManager {
       */
     //------------- fa -------------------------------------------------
     final shabnam = Font.bySize()
-      ..family = 'shabnam'
-      ..fileName = 'ShabnamMediumFD.ttf'
+      ..family = 'Shabnam'
       ..defaultLanguage = 'fa'
       ..defaultUsage = FontUsage.normal
-      ..usages = [FontUsage.sub]
+      ..usages = [FontUsage.bold]
       ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
       ..height = 1.4;
 
-    final shabnamBold = Font.bySize()
-      ..family = 'shabnam_bold'
-      ..fileName = 'ShabnamBoldFD.ttf'
+    final yekan = Font.bySize()
+      ..family = 'yekan'
+      ..defaultLanguage = 'fa'
+      ..defaultUsage = FontUsage.normal
+      //..usages = [FontUsage.sub]
+      ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
+      ..height = 1.2;
+
+    final yekanBold = Font.bySize()
+      ..family = 'yekan_bold'
       ..defaultLanguage = 'fa'
       ..defaultUsage = FontUsage.bold
-      ..usages = [FontUsage.normal, FontUsage.bold]
+      //..usages = [FontUsage.normal, FontUsage.bold]
       ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
-      ..height = 1.4;
+      ..height = 1.2;
+
+    final yekanSub = Font.bySize()
+      ..family = 'yekan_light'
+      ..defaultLanguage = 'fa'
+      ..defaultUsage = FontUsage.sub
+      //..usages = [FontUsage.normal, FontUsage.bold]
+      ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
+      ..height = 1.2;
 
 
+    final morabba = Font.bySize()
+      ..family = 'morabba'
+      ..defaultLanguage = 'fa'
+      ..defaultUsage = FontUsage.normal
+      ..usages = [FontUsage.sub, FontUsage.bold]
+      ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
+      ..height = 1.0;
+
+
+    _fontList.add(yekan);
+    _fontList.add(yekanBold);
+    _fontList.add(yekanSub);
+    _fontList.add(morabba);
     _fontList.add(shabnam);
-    _fontList.add(shabnamBold);
 
 
     var rawDef = _getDefaultFontFamily();
