@@ -53,6 +53,7 @@ dependencies:
   firebase_core: ^2.14.0
   simple_animations: ^5.0.2
   animate_do: ^3.0.2                   # https://animate.style/
+  animator: ^3.3.0
   jwt_decoder: ^2.0.1
   dart_jsonwebtoken: ^2.8.2
   badges: ^3.1.1
@@ -80,9 +81,6 @@ dependencies:
 
 dependency_overrides:
   intl: 0.18.1    # awesome_notifications, flutter_localizations
-  win32: 4.1.4    # file_picker, wakelock_windows
-  flutter_svg: 1.1.6
-  flutter_math_fork: 0.7.1
   file: ^7.0.0  # audioplayers
   http: ^1.1.0  # audioplayers
 
@@ -110,7 +108,7 @@ flutter:
       - asset: assets/fonts/ShabnamMediumFD.ttf
     - family: yekan
       fonts:
-      - asset: assets/fonts/IRANYekanMobileMedium.ttf
+      - asset: assets/fonts/IRANYekanMediumMsn.ttf
     - family: yekan_bold
       fonts:
       - asset: assets/fonts/IRANYekanMobileBold.ttf

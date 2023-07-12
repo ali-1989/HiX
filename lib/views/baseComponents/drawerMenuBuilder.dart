@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/views/baseComponents/layoutScaffold.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -30,221 +31,205 @@ import 'package:app/tools/app/appMessages.dart';
 import 'package:app/tools/app/appSizes.dart';
 import 'package:app/tools/app/appThemes.dart';
 import 'package:app/tools/routeTools.dart';
+import 'package:iris_tools/widgets/irisImageView.dart';
 
 class DrawerMenuBuilder {
   DrawerMenuBuilder._();
 
-  //static Widget? _drawer;
-
-  static Widget getDrawer(){
-    return Refresh(
-      controller: AppBroadcast.drawerMenuRefresher,
-      builder: (ctx, ctr){
-        return _buildDrawer();
-      },
-    );
+  static void toggleDrawer(){
+    LayoutScaffoldState.toggleDrawer();
   }
 
-  static Widget _buildDrawer(){
+  static Widget buildDrawer(){
     return SizedBox(
-      width: MathHelper.minDouble(400, MathHelper.percent(AppSizes.instance.appWidth, 60)),
-      child: Drawer(
-        child: Column(
-          children: [
-            Expanded(
-              child: Theme(
-                data: AppThemes.instance.themeData.copyWith(
-                    textTheme: const TextTheme(bodyLarge: TextStyle(fontSize: 10, color: Colors.black))
+      width: MathHelper.minDouble(250, MathHelper.percent(AppSizes.instance.appWidth, 60)),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+            color: Colors.grey.shade50,
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15))
+        ),
+
+        child: Builder(
+            builder: (context) {
+              return ListTileTheme(
+                data: ListTileTheme.of(context).copyWith(
+                  style: ListTileStyle.drawer,
+                  titleTextStyle: AppThemes.baseTextStyle(),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
                 ),
                 child: ListView(
                   children: [
-                    const SizedBox(height: 32),
+                    //SizedBox(height: 30),
+
+                    Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(
+                          onPressed: (){
+                            LayoutScaffoldState.toggleDrawer();
+                          },
+                          icon: Image.asset(AppImages.newVersionIco, color: Colors.black),
+                        )
+                    ),
 
                     _buildProfileSection(),
 
-                    const SizedBox(height: 10),
-
-                    if(SessionService.hasAnyLogin())
-                      ListTile(
-                        title: Text(SessionService.isGuestCurrent()? AppMessages.registerTitle :AppMessages.logout).color(Colors.redAccent),
-                        leading: const Icon(AppIcons.logout, size: 18, color: Colors.redAccent),
-                        onTap: onLogoffCall,
-                        dense: true,
-                      ),
+                    const SizedBox(height: 30),
 
                     ListTile(
-                      title: Text(AppMessages.contactUs),
-                      leading: const Icon(AppIcons.message),
-                      onTap: gotoContactUsPage,
+                      title: const Text('کیف پول'),
+                      leading: Image.asset(AppImages.newVersionIco, width: 20, height: 20),
+                      onTap: gotoAboutPage,
                       dense: true,
+                      horizontalTitleGap: 0,
+                      visualDensity: const VisualDensity(horizontal: 0, vertical: -3.0),
                     ),
 
                     ListTile(
                       title: Text(AppMessages.aboutUs),
-                      leading: const Icon(AppIcons.infoCircle),
-                      onTap: gotoAboutUsPage,
+                      leading: Image.asset(AppImages.newVersionIco, width: 20, height: 20),
+                      onTap: gotoAboutPage,
                       dense: true,
+                      horizontalTitleGap: 0,
+                      visualDensity: const VisualDensity(horizontal: 0, vertical: -3.0),
                     ),
 
-                    Builder(
-                      builder: (context) {
-                        if(VersionManager.existNewVersion){
-                          return Column(
-                            children: [
-                              ColoredBox(
-                                color: Colors.cyan.withAlpha(80),
-                                child: ListTile(
-                                  title: Text(AppMessages.downloadNewVersion),
-                                  leading: const Icon(AppIcons.downloadFile),
-                                  onTap: downloadNewVersion,
-                                  dense: true,
-                                ),
-                              ),
+                    /*ListTile(
+                    title: Text('تنظیمات'),
+                    leading: Image.asset(AppImages.drawerSettingIco, width: 20, height: 20),
+                    onTap: gotoProfilePage,
+                    dense: true,
+                    horizontalTitleGap: 0,
+                    visualDensity: VisualDensity(horizontal: 0, vertical: -3.0),
+                  ),*/
 
-                              const SizedBox(height: 50),
-                            ],
-                          );
-                        }
-
-                        return const SizedBox();
-                      },
-
-                    ),
+                    if(SessionService.hasAnyLogin())
+                      ListTile(
+                        title: Text(AppMessages.logout),/*.color(Colors.redAccent),*/
+                        //leading: Icon(AppIcons.logout, size: 18, color: Colors.redAccent),
+                        leading: Image.asset(AppImages.newVersionIco, width: 20, height: 20),
+                        onTap: onLogoffCall,
+                        dense: true,
+                        horizontalTitleGap: 0,
+                        visualDensity: const VisualDensity(horizontal: 0, vertical: -3.0),
+                      ),
                   ],
                 ),
-              ),
-            ),
-
-            ColoredBox(
-              color: Colors.amberAccent.shade200,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4.0),
-                    child: Text('نسخه ی ${Constants.appVersionName}'),
-                  ),
-                ],
-              ),
-            ),
-          ],
+              );
+            }
         ),
       ),
     );
   }
 
   static Widget _buildProfileSection(){
-    if(SessionService.hasAnyLogin()){
-      final user = SessionService.getLastLoginUser()!;
+    return StreamBuilder(
+      stream: EventNotifierService.getStream(AppEvents.userProfileChange),
+      builder: (_, data){
+        if(SessionService.hasAnyLogin()){
+          final user = SessionService.getLastLoginUser()!;
+          return GestureDetector(
+            onTap: (){
+              gotoProfilePage();
+            },
+            child: Column(
+              children: [
+                Builder(
+                  builder: (ctx) {
+                    return Builder(
+                      builder: (ctx){
+                        if(user.hasAvatar()){
+                          //final path = AppDirectories.getSavePathUri(user.avatarModel!.fileLocation?? '', SavePathType.userProfile, user.avatarFileName);
+                          //final img = FileHelper.getFile(path);
+                          //if(img.existsSync() && img.lengthSync() == (user.avatarModel!.volume?? 0)){
 
-      return GestureDetector(
-        onTap: gotoProfilePage,
-        child: Column(
-          children: [
-            StreamBuilder(
-              stream: EventNotifierService.getStream(AppEvents.userProfileChange),
-              builder: (ctx, data) {
-                return Builder(
-                  builder: (ctx){
-                    if(user.profileModel?.url != null){
-                      if(kIsWeb){
-                        return CircleAvatar(
-                          backgroundImage: NetworkImage(user.profileModel!.url!),
-                          radius: 30,
-                        );
-                      }
-                      else {
-                        final path = AppDirectories.getSavePathUri(user.profileModel!.url ?? '', SavePathType.userProfile, user.avatarFileName);
-                        final img = FileHelper.getFile(path);
-
-                        if (img.existsSync()) {
-                          if (user.profileModel!.volume == null || img.lengthSync() == user.profileModel!.volume) {
-                            return CircleAvatar(
-                              backgroundImage: FileImage(File(img.path)),
-                              radius: 30,
-                            );
-                          }
+                          return CircleAvatar(
+                            backgroundColor: ColorHelper.textToColor(user.nameFamily),
+                            radius: 35,
+                            child: IrisImageView(
+                              height: 70,
+                              width: 70,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+                              beforeLoadWidget: const CircularProgressIndicator(),
+                              //bytes: user.avatarModel?.bytes,
+                              //url: user.avatarModel?.fileLocation,
+                              onDownloadFn: (bytes, path){
+                                //user.avatarModel?.bytes = bytes;
+                              },
+                            ),
+                          );
                         }
-                      }
-                    }
 
-                    checkAvatar(user);
-                    return CircleAvatar(
-                      backgroundColor: ColorHelper.textToColor(user.nameFamily),
-                      radius: 30,
-                      child: Image.asset(AppImages.appIcon),
+                        //checkAvatar(user);
+                        return CircleAvatar(
+                          backgroundColor: ColorHelper.textToColor(user.nameFamily),
+                          radius: 35,
+                          child: Image.asset(AppImages.avatar),
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
+                ),
 
-            const SizedBox(height: 8,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Flexible(
                           child: Text(user.nameFamily,
-                          maxLines: 1, overflow: TextOverflow.clip,
+                            maxLines: 1, overflow: TextOverflow.clip,
                           ).bold()
                       ),
 
-                    /*IconButton(
+                      /*IconButton(
                         onPressed: gotoProfilePage,
                         icon: Icon(AppIcons.report2, size: 18,).alpha()
                     ),*/
-                ],
-              ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
-    }
+          );
+        }
 
-    return SizedBox(
-      height: 140,
-      child: Center(
-        child: Image.asset(AppImages.appIcon, height: 90,),
-      ),
+        return SizedBox(
+          height: 140,
+          child: Center(
+            child: Image.asset(AppImages.appIcon, height: 90,),
+          ),
+        );
+      },
     );
   }
 
-  static void gotoContactUsPage(){
-    //AppBroadcast.layoutPageKey.currentState?.scaffoldState.currentState?.closeDrawer();
-    RouteTools.pushPage(RouteTools.getTopContext()!, const ContactUsPage());
+  /*static void shareAppCall() {
+    AppBroadcast.homeScreenKey.currentState?.scaffoldState.currentState?.closeDrawer();
+    ShareExtend.share('https://cafebazaar.ir/app/ir.vosatezehn.com', 'text');
+  }*/
+
+  static void gotoProfilePage() async {
+    await LayoutScaffoldState.toggleDrawer();
+    RouteTools.pushPage(RouteTools.getTopContext()!, ProfilePage());
   }
 
-  static void gotoAboutUsPage(){
-    //AppBroadcast.layoutPageKey.currentState?.scaffoldState.currentState?.closeDrawer();
-    RouteTools.pushPage(RouteTools.getTopContext()!, const AboutUsPage());
-  }
-
-  static void downloadNewVersion(){
-    VersionManager.showUpdateDialog(RouteTools.getBaseContext()!, VersionManager.newVersionModel!);
-  }
-
-  static void gotoProfilePage(){
-    if(SessionService.isGuestCurrent()){
-      return;
-    }
-
+  static void gotoAboutPage() async {
+    await LayoutScaffoldState.toggleDrawer();
     RouteTools.pushPage(RouteTools.getTopContext()!, const ProfilePage());
   }
 
-  static void onLogoffCall(){
-    if(SessionService.isGuestCurrent()){
-      LoginService.forceLogoff(SessionService.getLastLoginUser()!.userId);
-      return;
-    }
 
-    void yesFn(_){
-      //RouteTools.popTopView();
+  static void onLogoffCall() async {
+    await LayoutScaffoldState.hideDrawer(millSec: 100);
+
+    bool yesFn(ctx){
       LoginService.forceLogoff(SessionService.getLastLoginUser()!.userId);
+      return false;
     }
 
     AppDialogIris.instance.showYesNoDialog(
-      RouteTools.getTopContext()!,
+      RouteTools.getBaseContext()!,
       desc: AppMessages.doYouWantLogoutYourAccount,
       dismissOnButtons: true,
       yesText: AppMessages.yes,
@@ -252,26 +237,5 @@ class DrawerMenuBuilder {
       yesFn: yesFn,
       decoration: AppDialogIris.instance.dialogDecoration.copy()..positiveButtonBackColor = Colors.green,
     );
-  }
-
-  static void checkAvatar(UserModel user) async {
-    if(user.profileModel?.url == null || kIsWeb){
-      return;
-    }
-
-    final path = AppDirectories.getSavePathUri(user.profileModel!.url!, SavePathType.userProfile, user.avatarFileName);
-    final img = FileHelper.getFile(path);
-
-    if(img.existsSync()) {
-      if (user.profileModel!.volume == null || img.existsSync() && img.lengthSync() == user.profileModel!.volume) {
-        return;
-      }
-    }
-
-    final dItm = DownloadUploadService.downloadManager.createDownloadItem(user.profileModel!.url!, tag: '${user.profileModel!.id!}');
-    dItm.savePath = path;
-    dItm.category = DownloadCategory.userProfile;
-
-    DownloadUploadService.downloadManager.enqueue(dItm);
   }
 }

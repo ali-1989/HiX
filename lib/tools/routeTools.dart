@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iris_route/iris_route.dart';
 
 import 'package:app/pages/e404_page.dart';
-import 'package:app/pages/home_page.dart';
+import 'package:app/pages/layout_page.dart';
 import 'package:app/pages/profile/profile_page.dart';
 import 'package:app/tools/app/appNavigator.dart';
 import 'package:iris_tools/api/stackList.dart';
@@ -16,7 +16,7 @@ class RouteTools {
 
   static prepareRoutes(){
     final aboutPage = IrisPageRoute.by((ProfilePage).toString(), ProfilePage());
-    final homePage = IrisPageRoute.by((HomePage).toString(), HomePage());
+    final homePage = IrisPageRoute.by((LayoutPage).toString(), LayoutPage());
     final e404Page = IrisPageRoute.by((E404Page).toString(), E404Page());
 
     IrisNavigatorObserver.notFoundHandler = (settings) => null;

@@ -10,6 +10,7 @@ class AppIcons {
   static const IconData delete = Icons.delete;
   static const IconData remove = Icons.highlight_remove;
   static const IconData personLogin = Icons.person;
+  static const IconData personLoginOutline = Icons.person_outline;
   static const IconData accountCircle = Icons.account_circle;
   static const IconData accountDoubleCircle = Icons.supervised_user_circle_rounded;
   static const IconData light = Icons.highlight_rounded;
@@ -37,6 +38,7 @@ class AppIcons {
   static const IconData enter = Icons.login;
   static const IconData logout = Icons.logout;
   static const IconData menu = Icons.view_list_rounded;
+  static const IconData menu3Line = CommunityMaterialIcons.menu;
   static const IconData list = Icons.view_headline;
   static const IconData grid = Icons.view_module;
   static const IconData sort = Icons.sort;

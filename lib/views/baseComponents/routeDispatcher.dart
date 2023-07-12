@@ -1,7 +1,8 @@
-import 'package:app/pages/home_page.dart';
+import 'package:app/pages/layout_page.dart';
 import 'package:app/pages/login_page.dart';
 import 'package:app/pages/welcome_page.dart';
 import 'package:app/services/session_service.dart';
+import 'package:app/tools/app/appBroadcast.dart';
 import 'package:flutter/material.dart';
 
 
@@ -10,10 +11,10 @@ class RouteDispatcher {
 
   static Widget dispatch(){
 
-    if(!SessionService.hasAnyLogin()){
+    /*if(!SessionService.hasAnyLogin()){
       return WelcomePage();
-    }
+    }*/
 
-    return HomePage();
+    return LayoutPage(key: AppBroadcast.layoutPageKey);
   }
 }
