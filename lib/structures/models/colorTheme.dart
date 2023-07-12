@@ -6,7 +6,7 @@ import 'package:iris_tools/api/helpers/colorHelper.dart';
 
 class ColorTheme {
   String themeName = 'theme_${Random().nextInt(1000)}';
-  double fontSize = 12;
+  double fontSize = 13;
   double buttonIconSize = 20;
   late HSLColor primaryHsl; // in Init
   late MaterialColor primarySwatch;
@@ -48,7 +48,7 @@ class ColorTheme {
   Color errorColor = Colors.red[600]!;
   Color textDifferentColor = Colors.black;
 
-  late ColorScheme buttonsColorScheme;  //in Init & create
+  late ColorScheme buttonsColorScheme;  //in AppTheme
   late TextStyle baseTextStyle; //in Init
   late TextStyle subTextStyle; //in Init
   late TextStyle boldTextStyle; //in Init
@@ -77,17 +77,6 @@ class ColorTheme {
     infoTextColor = textColor.withAlpha(170);
     webHoverColor = primaryColor.withAlpha(40);
     textDifferentColor = accentColor;
-
-    buttonsColorScheme = ColorScheme.fromSwatch(
-      primarySwatch: primarySwatch,
-      primaryColorDark: ColorHelper.darkIfIsLight(primaryColor),
-      // buttons are use this color for btnText (accentColor)
-      accentColor: buttonTextColor,
-      backgroundColor: buttonBackColor,
-      errorColor: errorColor,
-      cardColor: cardColor,
-      brightness: brightness,
-    );
 
     baseTextStyle = const TextStyle().copyWith(
       color: textColor,

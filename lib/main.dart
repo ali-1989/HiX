@@ -147,19 +147,28 @@ class MyApp extends StatelessWidget {
   }
 
   Widget materialHomeBuilder(){
-    return Builder(
-      builder: (localContext){
-        RouteTools.materialContext = localContext;
-        testCodes(localContext);
+    double factor = PlatformDispatcher.instance.textScaleFactor.clamp(0.85, 2.0);
 
-        double factor = PlatformDispatcher.instance.textScaleFactor.clamp(0.85, 2.0);
-        FontManager.instance.detectDeviceFontSize(localContext);
+    return Builder(
+      builder: (context) {
+        FontManager.instance.detectDeviceFontSize(context);
+
+        if(factor == 1.0 && FontManager.useFlutterFontSize && FontManager.deviceFontSize > FontManager.maxDeviceFontSize){
+          factor = 0.94;
+        }
 
         return MediaQuery(
-          data: MediaQuery.of(localContext).copyWith(textScaleFactor: factor),
-            child: SplashPage()
+            data: MediaQuery.of(context).copyWith(textScaleFactor: factor),
+            child: Builder(
+                builder: (localContext){
+                  RouteTools.materialContext = localContext;
+                  testCodes(localContext);
+
+                  return SplashPage();
+                }
+            )
         );
-      },
+      }
     );
   }
 

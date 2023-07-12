@@ -119,7 +119,7 @@ flutter:
       - asset: assets/fonts/IRANYekanMobileLight.ttf
     - family: morabba
       fonts:
-      - asset: assets/fonts/Morabba-Regular.ttf
+      - asset: assets/fonts/Morabba-Bold.ttf
 
 
 

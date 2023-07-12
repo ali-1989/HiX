@@ -1,14 +1,14 @@
 import 'package:app/constants.dart';
-import 'package:app/customRich.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:app/tools/app/appLocale.dart';
 import 'package:app/tools/app/appThemes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_tools/api/helpers/mathHelper.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
+import 'package:iris_tools/widgets/text/customRich.dart';
 
 import 'package:app/services/session_service.dart';
 import 'package:app/structures/abstract/stateBase.dart';
@@ -52,10 +52,7 @@ class _WelcomePageState extends StateBase<WelcomePage> {
   }
 
   Widget buildBody(){
-    /*if(isInFetchData) {
-      return WaitToLoad();
-    }*/
-
+    double imgHeight = MathHelper.between(160, 750, 130, 550, sh);
 
     return SizedBox.expand(
       child: DecoratedBox(
@@ -81,10 +78,10 @@ class _WelcomePageState extends StateBase<WelcomePage> {
                 ]
             ),
 
-            const SizedBox(height: 50),
-            Image.asset(AppImages.vector$welcomePage),
+            SizedBox(height: 50 * pw),
+            Image.asset(AppImages.vector$welcomePage, height: imgHeight),
 
-            const SizedBox(height: 40),
+            SizedBox(height: 40 * pw),
             Expanded(
               child: DecoratedBox(
                   decoration: const BoxDecoration(
@@ -100,16 +97,30 @@ class _WelcomePageState extends StateBase<WelcomePage> {
                         child: Column(
                           children: [
                             const SizedBox(height: 20),
-                            const Text('ورود به حساب کاربری').font(AppDecoration.morabbaFont)
-                                .bold().fsR(7),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.asset(AppImages.accountIco, width: 20),
+                                const SizedBox(width: 5),
+                                const Text('ورود به حساب کاربری').font(AppDecoration.morabbaFont)
+                                    .fsR(5),
+                              ],
+                            ),
 
                             const SizedBox(height: 20),
                             const Text('شما وارد حساب خود نشده اید. ابتدا وارد شوید یا ثبت نام کنید').fsR(-.5),
 
-                            const SizedBox(height: 30),
-                            ElevatedButton(
-                                onPressed: onGotoWebViewClick,
-                                child: const Text('ورود / ثبت نام')
+                            const SizedBox(height: 10),
+                            Expanded(
+                              child: Center(
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                      onPressed: onGotoWebViewClick,
+                                      child: const Text('ورود / ثبت نام')
+                                  ),
+                                ),
+                              ),
                             )
                           ],
                         ),
