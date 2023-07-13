@@ -14,7 +14,8 @@ enum AppEvents implements EventImplement {
   appPause(116),
   appDeAttach(117),
   firebaseTokenReceived(120),
-  layoutNavigateChange(130);
+  layoutNavigateChange(130),
+  dashboardNavigateChange(135);
 
   final int _number;
 

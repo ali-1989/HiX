@@ -177,7 +177,7 @@ class FontManager {
       ..defaultUsage = FontUsage.normal
       //..usages = [FontUsage.sub]
       ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
-      ..height = 1.2;
+      ..height = 1.3;
 
     final yekanBold = Font.bySize()
       ..family = 'yekan_bold'
@@ -185,7 +185,7 @@ class FontManager {
       ..defaultUsage = FontUsage.bold
       //..usages = [FontUsage.normal, FontUsage.bold]
       ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
-      ..height = 1.2;
+      ..height = 1.3;
 
     final yekanSub = Font.bySize()
       ..family = 'yekan_light'
@@ -193,7 +193,7 @@ class FontManager {
       ..defaultUsage = FontUsage.sub
       //..usages = [FontUsage.normal, FontUsage.bold]
       ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
-      ..height = 1.2;
+      ..height = 1.3;
 
 
     final morabba = Font.bySize()
@@ -202,7 +202,7 @@ class FontManager {
       ..defaultUsage = FontUsage.normal
       ..usages = [FontUsage.sub, FontUsage.bold]
       ..textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false)
-      ..height = 1.0;
+      ..height = 1.4;
 
 
     _fontList.add(yekan);

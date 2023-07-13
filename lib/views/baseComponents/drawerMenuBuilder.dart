@@ -1,31 +1,17 @@
-import 'dart:io';
 
-import 'package:app/views/baseComponents/layoutScaffold.dart';
-import 'package:flutter/foundation.dart';
+import 'package:app/managers/layout_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_notifier/iris_notifier.dart';
 import 'package:iris_tools/api/helpers/colorHelper.dart';
-import 'package:iris_tools/api/helpers/fileHelper.dart';
 import 'package:iris_tools/api/helpers/mathHelper.dart';
-import 'package:iris_tools/modules/stateManagers/refresh.dart';
 
-import 'package:app/constants.dart';
-import 'package:app/managers/version_manager.dart';
-import 'package:app/pages/about_us_page.dart';
-import 'package:app/pages/contact_us_page.dart';
 import 'package:app/pages/profile/profile_page.dart';
-import 'package:app/services/download_upload_service.dart';
 import 'package:app/services/login_service.dart';
 import 'package:app/services/session_service.dart';
 import 'package:app/structures/enums/appEvents.dart';
-import 'package:app/structures/enums/enums.dart';
-import 'package:app/structures/models/userModel.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appBroadcast.dart';
 import 'package:app/tools/app/appDialogIris.dart';
-import 'package:app/tools/app/appDirectories.dart';
-import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:app/tools/app/appMessages.dart';
 import 'package:app/tools/app/appSizes.dart';
@@ -35,10 +21,6 @@ import 'package:iris_tools/widgets/irisImageView.dart';
 
 class DrawerMenuBuilder {
   DrawerMenuBuilder._();
-
-  static void toggleDrawer(){
-    LayoutScaffoldState.toggleDrawer();
-  }
 
   static Widget buildDrawer(){
     return SizedBox(
@@ -65,7 +47,7 @@ class DrawerMenuBuilder {
                         alignment: Alignment.topRight,
                         child: IconButton(
                           onPressed: (){
-                            LayoutScaffoldState.toggleDrawer();
+                            LayoutManager.toggleDrawer();
                           },
                           icon: Image.asset(AppImages.newVersionIco, color: Colors.black),
                         )
@@ -107,7 +89,7 @@ class DrawerMenuBuilder {
                         title: Text(AppMessages.logout),/*.color(Colors.redAccent),*/
                         //leading: Icon(AppIcons.logout, size: 18, color: Colors.redAccent),
                         leading: Image.asset(AppImages.newVersionIco, width: 20, height: 20),
-                        onTap: onLogoffCall,
+                        onTap: _onLogoffClick,
                         dense: true,
                         horizontalTitleGap: 0,
                         visualDensity: const VisualDensity(horizontal: 0, vertical: -3.0),
@@ -210,18 +192,18 @@ class DrawerMenuBuilder {
   }*/
 
   static void gotoProfilePage() async {
-    await LayoutScaffoldState.toggleDrawer();
+    await LayoutManager.toggleDrawer();
     RouteTools.pushPage(RouteTools.getTopContext()!, ProfilePage());
   }
 
   static void gotoAboutPage() async {
-    await LayoutScaffoldState.toggleDrawer();
+    await LayoutManager.toggleDrawer();
     RouteTools.pushPage(RouteTools.getTopContext()!, const ProfilePage());
   }
 
 
-  static void onLogoffCall() async {
-    await LayoutScaffoldState.hideDrawer(millSec: 100);
+  static void _onLogoffClick() async {
+    await LayoutManager.hideDrawer(millSec: 100);
 
     bool yesFn(ctx){
       LoginService.forceLogoff(SessionService.getLastLoginUser()!.userId);

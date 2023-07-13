@@ -24,11 +24,11 @@ class LayoutScaffold extends StatefulWidget {
 }
 ///==========================================================================================
 class LayoutScaffoldState extends StateBase<LayoutScaffold> {
-  static bool _isOpen = false;
-  static bool _withAnimation = false;
-  static int _drawerTime = 400;
-  static double _drawerWidth = 0;
-  static double _lastXOffset = 0;
+  bool _isOpen = false;
+  bool _withAnimation = false;
+  int _drawerTime = 400;
+  double _drawerWidth = 0;
+  double _lastXOffset = 0;
 
 
   @override
@@ -122,7 +122,7 @@ class LayoutScaffoldState extends StateBase<LayoutScaffold> {
     );
   }
 
-  static Future<void> toggleDrawer(){
+  Future<void> toggleDrawer(){
     if(_isOpen){
       return hideDrawer();
     }
@@ -131,7 +131,7 @@ class LayoutScaffoldState extends StateBase<LayoutScaffold> {
     }
   }
 
-  static Future<void> showDrawer() async {
+  Future<void> showDrawer() async {
     if(_isOpen){
       return;
     }
@@ -145,7 +145,7 @@ class LayoutScaffoldState extends StateBase<LayoutScaffold> {
     return;
   }
 
-  static Future<void> hideDrawer({int? millSec}) async {
+  Future<void> hideDrawer({int? millSec}) async {
     if(!_isOpen){
       return;
     }

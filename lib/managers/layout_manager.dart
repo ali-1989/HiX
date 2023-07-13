@@ -4,11 +4,14 @@ import 'package:app/structures/enums/appEvents.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
 
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/views/baseComponents/layoutScaffold.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:iris_notifier/iris_notifier.dart';
 
 class LayoutManager {
   LayoutManager._();
 
+  static final layoutScaffoldKey = GlobalKey<LayoutScaffoldState>();
   static final List<LayoutNavigateModel> navigateList = [];
   static final dashboardNavigateModel = LayoutNavigateModel();
   static final calendarNavigateModel = LayoutNavigateModel();
@@ -54,4 +57,11 @@ class LayoutManager {
     EventNotifierService.notify(AppEvents.layoutNavigateChange);
   }
 
+  static Future toggleDrawer(){
+    return layoutScaffoldKey.currentState!.toggleDrawer();
+  }
+
+  static Future hideDrawer({int? millSec}){
+    return layoutScaffoldKey.currentState!.hideDrawer(millSec: millSec);
+  }
 }

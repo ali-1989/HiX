@@ -8,9 +8,9 @@ class AppImages {
   static const welcome = 'assets/images/welcome.png';
   static const hiX = 'assets/images/hi-x.png';
   static const vector$welcomePage = 'assets/images/vector_welcomePage.png';
-  static const appIcon = 'assets/images/app_icon.png';//todo.
+  static const appIcon = 'assets/images/accountIco.png';//todo.
   static const accountIco = 'assets/images/accountIco.png';
-  static const newVersion = 'assets/images/newVersion.png';//todo. delete
+  static const newVersion = 'assets/images/accountIco.png';//todo. delete
   static const newVersionIco = 'assets/images/newVersionIcon.png';
   static const calendarIcon = 'assets/images/calendarIco.png';
   static const navIco$dashboard = 'assets/images/navIco_dashboard.png';
@@ -18,7 +18,15 @@ class AppImages {
   static const navIco$webinar = 'assets/images/navIco_webinar.png';
   static const navIco$consultant = 'assets/images/navIco_consultant.png';
   static const navIco$notification = 'assets/images/navIco_notification.png';
+  static const dashboardIco$chart = 'assets/images/dashboardIco_chart.png';
+  static const dashboardIco$calendar = 'assets/images/dashboardIco_calendar.png';
+  static const dashboardIco$sex = 'assets/images/dashboardIco_sex.png';
   static const userIco = 'assets/images/userIco.png';
+  static const chartIco = 'assets/images/chartIco.png';
+  static const questionMarkIco = 'assets/images/questionMarkIco.png';
+  static const questionMarkFaIco = 'assets/images/questionMarkFaIco.png';
+  static const infoIco = 'assets/images/infoIco.png';
+  static const changeValueIco = 'assets/images/changeValueIco.png';
   static const avatar = 'assets/images/avatar.png';
 }
 

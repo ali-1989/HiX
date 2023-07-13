@@ -1,4 +1,6 @@
+import 'package:app/managers/dashboard_manager.dart';
 import 'package:app/managers/layout_manager.dart';
+import 'package:app/pages/dashboard_page.dart';
 import 'package:app/structures/enums/appEvents.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
 import 'package:app/system/extensions.dart';
@@ -38,6 +40,7 @@ class LayoutPageState extends StateBase<LayoutPage> {
     super.initState();
 
     LayoutManager.init();
+    DashboardManager.init();
     EventNotifierService.addListener(AppEvents.layoutNavigateChange, onNavigateChangeListener);
   }
 
@@ -52,10 +55,11 @@ class LayoutPageState extends StateBase<LayoutPage> {
     return Assist(
         controller: assistCtr,
         builder: (context, ctr, data) {
-          return LayoutScaffold(
-            drawer: DrawerMenuBuilder.buildDrawer(),
-            body: Material(
-              child: SafeArea(child: buildBody()),
+          return Material(
+            child: LayoutScaffold(
+              key: LayoutManager.layoutScaffoldKey,
+              drawer: DrawerMenuBuilder.buildDrawer(),
+              body: SafeArea(child: buildBody()),
             ),
           );
         }
@@ -63,45 +67,49 @@ class LayoutPageState extends StateBase<LayoutPage> {
   }
 
   Widget buildBody(){
-    return SizedBox.expand(
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xffE7E1FF), Colors.white],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xffE7E1FF), Colors.white],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        image: DecorationImage(image: AssetImage(AppImages.backgroundPlusColored), ),
+      ),
+      child: Column(
+        children: [
+          SizedBox(height: 15 * pw),
+          buildMenuKeySection(),
+
+          SizedBox(height: 15 * pw),
+          buildAvatarSection(),
+
+          SizedBox(height: 30 * pw),
+          buildNavigationSection(),
+
+          SizedBox(height: 30 * pw),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.0 * pw),
+            child: const MyDivider(),
           ),
-          image: DecorationImage(image: AssetImage(AppImages.backgroundPlusColored), ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(height: 15 * pw),
-            buildMenuKeySection(),
 
-            SizedBox(height: 15 * pw),
-            buildAvatarSection(),
+          SizedBox(height: 20 * pw),
 
-            SizedBox(height: 30 * pw),
-            buildNavigationSection(),
-
-            SizedBox(height: 30 * pw),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.0 * pw),
-              child: const MyDivider(),
-            ),
-            SizedBox(height: 10 * pw),
-
-            Expanded(
-                child: PageView(
-                  controller: pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-
-                  ],
-                )
-            )
-          ],
-        ),
+          Expanded(
+              child: LayoutBuilder(
+                builder: (_, siz) {
+                  return PageView(
+                    controller: pageController,
+                    scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      DashboardPage(),
+                    ],
+                  );
+                }
+              )
+          )
+        ],
       ),
     );
   }
@@ -118,7 +126,7 @@ class LayoutPageState extends StateBase<LayoutPage> {
               padding: EdgeInsets.only(right: 20 * pw),
               child: GestureDetector(
                 onTap: (){
-                  LayoutScaffoldState.toggleDrawer();
+                  LayoutManager.toggleDrawer();
                 },
                 child: CustomCard(
                   padding: const EdgeInsets.all(4),
