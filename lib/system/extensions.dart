@@ -541,7 +541,7 @@ extension TextExtension on Text {
 
     ts = ts.copyWith(
       fontFamily: font.family,
-      height: font.height,
+      height: style?.height ?? font.height,
     );
 
     return Text(
@@ -980,7 +980,7 @@ extension SelectableTextExtension on SelectableText {
     );
   }
 
-  SelectableText defFont() {
+  SelectableText platformFont() {
     var ts = style ?? AppThemes.instance.currentTheme.baseTextStyle;
 
     ts = ts.copyWith(

@@ -1,12 +1,20 @@
+import 'dart:math';
+
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/appThemes.dart';
+import 'package:app/views/components/calendar/calendarDayModel.dart';
+import 'package:app/views/components/calendar/calendar_builder.dart';
+import 'package:app/views/components/calendar/circle_number.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/widgets/text/customRich.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -44,7 +52,10 @@ class _CalendarPageState extends StateBase<CalendarPage> {
           children: [
             buildTopSection(),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
+            buildCalendarSection(),
+
+            const SizedBox(height: 15),
             buildInfoSection(),
           ],
         ),
@@ -211,57 +222,122 @@ class _CalendarPageState extends StateBase<CalendarPage> {
     );
   }
 
+  Widget buildCalendarSection() {
+    final list = <CalendarDayModel>[];
+
+    for(int i =1; i < 31; i++){
+      list.add(CalendarDayModel(text: '$i', color: Generator.getRandomFrom([pmsColor, periodColor, ovulationColor])));
+    }
+
+    for(int i =0; i < 9; i++){
+      list[i].color = pmsColor;
+    }
+
+    for(int i =9; i < 18; i++){
+      list[i].color = periodColor;
+    }
+
+    for(int i =18; i < 24; i++){
+      list[i].color = ovulationColor;
+    }
+
+    for(int i =24; i < 30; i++){
+      list[i].color = Colors.white;
+    }
+
+
+    list[24].border = Border.all(style: BorderStyle.solid, width: 0.5, color: Colors.blueAccent);
+    list[24].color = Colors.white;
+
+    return CalendarBuilder(
+      dayList: list,
+    );
+  }
+
   Widget buildInfoSection() {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        minHeight: 170,
-        maxHeight: 220,
-      ),
-      child: CustomCard(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-          child: Column(
-            children: [
-              CustomCard(
-                color: AppDecoration.gray,
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('موارد قابل توجه').font(AppDecoration.morabbaFont).color(Colors.red).fsR(-1),
-                  ],
+    return IntrinsicHeight(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          minHeight: 150,
+          //maxHeight: 220,
+        ),
+        child: CustomCard(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+            child: Column(
+              children: [
+                CustomCard(
+                  color: AppDecoration.gray,
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('موارد قابل توجه').font(AppDecoration.morabbaFont).color(Colors.red).fsR(-1),
+                    ],
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-              Expanded(
-                child: Stack(
-                  children: [
+                Expanded(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
 
-                    SizedBox(
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: CustomPaint(
-                        painter: MakeBookLine(
-                            color: Colors.grey.shade400,
-                          lineSpace: 21,
-                          drawTopLine: true,
+                      /*SizedBox(
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: CustomPaint(
+                          painter: MakeBookLine(
+                              color: Colors.grey.shade400,
+                            lineSpace: tp.height,
+                            drawTopLine: true,
+                          ),
                         ),
-                      ),
-                    ),
+                      ),*/
 
-                    Column(
-                      children: [
-                        Text('به متن توجه کن به متن توجه کن به متن توجه کن', style: TextStyle(height: 2.0),).fsR(-3),
-                        Text('خخخ به متن توجه کن به متن توجه کن به متن توجه کن', style: TextStyle(height: 2.0)).fsR(-3),
-                      ],
-                    )
-                  ],
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildInfoLine('به زندگی امیدوار باش و به پیش برو'),
+                          buildInfoLine('دنیا بدون تو هم ادامه دارد. پس فرد مفیدی باش'),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          )
+              ],
+            )
+        ),
       ),
+    );
+  }
+
+  Widget buildInfoLine(String txt){
+    final st = AppThemes.instance.currentTheme.baseTextStyle.copyWith(height: 2.0 *pw, fontSize: 12 *pw);
+
+    /*var tp = TextPainter(
+      textAlign: AppThemes.getTextAlign(),
+      textDirection: AppThemes.instance.textDirection,
+      textWidthBasis: TextWidthBasis.parent,
+      text: TextSpan(text: 'به متن ', style: st),
+    );
+
+    tp.layout(maxWidth: double.infinity);*/
+
+    return CustomRich(
+      alignment: PlaceholderAlignment.middle,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 2),
+            child: TabPageSelectorIndicator(
+                backgroundColor: Colors.red,
+                borderColor: Colors.red,
+                size: 4
+            ),
+          ),
+
+          Text(txt, style: st),
+        ]
     );
   }
 }

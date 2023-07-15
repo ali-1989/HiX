@@ -74,42 +74,38 @@ class LayoutPageState extends StateBase<LayoutPage> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        image: DecorationImage(image: AssetImage(AppImages.backgroundPlusColored), ),
+        image: DecorationImage(image: AssetImage(AppImages.backgroundPlusColored), fit: BoxFit.fill),
       ),
-      child: Column(
-        children: [
-          SizedBox(height: 15 * pw),
-          buildMenuKeySection(),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 15 * pw),
+            buildMenuKeySection(),
 
-          SizedBox(height: 15 * pw),
-          buildAvatarSection(),
+            SizedBox(height: 15 * pw),
+            buildAvatarSection(),
 
-          SizedBox(height: 30 * pw),
-          buildNavigationSection(),
+            SizedBox(height: 30 * pw),
+            buildNavigationSection(),
 
-          SizedBox(height: 30 * pw),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0 * pw),
-            child: const MyDivider(),
-          ),
+            SizedBox(height: 30 * pw),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.0 * pw),
+              child: const MyDivider(),
+            ),
 
-          SizedBox(height: 20 * pw),
+            SizedBox(height: 20 * pw),
 
-          Expanded(
-              child: LayoutBuilder(
-                builder: (_, siz) {
-                  return PageView(
-                    controller: pageController,
-                    scrollDirection: Axis.horizontal,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      DashboardPage(),
-                    ],
-                  );
-                }
-              )
-          )
-        ],
+            PageView(
+              controller: pageController,
+              scrollDirection: Axis.horizontal,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                //DashboardPage(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

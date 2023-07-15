@@ -47,32 +47,27 @@ class DashboardPageState extends StateBase<DashboardPage> {
 
   Widget buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 27.0 * pw),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /// vertical rail
-            SizedBox(
-              width: 65 * pw,
-              child: CustomCard(
-                color: Colors.white,
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  children: DashboardManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
-                ),
+      padding: EdgeInsets.symmetric(horizontal: 18 * pw),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// vertical rail
+          SizedBox(
+            width: 65 * pw,
+            child: CustomCard(
+              color: Colors.white,
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: DashboardManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
               ),
             ),
+          ),
 
 
-            const SizedBox(width: 17),
+          const SizedBox(width: 17),
 
-            Expanded(
-                child: pickView()
-            ),
-          ]
-        ),
+          //pickView(),
+        ]
       ),
     );
   }
