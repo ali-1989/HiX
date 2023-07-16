@@ -1,29 +1,25 @@
-import 'dart:math';
-
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/appSheet.dart';
 import 'package:app/tools/app/appThemes.dart';
-import 'package:app/views/components/calendar/calendarDayModel.dart';
-import 'package:app/views/components/calendar/calendar_builder.dart';
-import 'package:app/views/components/calendar/circle_number.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:app/views/sheet/period_change_state_sheet.dart';
+import 'package:app/views/sheet/pregnant_change_state_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 import 'package:iris_tools/widgets/text/customRich.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
-class CalendarPage extends StatefulWidget {
-  const CalendarPage({Key? key}) : super(key: key);
+class DashboardCalendarPage extends StatefulWidget {
+  const DashboardCalendarPage({Key? key}) : super(key: key);
 
   @override
-  State createState() => _CalendarPageState();
+  State createState() => _DashboardCalendarPageState();
 }
 ///============================================================================================
-class _CalendarPageState extends StateBase<CalendarPage> {
+class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
   Color pmsColor = const Color(0xffFFEC94);
   Color periodColor = const Color(0xffEDC6FF);
   Color ovulationColor = const Color(0xffABFFEF);
@@ -53,7 +49,7 @@ class _CalendarPageState extends StateBase<CalendarPage> {
             buildTopSection(),
 
             const SizedBox(height: 15),
-            buildCalendarSection(),
+            buildChartSection(),
 
             const SizedBox(height: 15),
             buildInfoSection(),
@@ -81,7 +77,8 @@ class _CalendarPageState extends StateBase<CalendarPage> {
 
                     const SizedBox(width: 3),
 
-                    const Text('تقویم قاعدگی').font(AppDecoration.morabbaFont),
+                    //const Text('تقویم قاعدگی').font(AppDecoration.morabbaFont),
+                    const Text('تقویم بارداری').font(AppDecoration.morabbaFont),
                   ],
                 ),
 
@@ -94,125 +91,22 @@ class _CalendarPageState extends StateBase<CalendarPage> {
                     ),
                     const SizedBox(width: 5),
 
-                    CustomCard(
-                        padding: const EdgeInsets.all(5),
-                        color: AppDecoration.gray,
-                        child: Image.asset(AppImages.changeValueIco, width: 18)
-                    ),
-                    const SizedBox(width: 5),
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: onChangeStateClick,
+                      child: Row(
+                        children: [
+                          CustomCard(
+                              padding: const EdgeInsets.all(5),
+                              color: AppDecoration.gray,
+                              child: Image.asset(AppImages.changeValueIco, width: 18)
+                          ),
+                          const SizedBox(width: 5),
 
-                    const Text('تغییر\nوضعیت').font(AppDecoration.morabbaFont).fsR(-4),
-                  ],
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 20),
-            CustomCard(
-              padding: const EdgeInsets.all(5),
-              color: AppDecoration.gray,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomCard(
-                    color: Colors.white,
-                      padding: const EdgeInsets.all(8),
-                      child: const Icon(AppIcons.arrowLeft, size: 15,).alpha(alpha: 100),
-                  ),
-
-                  Text('خرداد    1402'.localeNum()).font(AppDecoration.morabbaFont),
-
-                  CustomCard(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(8),
-                    child: RotatedBox(
-                        quarterTurns: 2,
-                        child: const Icon(AppIcons.arrowLeft, size: 15,).alpha(alpha: 100)
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: SizedBox(
-                        width: 9,
-                        child: Divider(
-                          height: 8,
-                          thickness: 8,
-                          color: AppDecoration.gray,
-                        ),
+                          const Text('تغییر\nوضعیت').font(AppDecoration.morabbaFont).fsR(-4),
+                        ],
                       ),
-                    ),
-
-                    const SizedBox(width: 5),
-                    const Text('خنثی').font(AppDecoration.morabbaFont).fsR(-4)
-                  ],
-                ),
-
-                const SizedBox(width: 10),
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: SizedBox(
-                        width: 9,
-                        child: Divider(
-                          height: 8,
-                          thickness: 8,
-                          color: ovulationColor,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(width: 5),
-                    const Text('تخمک گذاری').font(AppDecoration.morabbaFont).fsR(-4)
-                  ],
-                ),
-
-                const SizedBox(width: 10),
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: SizedBox(
-                        width: 9,
-                        child: Divider(
-                          height: 8,
-                          thickness: 8,
-                          color: pmsColor,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(width: 5),
-                    const Text('PMS').font(AppDecoration.morabbaFont).fsR(-4)
-                  ],
-                ),
-
-                const SizedBox(width: 10),
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: SizedBox(
-                        width: 9,
-                        child: Divider(
-                          height: 8,
-                          thickness: 8,
-                          color: periodColor,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(width: 5),
-                    const Text('قاعدگی').font(AppDecoration.morabbaFont).fsR(-4)
+                    )
                   ],
                 ),
               ],
@@ -222,35 +116,60 @@ class _CalendarPageState extends StateBase<CalendarPage> {
     );
   }
 
-  Widget buildCalendarSection() {
-    final list = <CalendarDayModel>[];
+  Widget buildChartSection() {
+    return Column(
+      children: [
+        const Text('هفته 2').fsR(-2).bold(),
 
-    for(int i =1; i < 31; i++){
-      list.add(CalendarDayModel(text: '$i', color: Generator.getRandomFrom([pmsColor, periodColor, ovulationColor])));
-    }
+        const SizedBox(height: 12),
 
-    for(int i =0; i < 9; i++){
-      list[i].color = pmsColor;
-    }
+        Stack(
+          children: [
+            SimpleCircularProgressBar(
+              animationDuration: 2,
+              progressStrokeWidth: 12,
+              backStrokeWidth: 12,
+              backColor: Colors.white,
+              fullProgressColor: Colors.white,
+              maxValue: 360,
+              mergeMode: false,
+              size: 92,
+              progressColors: [AppDecoration.mainColor.withAlpha(30),
+                AppDecoration.mainColor.withAlpha(120),
+                AppDecoration.mainColor.withAlpha(170),
+                AppDecoration.mainColor
+              ],
+              valueNotifier: ValueNotifier(270),
+            ),
 
-    for(int i =9; i < 18; i++){
-      list[i].color = periodColor;
-    }
+            Positioned(
+              top: 5,
+                right: 5,
+                child: Image.asset(AppImages.avatar)
+            ),
+          ],
+        ),
 
-    for(int i =18; i < 24; i++){
-      list[i].color = ovulationColor;
-    }
+        const SizedBox(height: 15),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('هفته های سپری شده:').fsR(-2),
 
-    for(int i =24; i < 30; i++){
-      list[i].color = Colors.white;
-    }
-
-
-    list[24].border = Border.all(style: BorderStyle.solid, width: 0.5, color: Colors.blueAccent);
-    list[24].color = Colors.white;
-
-    return CalendarBuilder(
-      dayList: list,
+            CustomCard(
+              color: AppDecoration.mainColor,
+              radius: 15,
+              padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: Row(
+                children: [
+                  const Text('40 /').color(Colors.white).fsR(-2),
+                  Text(' 26'.localeNum()).color(Colors.white).bold().fsR(-2).font(AppDecoration.morabbaFont),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -338,6 +257,24 @@ class _CalendarPageState extends StateBase<CalendarPage> {
 
           Text(txt, style: st),
         ]
+    );
+  }
+
+  void onChangeStateClick(){
+    Widget b(_){
+      if(false) {
+        return const PregnantChangeStateSheet();
+      }
+      else {
+        return const PeriodChangeStateSheet();
+      }
+    }
+
+    AppSheet.showSheetCustom(
+        context,
+        builder: b,
+        contentColor: Colors.transparent,
+        routeName: 'change',
     );
   }
 }

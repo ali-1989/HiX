@@ -20,7 +20,8 @@ class DashboardManager {
     chartNavigateModel.iconAddress = AppImages.dashboardIco$chart;
     chartNavigateModel.isSelected = true;
 
-    calendarNavigateModel.title = 'تقویم قائدگی';
+    //calendarNavigateModel.title = 'تقویم قائدگی';
+    calendarNavigateModel.title = 'تقویم بارداری';
     calendarNavigateModel.iconAddress = AppImages.dashboardIco$calendar;
 
     repeatTimeNavigateModel.title = 'لحظات پرتکرار';
@@ -42,5 +43,15 @@ class DashboardManager {
 
     model.isSelected = true;
     EventNotifierService.notify(AppEvents.dashboardNavigateChange);
+  }
+
+  static DashboardNavigateModel currentPage() {
+    for (final nav in navigateList) {
+      if(nav.isSelected){
+        return nav;
+      }
+    }
+
+    return chartNavigateModel;
   }
 }

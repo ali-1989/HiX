@@ -11,14 +11,14 @@ import 'package:iris_notifier/iris_notifier.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class WebinarPage extends StatefulWidget {
+  const WebinarPage({Key? key}) : super(key: key);
 
   @override
-  State createState() => DashboardPageState();
+  State createState() => WebinarPageState();
 }
 ///====================================================================================
-class DashboardPageState extends StateBase<DashboardPage> {
+class WebinarPageState extends StateBase<WebinarPage> {
   Color selectColor = const Color(0xff001949);
 
   @override
@@ -48,25 +48,20 @@ class DashboardPageState extends StateBase<DashboardPage> {
   Widget buildBody() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 18 * pw),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// vertical rail
-          SizedBox(
-            width: 65 * pw,
-            child: CustomCard(
-              color: Colors.white,
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                children: DashboardManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
-              ),
-            ),
-          ),
+          Text('aaaaaaaaaaaaaaaaaaaa'),
+          Text('bbbbbbbbbbbbbbbbbbbbb'),
+          SizedBox(height: 200),
+
+          Text('aaaaaaaaaaaaaaaaaaaa'),
+          Text('bbbbbbbbbbbbbbbbbbbbb'),
+          SizedBox(height: 200),
 
 
-          const SizedBox(width: 17),
-
-          Expanded(child: pickView()),
+          Text('aaaaaaaaaaaaaaaaaaaa'),
+          Text('bbbbbbbbbbbbbbbbbbbbb'),
         ]
       ),
     );

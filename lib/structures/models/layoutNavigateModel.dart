@@ -1,6 +1,6 @@
 
 class LayoutNavigateModel {
-  String enTitle = '';
+  int index = 0;
   String title = '';
   String iconAddress = '';
   bool isSelected = false;
@@ -9,7 +9,7 @@ class LayoutNavigateModel {
 
   LayoutNavigateModel.fromMap(Map map) {
     title = map['title']?? '';
-    enTitle = map['enTitle']?? '';
+    index = map['index']?? '';
     iconAddress = map['iconAddress']?? '';
     isSelected = map['isSelected']?? false;
   }
@@ -17,7 +17,7 @@ class LayoutNavigateModel {
   Map<String, dynamic> toMap() {
     final map = <String, dynamic>{};
 
-    map['enTitle'] = enTitle;
+    map['index'] = index;
     map['title'] = title;
     map['iconAddress'] = iconAddress;
     map['isSelected'] = isSelected;

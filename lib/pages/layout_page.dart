@@ -1,6 +1,7 @@
 import 'package:app/managers/dashboard_manager.dart';
 import 'package:app/managers/layout_manager.dart';
 import 'package:app/pages/dashboard_page.dart';
+import 'package:app/pages/webinar_page.dart';
 import 'package:app/structures/enums/appEvents.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
 import 'package:app/system/extensions.dart';
@@ -20,6 +21,7 @@ import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/system/keys.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 import 'package:iris_tools/widgets/icon/circularIcon.dart';
+import 'package:iris_tools/widgets/page_switcher.dart';
 
 class LayoutPage extends StatefulWidget {
 
@@ -33,7 +35,7 @@ class LayoutPage extends StatefulWidget {
 ///==================================================================================
 class LayoutPageState extends StateBase<LayoutPage> {
   //Requester requester = Requester();
-  PageController pageController = PageController(initialPage: 0);
+  PageSwitcherController pageCtr = PageSwitcherController();
 
   @override
   void initState(){
@@ -78,6 +80,7 @@ class LayoutPageState extends StateBase<LayoutPage> {
       ),
       child: SingleChildScrollView(
         child: Column(
+            mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 15 * pw),
             buildMenuKeySection(),
@@ -96,14 +99,14 @@ class LayoutPageState extends StateBase<LayoutPage> {
 
             SizedBox(height: 20 * pw),
 
-            PageView(
-              controller: pageController,
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                //DashboardPage(),
-              ],
-            )
+            PageSwitcher(
+              controller: pageCtr,
+              pages: [
+                DashboardPage(),
+                WebinarPage(),
+                WebinarPage(),
+              ]
+            ),
           ],
         ),
       ),
@@ -315,6 +318,10 @@ class LayoutPageState extends StateBase<LayoutPage> {
   }
 
   void onNavigateChangeListener({data}) {
+    if(LayoutManager.currentPage().index != pageCtr.index){
+      pageCtr.changePageTo(LayoutManager.currentPage().index);
+    }
+
     assistCtr.updateHead();
   }
 }

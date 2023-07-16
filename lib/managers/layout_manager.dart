@@ -21,24 +21,24 @@ class LayoutManager {
 
   static Future<void> init() async {
     dashboardNavigateModel.title = 'پیشخوان';
-    dashboardNavigateModel.enTitle = 'dashboard';
+    dashboardNavigateModel.index = 0;
     dashboardNavigateModel.iconAddress = AppImages.navIco$dashboard;
     dashboardNavigateModel.isSelected = true;
 
     calendarNavigateModel.title = 'تقویم';
-    calendarNavigateModel.enTitle = 'calendar';
+    calendarNavigateModel.index = 1;
     calendarNavigateModel.iconAddress = AppImages.navIco$calendar;
 
     webinarNavigateModel.title = 'وبینار';
-    webinarNavigateModel.enTitle = 'webinar';
+    webinarNavigateModel.index = 2;
     webinarNavigateModel.iconAddress = AppImages.navIco$webinar;
 
     consultantNavigateModel.title = 'مشاوره';
-    consultantNavigateModel.enTitle = 'consultant';
+    consultantNavigateModel.index = 3;
     consultantNavigateModel.iconAddress = AppImages.navIco$consultant;
 
     notificationsNavigateModel.title = 'اعلانات';
-    notificationsNavigateModel.enTitle = 'notifications';
+    notificationsNavigateModel.index = 4;
     notificationsNavigateModel.iconAddress = AppImages.navIco$notification;
 
     navigateList.add(dashboardNavigateModel);
@@ -63,5 +63,15 @@ class LayoutManager {
 
   static Future hideDrawer({int? millSec}){
     return layoutScaffoldKey.currentState!.hideDrawer(millSec: millSec);
+  }
+
+  static LayoutNavigateModel currentPage() {
+    for (final nav in navigateList) {
+      if(nav.isSelected){
+        return nav;
+      }
+    }
+
+    return dashboardNavigateModel;
   }
 }
