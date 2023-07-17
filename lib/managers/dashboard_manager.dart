@@ -12,28 +12,28 @@ class DashboardManager {
   static final List<DashboardNavigateModel> navigateList = [];
   static final chartNavigateModel = DashboardNavigateModel();
   static final calendarNavigateModel = DashboardNavigateModel();
-  static final repeatTimeNavigateModel = DashboardNavigateModel();
+  static final repetitiveSymptomsNavigateModel = DashboardNavigateModel();
   static final sexNavigateModel = DashboardNavigateModel();
 
   static Future<void> init() async {
-    chartNavigateModel.title = 'زیست آهنگ';
-    chartNavigateModel.iconAddress = AppImages.dashboardIco$chart;
-    chartNavigateModel.isSelected = true;
-
     //calendarNavigateModel.title = 'تقویم قائدگی';
     calendarNavigateModel.title = 'تقویم بارداری';
     calendarNavigateModel.iconAddress = AppImages.dashboardIco$calendar;
+    calendarNavigateModel.isSelected = true;
 
-    repeatTimeNavigateModel.title = 'لحظات پرتکرار';
-    repeatTimeNavigateModel.iconAddress = AppImages.dashboardIco$calendar;
+    repetitiveSymptomsNavigateModel.title = 'علائم پرتکرار';
+    repetitiveSymptomsNavigateModel.iconAddress = AppImages.dashboardIco$calendar;
 
     sexNavigateModel.title = 'رابطه جنسی';
     sexNavigateModel.iconAddress = AppImages.dashboardIco$sex;
 
-    navigateList.add(chartNavigateModel);
+    chartNavigateModel.title = 'زیست آهنگ';
+    chartNavigateModel.iconAddress = AppImages.dashboardIco$chart;
+
     navigateList.add(calendarNavigateModel);
-    navigateList.add(repeatTimeNavigateModel);
+    navigateList.add(repetitiveSymptomsNavigateModel);
     navigateList.add(sexNavigateModel);
+    navigateList.add(chartNavigateModel);
   }
 
   static void selectNavigateItem(DashboardNavigateModel model) {

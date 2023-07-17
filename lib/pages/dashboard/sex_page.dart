@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
-class ChartPage extends StatefulWidget {
-  const ChartPage({Key? key}) : super(key: key);
+class SexPage extends StatefulWidget {
+  const SexPage({Key? key}) : super(key: key);
 
   @override
-  State createState() => _ChartPageState();
+  State createState() => _SexPageState();
 }
 ///============================================================================================
-class _ChartPageState extends StateBase<ChartPage> {
+class _SexPageState extends StateBase<SexPage> {
   late Border border;
 
   @override

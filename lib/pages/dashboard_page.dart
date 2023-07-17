@@ -1,6 +1,8 @@
 import 'package:app/managers/dashboard_manager.dart';
 import 'package:app/pages/dashboard/dashboard_calendar_page.dart';
 import 'package:app/pages/dashboard/chart_page.dart';
+import 'package:app/pages/dashboard/repetitive_symptoms_page.dart';
+import 'package:app/pages/dashboard/sex_page.dart';
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/structures/enums/appEvents.dart';
 import 'package:app/structures/models/dashboardNavigateModel.dart';
@@ -129,6 +131,10 @@ class DashboardPageState extends StateBase<DashboardPage> {
       return DashboardCalendarPage();
     }
 
-    return Text('soon');
+    if(DashboardManager.repetitiveSymptomsNavigateModel.isSelected){
+      return RepetitiveSymptomsPage();
+    }
+
+    return SexPage();
   }
 }

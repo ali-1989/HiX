@@ -21,6 +21,7 @@ class AppIcons {
   static const IconData apps2 = Icons.widgets_rounded;
   static const IconData arrowDown = Icons.arrow_downward;
   static const IconData arrowLeft = Icons.arrow_back;
+  static const IconData arrowRight = Icons.arrow_forward_rounded;
   static const IconData arrowLeftIos = Icons.arrow_back_ios;
   static const IconData playArrow = Icons.play_arrow;
   static const IconData arrowCircleDown = Icons.arrow_circle_down;

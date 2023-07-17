@@ -28,6 +28,8 @@ class AppImages {
   static const infoIco = 'assets/images/infoIco.png';
   static const changeValueIco = 'assets/images/changeValueIco.png';
   static const avatar = 'assets/images/avatar.png';
+  static const baby = 'assets/images/baby.png';
+  static const logoffIco = 'assets/images/logoffIco.png';
 }
 
 

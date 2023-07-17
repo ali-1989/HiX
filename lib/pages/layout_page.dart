@@ -104,6 +104,7 @@ class LayoutPageState extends StateBase<LayoutPage> {
               pages: [
                 DashboardPage(),
                 WebinarPage(),
+                DashboardPage(),
                 WebinarPage(),
               ]
             ),
