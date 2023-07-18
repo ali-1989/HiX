@@ -111,6 +111,29 @@ class DateTools {
         .localeNum());
   }
 
+  static String hmAndDateRelative(DateTime? date, {bool isUtc = true}){
+    if(date == null) {
+      return '';
+    }
+
+    ADateStructure mDate;
+
+    if(SettingsManager.localSettings.calendarType == CalendarType.solarHijri){
+      mDate = SolarHijriDate.from(date);
+    }
+    else {
+      mDate = GregorianDate.from(date);
+    }
+
+    if(isUtc) {
+      mDate.attachTimeZone('UTC');
+      mDate.moveUtcToLocal();
+    }
+
+    return LocaleHelper.overrideLtr(mDate.format('HH:mm ${SettingsManager.localSettings.dateFormat}', 'en')
+        .localeNum());
+  }
+
   static String dateAndHmRelative$String(String date, {bool isUtc = true}){
     return dateAndHmRelative(DateHelper.tsToSystemDate(date), isUtc: isUtc);
   }

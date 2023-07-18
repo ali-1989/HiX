@@ -30,6 +30,7 @@ class AppImages {
   static const avatar = 'assets/images/avatar.png';
   static const baby = 'assets/images/baby.png';
   static const logoffIco = 'assets/images/logoffIco.png';
+  static const tomanSign = 'assets/images/tomanSign.png';
 }
 
 

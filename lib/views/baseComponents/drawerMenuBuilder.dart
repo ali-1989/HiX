@@ -1,5 +1,6 @@
 
 import 'package:app/managers/layout_manager.dart';
+import 'package:app/pages/wallet_page.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/views/widgets/my_divider.dart';
@@ -296,7 +297,7 @@ class DrawerMenuBuilder {
 
   static void gotoWalletPage() async {
     await LayoutManager.toggleDrawer();
-    RouteTools.pushPage(RouteTools.getTopContext()!, const ProfilePage());
+    RouteTools.pushPage(RouteTools.getTopContext()!, WalletPage());
   }
 
   static void gotoAboutPage() async {
