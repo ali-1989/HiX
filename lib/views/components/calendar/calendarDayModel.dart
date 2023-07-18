@@ -9,6 +9,7 @@ class CalendarDayModel {
   String text;
   TextStyle? textStyle;
   Border? border;
+  double? size;
   Color color;
   OnDayClick? onClick;
 

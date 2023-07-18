@@ -1,8 +1,9 @@
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appDialogIris.dart';
-import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/appIcons.dart';
+
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
@@ -15,24 +16,16 @@ class SexPage extends StatefulWidget {
 }
 ///============================================================================================
 class _SexPageState extends StateBase<SexPage> {
-  late Border border;
 
   @override
   void initState(){
     super.initState();
-
-    border = const Border(
-      top: BorderSide(color: Colors.white, width: 1.0, style: BorderStyle.solid),
-      right: BorderSide(color: Colors.white, width: 0, style: BorderStyle.solid),
-      left: BorderSide(color: Colors.white, width: 1.0, style: BorderStyle.solid),
-      bottom: BorderSide(color: Colors.white, width: 0, style: BorderStyle.solid),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Assist(
-      controller: assistCtr,
+        controller: assistCtr,
         builder: (_, ctr, data){
           return buildBody();
         }
@@ -42,223 +35,243 @@ class _SexPageState extends StateBase<SexPage> {
   Widget buildBody() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [AppDecoration.mainColor, AppDecoration.mainColor.withAlpha(0)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Column(
+      child: CustomCard(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    const TabPageSelectorIndicator(
-                        backgroundColor: Colors.white,
-                        borderColor: Colors.white,
-                        size: 10
+                    TabPageSelectorIndicator(
+                      backgroundColor: AppDecoration.mainColor,
+                      borderColor: AppDecoration.mainColor,
+                      size: 8,
                     ),
-                    const SizedBox(width: 5),
-                    const Text('زیست آهنگ امروز').color(Colors.white).font(AppDecoration.morabbaFont),
+
+                    const Text('رابطه جنسی').font(AppDecoration.morabbaFont),
                   ],
                 ),
 
-                const SizedBox(height: 20),
-
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    gradient: LinearGradient(
-                      colors: [const Color(0xffFFE8CC), const Color(0xffFFE8CC).withAlpha(0)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft,
-                    ),
-                    border: border,
-                  ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 2, 10, 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('عاطفی').bold().fsR(-1),
-                          const Text('8').color(Colors.white),
-                        ],
-                      ),
-                    )
-                ),
-
-               const SizedBox(height: 10),
-
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    gradient: LinearGradient(
-                      colors: [const Color(0xffFED4FF), const Color(0xffFED4FF).withAlpha(0)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft,
-                    ),
-                    border: border,
-                  ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 2, 10, 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('جسمی').bold().fsR(-1),
-                          const Text('8').color(Colors.white),
-                        ],
-                      ),
-                    )
-                ),
-
-                const SizedBox(height: 10),
-
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    gradient: LinearGradient(
-                      colors: [const Color(0xffBFFFF4), const Color(0xffBFFFF4).withAlpha(0)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft,
-                    ),
-                    border: border,
-                  ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 2, 10, 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('ذهنی').bold().fsR(-1),
-                          const Text('12').color(Colors.white),
-                        ],
-                      ),
-                    )
-                ),
-
-                /// info
-                const SizedBox(height: 20),
-
-                Stack(
-                  children: [
-
-                    Positioned.fill(
-                      child: Transform.translate(
-                        offset: const Offset(-3, -1),
-                        child: Transform.rotate(
-                          angle: -0.04,
-                          child: CustomCard(
-                            color: Colors.white.withAlpha(100),
-                            child: const Text(''),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Opacity(
-                      opacity: 1,
-                      child: CustomCard(
-                        color: Colors.white,
-                          padding: const EdgeInsets.all(10),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset(AppImages.infoIco),
-                                    const SizedBox(width: 7),
-                                    const Text('توصیـه').bold().fsR(-1)
-                                  ],
-                                ),
-
-                                const SizedBox(height: 2),
-                                const Text('فردا زودتر از خواب نازت بیدارشو و یکم به فکر باشی.\nتا کی بی فکری\nتا کی غفلت').fsR(-1),
-
-                                const SizedBox(height: 5),
-                                CustomCard(
-                                  color: AppDecoration.mainColor,
-                                    radius: 28,
-                                    padding: const EdgeInsets.fromLTRB(7, 2, 7, 4),
-                                    child: const Text('مشاهده لینک').color(Colors.white).fsR(-3)
-                                )
-                              ],
-                            ),
-                          )
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 22),
-
-                const Divider(),
-
-                const SizedBox(height: 22),
-
-                /// buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: onHelpClick,
-                      child: Column(
-                        children: [
-                          CustomCard(
-                            color: Colors.white,
-                            padding: const EdgeInsets.all(1),
-                            radius: 10,
-                            child: Image.asset(AppImages.questionMarkIco, width: 28, height: 28,),
-                          ),
-
-                          const Text('راهنما').fsR(-2.5)
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(width: 12),
-
-                    GestureDetector(
-                      onTap: onChartClick,
-                      child: Column(
-                        children: [
-                          CustomCard(
-                            color: Colors.white,
-                            padding: const EdgeInsets.all(1),
-                            radius: 10,
-                            child: Image.asset(AppImages.chartIco, width: 28),
-                          ),
-
-                          const Text('نمودار').fsR(-2.5)
-                        ],
-                      ),
-                    ),
-                  ],
+                CustomCard(
+                    padding: const EdgeInsets.all(4),
+                    radius: 6,
+                    color: AppDecoration.mainColor,
+                    child: const Icon(AppIcons.add, color: Colors.white, size: 15,)
                 ),
               ],
             ),
-          ),
+
+            const SizedBox(height: 20),
+
+            const Text('لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها'
+                ' و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است،', textAlign: TextAlign.justify,),
+
+            const SizedBox(height: 20),
+            buildArrowMonth(),
+
+            const SizedBox(height: 25),
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: SizedBox(
+                width: 250,
+                height: 150 * pw,
+                child: buildChartSection(),
+              ),
+            ),
+
+            const SizedBox(height: 25),
+          ],
         ),
       ),
     );
   }
 
-  void onHelpClick() {
-    AppDialogIris.instance.showIrisDialog(
-        context,
-        descView: Text('lorm'),
-        canDismissible:  true
+  Widget buildArrowMonth(){
+    return CustomCard(
+      padding: const EdgeInsets.all(5),
+      color: AppDecoration.gray,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomCard(
+            color: Colors.white,
+            padding: const EdgeInsets.all(8),
+            child: const Icon(AppIcons.arrowLeft, size: 15,).alpha(alpha: 100),
+          ),
+
+          Text('خرداد    1402'.localeNum()).font(AppDecoration.morabbaFont),
+
+          CustomCard(
+            color: Colors.white,
+            padding: const EdgeInsets.all(8),
+            child: RotatedBox(
+                quarterTurns: 2,
+                child: const Icon(AppIcons.arrowLeft, size: 15,).alpha(alpha: 100)
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  void onChartClick() {
-    //todo. need UI
+  Widget buildChartSection(){
+    const maxY = 50.0;
+    const horizontalInterval = 10.0;
+    const noTitle = AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: false,
+        )
+    );
+
+    return BarChart(
+      swapAnimationDuration: const Duration(milliseconds: 150),
+      swapAnimationCurve: Curves.linear,
+      BarChartData(
+          maxY: maxY,
+          minY: 0,
+          borderData: FlBorderData(
+              show: true,
+              border: Border(
+                  bottom: BorderSide(width: 1, style: BorderStyle.solid, color: Colors.grey.shade300)
+              )
+          ),
+          titlesData: FlTitlesData(
+            show: true,
+            rightTitles: noTitle,
+            topTitles: noTitle,
+            leftTitles: AxisTitles(
+                drawBelowEverything: true,
+                sideTitles: SideTitles(
+                    interval: 20,
+                    reservedSize: 25,
+                    showTitles: true,
+                    getTitlesWidget: (step, TitleMeta meta){
+                      if(step > 45){
+                        return const SizedBox();
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: CustomCard(
+                            color: AppDecoration.gray,
+                            radius: 0,
+                            padding: const EdgeInsets.all(0.5),
+                            child: Text('${step.toInt()}').fsR(-5)
+                        ),
+                      );
+                    }
+                )
+            ),
+            bottomTitles: AxisTitles(
+                sideTitles: SideTitles(
+                    showTitles: true,
+                    reservedSize: 60,
+                    getTitlesWidget: (step, meta){
+                      return SideTitleWidget(
+                        axisSide: meta.axisSide,
+                        space: 1,
+                        angle: 0,
+                        child: RotatedBox(quarterTurns: 3,
+                            child: Text(getChartTitle(step)).fsR(-2).boldFont()),
+                      );
+                    }
+                )
+            ),
+          ),
+          gridData: FlGridData(
+              show: true,
+              checkToShowVerticalLine: (v) => true,
+              drawVerticalLine: false,
+              drawHorizontalLine: true,
+              horizontalInterval: horizontalInterval,
+              verticalInterval: 1,
+              checkToShowHorizontalLine: (v){
+                if(v == 0 || v == 20 || v == 40) {
+                  return true;
+                }
+
+                return false;
+              },
+              getDrawingHorizontalLine: (step){
+                return FlLine(color: Colors.grey.shade300, strokeWidth: 1);
+              }
+          ),
+          barGroups: buildBars()
+      ),
+    );
+  }
+
+  List<BarChartGroupData> buildBars(){
+    const radius = BorderRadius.vertical(top: Radius.circular(10));
+    final bar = BarChartRodData(toY: 22, width: 10, borderRadius: radius, color: AppDecoration.mainColor);
+
+    return [
+      BarChartGroupData(
+          x: 0,
+          barsSpace: 10,
+          barRods: [
+            bar.copyWith(toY: 20),
+          ]
+      ),
+
+      BarChartGroupData(
+          x: 1,
+          barsSpace: 10,
+          barRods: [
+            bar.copyWith(toY: 12),
+          ]
+      ),
+
+      BarChartGroupData(
+          x: 2,
+          barsSpace: 10,
+          barRods: [
+            bar.copyWith(toY: 30),
+          ]
+      ),
+
+      BarChartGroupData(
+          x: 3,
+          barsSpace: 10,
+          barRods: [
+            bar.copyWith(toY: 19),
+          ]
+      ),
+
+      BarChartGroupData(
+          x: 4,
+          barsSpace: 10,
+          barRods: [
+            bar.copyWith(toY: 8),
+          ]
+      ),
+
+      BarChartGroupData(
+          x: 5,
+          barsSpace: 10,
+          barRods: [
+            bar.copyWith(toY: 42),
+          ]
+      ),
+    ];
+  }
+
+  String getChartTitle(double step) {
+    switch(step){
+      case 0:
+        return 'سردرد';
+      case 1:
+        return 'کمر درد';
+      case 2:
+        return 'حالت تهوع';
+      case 3:
+        return 'دل درد';
+      case 4:
+        return 'سرگیجه';
+    }
+
+    return 'بیماری';
   }
 }

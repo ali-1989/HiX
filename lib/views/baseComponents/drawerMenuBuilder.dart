@@ -131,7 +131,7 @@ class DrawerMenuBuilder {
                                 ListTile(
                                   title: const Text('کیف پول').boldFont(),
                                   //leading: Image.asset(AppImages.newVersionIco, width: 20, height: 20),
-                                  onTap: gotoAboutPage,
+                                  onTap: gotoWalletPage,
                                   dense: true,
                                   horizontalTitleGap: 0,
                                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4.0),
@@ -290,6 +290,11 @@ class DrawerMenuBuilder {
   }*/
 
   static void gotoProfilePage() async {
+    await LayoutManager.toggleDrawer();
+    RouteTools.pushPage(RouteTools.getTopContext()!, const ProfilePage());
+  }
+
+  static void gotoWalletPage() async {
     await LayoutManager.toggleDrawer();
     RouteTools.pushPage(RouteTools.getTopContext()!, const ProfilePage());
   }

@@ -34,9 +34,8 @@ class _CalendarBuilderState extends State<CalendarBuilder> {
       child: CircleNumber(
         text: day.text,
         backColor: day.color,
-        size: 35,
+        size: day.size?? 37,
         textStyle: day.textStyle?? TextStyle(fontSize: AppDecoration.fontSizeRelative(-2)),
-        padding: const EdgeInsets.all(10),
         border: day.border?? Border.all(style: BorderStyle.none),
       ),
     );

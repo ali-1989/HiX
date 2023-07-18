@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class CircleNumber extends StatelessWidget {
   final String text;
-  final EdgeInsets? padding;
   final TextStyle? textStyle;
   final Border? border;
   final Color? backColor;
@@ -12,7 +11,6 @@ class CircleNumber extends StatelessWidget {
     Key? key,
     required this.text,
     this.textStyle,
-    this.padding = const EdgeInsets.all(7.0),
     this.backColor = Colors.transparent,
     this.size,
     this.border,
@@ -34,10 +32,7 @@ class CircleNumber extends StatelessWidget {
 
         child: Center(
           widthFactor: 1,
-          child: Padding(
-            padding: padding!,
-            child: Text(text, style: textStyle),
-          ),
+          child: Text(text, style: textStyle),
         ),
       ),
     );

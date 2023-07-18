@@ -1,9 +1,12 @@
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
+import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:app/tools/app/appSheet.dart';
 import 'package:app/tools/app/appThemes.dart';
+import 'package:app/views/components/calendar/calendarDayModel.dart';
+import 'package:app/views/components/calendar/calendar_builder.dart';
 import 'package:app/views/sheet/period_change_state_sheet.dart';
 import 'package:app/views/sheet/pregnant_change_state_sheet.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,7 @@ import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 import 'package:iris_tools/widgets/text/customRich.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
+
 
 class DashboardCalendarPage extends StatefulWidget {
   const DashboardCalendarPage({Key? key}) : super(key: key);
@@ -23,6 +27,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
   Color pmsColor = const Color(0xffFFEC94);
   Color periodColor = const Color(0xffEDC6FF);
   Color ovulationColor = const Color(0xffABFFEF);
+  bool isPregnant = false;
 
   @override
   void initState(){
@@ -32,7 +37,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Assist(
-      controller: assistCtr,
+        controller: assistCtr,
         builder: (_, ctr, data){
           return buildBody();
         }
@@ -49,13 +54,22 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
             buildTopSection(),
 
             const SizedBox(height: 15),
-            buildChartSection(),
+            Builder(
+                builder: (_){
+                  if(isPregnant){
+                    return buildWeekProgressSection();
+                  }
+
+                  return buildCalendarSection();
+                }
+            ),
 
             const SizedBox(height: 15),
             buildInfoSection(),
 
             const SizedBox(height: 15),
             buildAdviceSection(),
+
             const SizedBox(height: 5),
           ],
         ),
@@ -65,7 +79,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
 
   Widget buildTopSection() {
     return CustomCard(
-      padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Row(
@@ -81,8 +95,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
 
                     const SizedBox(width: 3),
 
-                    //const Text('تقویم قاعدگی').font(AppDecoration.morabbaFont),
-                    const Text('تقویم بارداری').font(AppDecoration.morabbaFont),
+                    Text(isPregnant ? 'تقویم بارداری' : 'تقویم قاعدگی').font(AppDecoration.morabbaFont),
                   ],
                 ),
 
@@ -95,32 +108,227 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
                     ),
                     const SizedBox(width: 5),
 
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: onChangeStateClick,
-                      child: Row(
-                        children: [
-                          CustomCard(
-                              padding: const EdgeInsets.all(5),
-                              color: AppDecoration.gray,
-                              child: Image.asset(AppImages.changeValueIco, width: 18)
-                          ),
-                          const SizedBox(width: 5),
+                    CustomCard(
+                        padding: const EdgeInsets.all(5),
+                        color: AppDecoration.gray,
+                        child: Image.asset(AppImages.changeValueIco, width: 18)
+                    ),
+                    const SizedBox(width: 5),
 
-                          const Text('تغییر\nوضعیت').font(AppDecoration.morabbaFont).fsR(-4),
-                        ],
-                      ),
-                    )
+                    const Text('تغییر\nوضعیت').font(AppDecoration.morabbaFont).fsR(-4),
                   ],
                 ),
               ],
+            ),
+
+            Builder(
+                builder: (_){
+                  if(isPregnant){
+                    return const SizedBox();
+                  }
+
+                  return buildPeriodHelp();
+                }
             ),
           ],
         )
     );
   }
 
-  Widget buildChartSection() {
+  Widget buildPeriodHelp(){
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        CustomCard(
+          padding: const EdgeInsets.all(5),
+          color: AppDecoration.gray,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomCard(
+                color: Colors.white,
+                padding: const EdgeInsets.all(8),
+                child: const Icon(AppIcons.arrowLeft, size: 15,).alpha(alpha: 100),
+              ),
+
+              Text('خرداد    1402'.localeNum()).font(AppDecoration.morabbaFont),
+
+              CustomCard(
+                color: Colors.white,
+                padding: const EdgeInsets.all(8),
+                child: RotatedBox(
+                    quarterTurns: 2,
+                    child: const Icon(AppIcons.arrowLeft, size: 15,).alpha(alpha: 100)
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 20),
+        Row(
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: SizedBox(
+                    width: 9,
+                    child: Divider(
+                      height: 8,
+                      thickness: 8,
+                      color: AppDecoration.gray,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 5),
+                const Text('خنثی').font(AppDecoration.morabbaFont).fsR(-4)
+              ],
+            ),
+
+            const SizedBox(width: 10),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: SizedBox(
+                    width: 9,
+                    child: Divider(
+                      height: 8,
+                      thickness: 8,
+                      color: ovulationColor,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 5),
+                const Text('تخمک گذاری').font(AppDecoration.morabbaFont).fsR(-4)
+              ],
+            ),
+
+            const SizedBox(width: 10),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: SizedBox(
+                    width: 9,
+                    child: Divider(
+                      height: 8,
+                      thickness: 8,
+                      color: pmsColor,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 5),
+                const Text('PMS').font(AppDecoration.morabbaFont).fsR(-4)
+              ],
+            ),
+
+            const SizedBox(width: 10),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: SizedBox(
+                    width: 9,
+                    child: Divider(
+                      height: 8,
+                      thickness: 8,
+                      color: periodColor,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 5),
+                const Text('قاعدگی').font(AppDecoration.morabbaFont).fsR(-4)
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget buildCalendarSection() {
+    final list = <CalendarDayModel>[];
+
+    for(int i =1; i < 31; i++){
+      list.add(CalendarDayModel(text: '$i', color: Colors.grey,)..size = 37*pw);
+    }
+
+    for(int i =0; i < 9; i++){
+      list[i].color = pmsColor;
+    }
+
+    for(int i =9; i < 18; i++){
+      list[i].color = periodColor;
+    }
+
+    for(int i =18; i < 24; i++){
+      list[i].color = ovulationColor;
+    }
+
+    for(int i =24; i < 30; i++){
+      list[i].color = Colors.white;
+    }
+
+
+    list[24].border = Border.all(style: BorderStyle.solid, width: 0.5, color: Colors.blueAccent);
+    list[24].color = Colors.white;
+
+    return CalendarBuilder(
+      dayList: list,
+    );
+  }
+
+  Widget buildInfoSection() {
+    return ConstrainedBox(//IntrinsicHeight
+      constraints: const BoxConstraints(
+        minHeight: 150,
+        //maxHeight: 220,
+      ),
+      child: CustomCard(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+          child: Column(
+            children: [
+              CustomCard(
+                color: AppDecoration.gray,
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('موارد قابل توجه').font(AppDecoration.morabbaFont).color(Colors.red).fsR(-1),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              ListView.separated(
+                itemCount: 10,
+                shrinkWrap: true,
+                itemBuilder: infoItemBuilder,
+                separatorBuilder: (_, idx) {
+                  if(idx == 0 || idx == 8){
+                    return const SizedBox();
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2.0),
+                    child: Divider(color: AppDecoration.gray,),
+                  );
+                },
+              ),
+            ],
+          )
+      ),
+    );
+  }
+
+  Widget buildWeekProgressSection() {
     return Column(
       children: [
         const Text('هفته 2').fsR(-2).bold(),
@@ -130,7 +338,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
         Stack(
           children: [
             Positioned(
-              top: 5,
+                top: 5,
                 right: 5,
                 child: Image.asset(AppImages.baby, width: 87, height: 87, fit: BoxFit.fill,)
             ),
@@ -177,69 +385,13 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
     );
   }
 
-  Widget buildInfoSection() {
-    return ConstrainedBox(//IntrinsicHeight
-      constraints: const BoxConstraints(
-        minHeight: 150,
-        //maxHeight: 220,
-      ),
-      child: CustomCard(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-          child: Column(
-            children: [
-              CustomCard(
-                color: AppDecoration.gray,
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('موارد قابل توجه').font(AppDecoration.morabbaFont).color(Colors.red).fsR(-1),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 12),
-
-              /*SizedBox(
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: CustomPaint(
-                        painter: MakeBookLine(
-                            color: Colors.grey.shade400,
-                          lineSpace: tp.height,
-                          drawTopLine: true,
-                        ),
-                      ),
-                    ),*/
-
-              ListView.separated(
-                itemCount: 10,
-                shrinkWrap: true,
-                itemBuilder: infoItemBuilder,
-                separatorBuilder: (_, idx) {
-                  if(idx == 0 || idx == 8){
-                    return const SizedBox();
-                  }
-
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    child: Divider(color: AppDecoration.gray,),
-                  );
-                },
-              ),
-            ],
-          )
-      ),
-    );
-  }
-
   Widget infoItemBuilder(_, int idx){
     if(idx == 0 || idx == 9) {
       return Divider(color: AppDecoration.gray,);
     }
 
-    if(idx == 1) {
-      return buildInfoLine('به زندگی امیدوار باش و به پیش برو');
+    if(idx == 3) {
+      return buildInfoLine('به زندگی امیدوار باش و به پیش برو.به زندگی امیدوار باش و به پیش برو');
     }
 
     return buildInfoLine('دنیا بدون تو هم ادامه دارد. پس فرد مفیدی باش');
@@ -258,14 +410,14 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
     tp.layout(maxWidth: double.infinity);*/
 
     return CustomRich(
-      alignment: PlaceholderAlignment.middle,
+        alignment: PlaceholderAlignment.middle,
         children: [
           const Padding(
             padding: EdgeInsets.only(top: 2),
             child: TabPageSelectorIndicator(
-                backgroundColor: Colors.red,
-                borderColor: Colors.red,
-                size: 4,
+              backgroundColor: Colors.red,
+              borderColor: Colors.red,
+              size: 4,
             ),
           ),
 
@@ -309,7 +461,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
 
   void onChangeStateClick(){
     Widget b(_){
-      if(false) {
+      if(isPregnant) {
         return const PregnantChangeStateSheet();
       }
       else {
@@ -318,10 +470,10 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
     }
 
     AppSheet.showSheetCustom(
-        context,
-        builder: b,
-        contentColor: Colors.transparent,
-        routeName: 'change',
+      context,
+      builder: b,
+      contentColor: Colors.transparent,
+      routeName: 'change',
     );
   }
 }
