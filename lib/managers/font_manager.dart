@@ -154,14 +154,13 @@ class FontManager {
     /// family: family name in [pubspec.yaml]   *** family match is important, case insensitive
     /// fileName: asset in [pubspec.yaml]       not important
 
-    /*final atlanta = Font.bySize()
-        ..family = 'Atlanta'
-        ..fileName = 'Atlanta'
+    final righteous = Font.bySize()
+        ..family = 'Righteous'
         ..defaultLanguage = 'en'
-        ..defaultUsage = 'base'
-        ..usages = ['sub'];
+        ..defaultUsage = FontUsage.normal
+        ..usages =[FontUsage.sub];
 
-      */
+
     //------------- fa -------------------------------------------------
     final shabnam = Font.bySize()
       ..family = 'Shabnam'
@@ -210,6 +209,7 @@ class FontManager {
     _fontList.add(yekanSub);
     _fontList.add(morabba);
     _fontList.add(shabnam);
+    _fontList.add(righteous);
 
 
     var rawDef = _getDefaultFontFamily();

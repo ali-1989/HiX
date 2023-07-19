@@ -33,6 +33,8 @@ class AppImages {
   static const tomanSign = 'assets/images/tomanSign.png';
   static const notificationIco = 'assets/images/notificationIco.png';
   static const tickIco = 'assets/images/tickIco.png';
+  static const walletPlus = 'assets/images/wallet_plus.png';
+  static const infoIco2 = 'assets/images/infoIco2.png';
 }
 
 

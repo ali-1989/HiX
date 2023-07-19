@@ -5,6 +5,7 @@ import 'package:app/tools/app/appImages.dart';
 import 'package:app/tools/dateTools.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/api/generator.dart';
+import 'package:iris_tools/api/system.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 
@@ -34,14 +35,7 @@ class _NotificationPageState extends StateBase<NotificationPage> {
 
     //requestData();
 
-    List.generate(10, (index) {
-      final t = NotificationModel();
-      t.description = 'حواست باشه فردا دوره قاعدگیت شروع میشه';
-      t.isSeen = Generator.getRandomFrom([true, false]);
-      t.date = DateTime.now();
-
-      list.add(t);
-    });
+    addItem();
   }
 
   @override
@@ -119,7 +113,7 @@ class _NotificationPageState extends StateBase<NotificationPage> {
           ),
 
           ListView.builder(
-              itemCount: list.length,
+              itemCount: list.length +1,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.only(top: 10),
@@ -131,6 +125,16 @@ class _NotificationPageState extends StateBase<NotificationPage> {
   }
 
   Widget? itemBuilder(BuildContext context, int index) {
+    if(index == list.length){
+      return GestureDetector(
+        onTap: onMoreItemClick,
+        child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Center(child: const Text('موارد بیشتر').color(Colors.blue).boldFont()),
+        ),
+      );
+    }
+
     final itm = list[index];
 
     return Padding(
@@ -186,6 +190,26 @@ class _NotificationPageState extends StateBase<NotificationPage> {
     requester.bodyJson = js;
 
     requester.request(context);
+  }
+
+  void addItem() {
+    List.generate(10, (index) {
+      final t = NotificationModel();
+      t.description = Generator.getRandomFrom(['حواست باشه فردا دوره قاعدگیت شروع میشه', 'پولت برگشت داده شد']);
+      t.isSeen = Generator.getRandomFrom([true, false]);
+      t.date = DateTime.now();
+
+      list.add(t);
+    });
+  }
+
+  void onMoreItemClick() async {
+    showLoading();
+    await System.wait(const Duration(milliseconds: 1500));
+
+    addItem();
+    await hideLoading();
+    assistCtr.updateHead();
   }
 }
 ///==============================================================================

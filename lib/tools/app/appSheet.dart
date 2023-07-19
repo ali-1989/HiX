@@ -103,6 +103,7 @@ class AppSheet {
         builder: builder,
         elevation: elevation,
         shape: shape,
+        enableDrag: true,
         constraints: AppSizes.isBigWidth()? BoxConstraints.tightFor(width: AppSizes.webMaxWidthSize) : null,
         isDismissible: isDismissible,
         clipBehavior: shape != null ? Clip.antiAlias : Clip.none,

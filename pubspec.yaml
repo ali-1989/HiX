@@ -105,6 +105,9 @@ flutter:
 
   #style: italic  weight: 700
   fonts:
+    - family: Righteous
+      fonts:
+      - asset: assets/fonts/Righteous-Regular.ttf
     - family: Shabnam
       fonts:
       - asset: assets/fonts/ShabnamMediumFD.ttf

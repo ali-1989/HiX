@@ -26,6 +26,10 @@ class AppDecoration {
     return 'Shabnam';
   }
 
+  static String get righteousFont {
+    return 'Righteous';
+  }
+
   static TextStyle infoHeadLineTextStyle() {
     return AppThemes.instance.themeData.textTheme.headlineSmall!.copyWith(
       color: AppThemes.instance.themeData.textTheme.headlineSmall!.color!.withAlpha(150),

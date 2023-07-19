@@ -3,9 +3,11 @@ import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/appSheet.dart';
 import 'package:app/tools/currencyTools.dart';
 import 'package:app/tools/dateTools.dart';
 import 'package:app/views/components/backBtn.dart';
+import 'package:app/views/sheet/wallet_increase_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/api/generator.dart';
 
@@ -38,10 +40,10 @@ class _WalletPageState extends StateBase<WalletPage> {
 
     //requestData();
 
-    List.generate(5, (index) {
+    List.generate(20, (index) {
       final t = TransactionModel();
-      t.title = 'عنوان';
-      t.amount = 123000;
+      t.title = Generator.getRandomFrom(['فاکتور وبینار', 'فاکتور خرید', 'صورت حساب مشاوره', 'واریز وجه']);
+      t.amount = Generator.getRandomFrom([123000, -70000, 25000, -65000]);
       t.factorNumber = Generator.generateIntId(10).toString();
       t.date = DateTime.now();
 
@@ -144,22 +146,25 @@ class _WalletPageState extends StateBase<WalletPage> {
 
             const SizedBox(height: 20),
 
-            CustomCard(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                radius: 20,
-                color: AppDecoration.mainColor,
-                child: Row(
-                  children: [
-                    CircularIcon(
-                      backColor: Colors.white,
-                      itemColor: AppDecoration.mainColor,
-                      icon: AppIcons.add,
-                    ),
+            GestureDetector(
+              onTap: onIncreaseWalletClick,
+              child: CustomCard(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  radius: 20,
+                  color: AppDecoration.mainColor,
+                  child: Row(
+                    children: [
+                      CircularIcon(
+                        backColor: Colors.white,
+                        itemColor: AppDecoration.mainColor,
+                        icon: AppIcons.add,
+                      ),
 
-                    const SizedBox(width: 8),
-                    const Text('افـزایش اعــــتبار').color(Colors.white).fsR(-3).boldFont()
-                  ],
-                )
+                      const SizedBox(width: 8),
+                      const Text('افـزایش اعــــتبار').color(Colors.white).fsR(-3).boldFont()
+                    ],
+                  )
+              ),
             )
           ],
         )
@@ -250,12 +255,12 @@ class _WalletPageState extends StateBase<WalletPage> {
                 Text(itm.title).boldFont(),
 
                  CustomCard(
-                  padding: EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(4),
                     radius: 4,
-                    color: itm.isPlus() ? Color(0xff00FFD1) : Color(0xffF0134D),
+                    color: itm.isPlus() ? const Color(0xff00FFD1) : const Color(0xffF0134D),
                     child: RotatedBox(
                       quarterTurns: itm.isPlus() ? 2 : 0,
-                        child: Icon(AppIcons.arrowDown, size: 12)
+                        child: const Icon(AppIcons.arrowDown, size: 12)
                     )
                 )
               ],
@@ -266,7 +271,7 @@ class _WalletPageState extends StateBase<WalletPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('شماره فاکتور').fsR(-3),
-                Text(itm.factorNumber).englishFont().fsR(-1.5),
+                Text(itm.factorNumber).font(AppDecoration.righteousFont).fsR(-3),
               ],
             ),
 
@@ -318,6 +323,20 @@ class _WalletPageState extends StateBase<WalletPage> {
     requester.bodyJson = js;
 
     requester.request(context);
+  }
+
+  void onIncreaseWalletClick() {
+    Widget b(_){
+      return const WalletIncreaseSheet();
+    }
+
+    AppSheet.showSheetCustom(
+      context,
+      builder: b,
+      contentColor: Colors.transparent,
+      routeName: 'WalletIncreaseSheet',
+      isScrollControlled: true,
+    );
   }
 }
 
