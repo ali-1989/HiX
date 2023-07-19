@@ -160,6 +160,28 @@ class DateTools {
     return LocaleHelper.overrideLtr(mDate.format('YYYY/MM', 'en').localeNum());
   }
 
+  static String ymdWithMonthNameRelative(DateTime? date, {bool isUtc = true}){
+    if(date == null) {
+      return '';
+    }
+
+    ADateStructure mDate;
+
+    if(SettingsManager.localSettings.calendarType == CalendarType.solarHijri){
+      mDate = SolarHijriDate.from(date);
+    }
+    else {
+      mDate = GregorianDate.from(date);
+    }
+
+    if(isUtc) {
+      mDate.attachTimeZone('UTC');
+      mDate.moveUtcToLocal();
+    }
+
+    return LocaleHelper.overrideLtr(mDate.format('YYYY NN dd', 'en').localeNum());
+  }
+
   static String hmOnlyRelative(DateTime? date, {bool isUtc = true}){
     if(date == null) {
       return '';

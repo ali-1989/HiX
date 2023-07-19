@@ -31,6 +31,8 @@ class AppImages {
   static const baby = 'assets/images/baby.png';
   static const logoffIco = 'assets/images/logoffIco.png';
   static const tomanSign = 'assets/images/tomanSign.png';
+  static const notificationIco = 'assets/images/notificationIco.png';
+  static const tickIco = 'assets/images/tickIco.png';
 }
 
 

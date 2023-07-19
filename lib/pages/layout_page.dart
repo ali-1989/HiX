@@ -1,6 +1,9 @@
 import 'package:app/managers/dashboard_manager.dart';
 import 'package:app/managers/layout_manager.dart';
+import 'package:app/pages/calendar_page.dart';
+import 'package:app/pages/consultation_page.dart';
 import 'package:app/pages/dashboard_page.dart';
+import 'package:app/pages/notification_page.dart';
 import 'package:app/pages/webinar_page.dart';
 import 'package:app/structures/enums/appEvents.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
@@ -8,6 +11,7 @@ import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/dateTools.dart';
 import 'package:app/views/baseComponents/drawerMenuBuilder.dart';
 import 'package:app/views/baseComponents/layoutScaffold.dart';
 import 'package:app/views/widgets/my_divider.dart';
@@ -103,9 +107,10 @@ class LayoutPageState extends StateBase<LayoutPage> {
               controller: pageCtr,
               pages: [
                 DashboardPage(),
+                CalendarPage(),
                 WebinarPage(),
-                DashboardPage(),
-                WebinarPage(),
+                ConsultationPage(),
+                NotificationPage(),
               ]
             ),
           ],
@@ -151,7 +156,7 @@ class LayoutPageState extends StateBase<LayoutPage> {
                 children: [
                   Image.asset(AppImages.calendarIcon, width: 14),
                   const SizedBox(width: 6),
-                  Text('امروز:  1 خرداد 1402'.localeNum()).fsR(-1),
+                  Text('امروز:  ${DateTools.ymdWithMonthNameRelative(DateTime.now())}'.localeNum()).fsR(-1),
                 ],
               )
           ),

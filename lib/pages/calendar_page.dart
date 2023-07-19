@@ -2,14 +2,14 @@ import 'package:app/structures/abstract/stateBase.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 
-class WebinarPage extends StatefulWidget {
-  const WebinarPage({Key? key}) : super(key: key);
+class CalendarPage extends StatefulWidget {
+  const CalendarPage({Key? key}) : super(key: key);
 
   @override
-  State createState() => WebinarPageState();
+  State createState() => CalendarPageState();
 }
 ///====================================================================================
-class WebinarPageState extends StateBase<WebinarPage> {
+class CalendarPageState extends StateBase<CalendarPage> {
 
   @override
   void initState(){
@@ -37,14 +37,14 @@ class WebinarPageState extends StateBase<WebinarPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('webinar'),
+          Text('calendar'),
           SizedBox(height: 200),
 
-          Text('webinar'),
+          Text('calendar'),
           SizedBox(height: 200),
 
 
-          Text('webinar'),
+          Text('calendar'),
         ]
       ),
     );
