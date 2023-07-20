@@ -35,6 +35,10 @@ class AppImages {
   static const tickIco = 'assets/images/tickIco.png';
   static const walletPlus = 'assets/images/wallet_plus.png';
   static const infoIco2 = 'assets/images/infoIco2.png';
+  static const consultationIco = 'assets/images/consultationIco.png';
+  static const supportIco = 'assets/images/supportIco.png';
+  static const textIco = 'assets/images/textIco.png';
+  static const sexRelationIco = 'assets/images/sexRelationIco.png';
 }
 
 
