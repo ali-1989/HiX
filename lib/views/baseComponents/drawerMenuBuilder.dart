@@ -125,7 +125,7 @@ class DrawerMenuBuilder {
                             child: Column(
                               children: [
                                 const Opacity(
-                                  opacity: 0.5,
+                                  opacity: 0.3,
                                     child: MyDivider()
                                 ),
 
@@ -148,7 +148,7 @@ class DrawerMenuBuilder {
                                 ),
 
                                 const Opacity(
-                                    opacity: 0.5,
+                                    opacity: 0.3,
                                     child: MyDivider()
                                 ),
 

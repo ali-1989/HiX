@@ -82,7 +82,29 @@ class _RepetitiveSymptomsPageState extends StateBase<RepetitiveSymptomsPage> {
                  ],
                ),
 
-               Text('1 خرداد 1402'.localeNum()).boldFont()
+               Row(
+                 children: [
+                   CustomCard(
+                     color: AppDecoration.gray,
+                     padding: const EdgeInsets.all(6),
+                     child: const Icon(AppIcons.arrowLeft, size: 12).alpha(alpha: 100),
+                   ),
+
+                   const SizedBox(width: 4),
+
+                   Text(' خرداد 1402'.localeNum()).boldFont(),
+
+                   const SizedBox(width: 6),
+                   CustomCard(
+                     color: AppDecoration.gray,
+                     padding: const EdgeInsets.all(6),
+                     child: RotatedBox(
+                         quarterTurns: 2,
+                         child: const Icon(AppIcons.arrowLeft, size: 12).alpha(alpha: 100)
+                     ),
+                   ),
+                 ],
+               )
              ],
            ),
 

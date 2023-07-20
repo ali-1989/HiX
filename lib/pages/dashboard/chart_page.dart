@@ -3,6 +3,8 @@ import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appDialogIris.dart';
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/appSheet.dart';
+import 'package:app/views/sheet/biometric_chart_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
@@ -253,12 +255,22 @@ class _ChartPageState extends StateBase<ChartPage> {
   void onHelpClick() {
     AppDialogIris.instance.showIrisDialog(
         context,
-        descView: Text('lorm'),
+        descView: Text('lorm'),//todo.
         canDismissible:  true
     );
   }
 
   void onChartClick() {
-    //todo. need UI
+    Widget b(_){
+      return const BiometricChartSheet();
+    }
+
+    AppSheet.showSheetCustom(
+      context,
+      builder: b,
+      contentColor: Colors.transparent,
+      routeName: 'chart',
+      isScrollControlled: true,
+    );
   }
 }

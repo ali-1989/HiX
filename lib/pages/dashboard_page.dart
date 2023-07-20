@@ -99,7 +99,7 @@ class DashboardPageState extends StateBase<DashboardPage> {
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 9),
             child: Visibility(
-              visible: model != DashboardManager.sexNavigateModel,
+              visible: model != DashboardManager.chartNavigateModel,
               child: SizedBox(
                 height: 0.8,
                 width: 30,

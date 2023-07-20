@@ -13,6 +13,7 @@ import 'package:app/services/session_service.dart';
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/structures/middleWares/requester.dart';
 import 'package:app/system/keys.dart';
+import 'package:iris_tools/widgets/circle.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -90,36 +91,43 @@ class _NotificationPageState extends StateBase<NotificationPage> {
         child: CustomCard(
           padding: const EdgeInsets.all(7),
           color: AppDecoration.mainColor,
-          child: const Text('تراکنشی برای شما ثبت نشده است').fsR(-3).color(Colors.white).boldFont(),
+          child: const Text('اعلانی وجود ندارد').fsR(-3).color(Colors.white).boldFont(),
         ),
       );
     }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Image.asset(AppImages.notificationIco),
+      child: CustomCard(
+        color: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        radius: 14,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    //Image.asset(AppImages.notificationIco),
+                    const Circle(color: Colors.red, size: 9),
+                    const SizedBox(width: 5),
 
-                  const Text('اعلانات شما').font(AppDecoration.morabbaFont).fsR(-1),
-                ],
-              ),
-            ],
-          ),
+                    const Text('اعلانات شما').font(AppDecoration.morabbaFont).fsR(2.5),
+                  ],
+                ),
+              ],
+            ),
 
-          ListView.builder(
-              itemCount: list.length +1,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(top: 10),
-              itemBuilder: itemBuilder
-          ),
-        ],
+            ListView.builder(
+                itemCount: list.length +1,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.only(top: 10),
+                itemBuilder: itemBuilder
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -144,6 +152,7 @@ class _NotificationPageState extends StateBase<NotificationPage> {
           CustomCard(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             radius: 12,
+            color: AppDecoration.gray,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

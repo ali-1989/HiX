@@ -10,10 +10,10 @@ class DashboardManager {
   DashboardManager._();
 
   static final List<DashboardNavigateModel> navigateList = [];
-  static final chartNavigateModel = DashboardNavigateModel();
   static final calendarNavigateModel = DashboardNavigateModel();
   static final repetitiveSymptomsNavigateModel = DashboardNavigateModel();
   static final sexNavigateModel = DashboardNavigateModel();
+  static final chartNavigateModel = DashboardNavigateModel();
 
   static Future<void> init() async {
     //calendarNavigateModel.title = 'تقویم قائدگی';
