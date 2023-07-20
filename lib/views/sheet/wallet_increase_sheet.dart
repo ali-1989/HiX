@@ -2,10 +2,9 @@ import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:app/tools/currencyTools.dart';
-import 'package:app/tools/dateTools.dart';
 import 'package:app/views/components/my_sheet_layout.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_tools/api/helpers/textFieldHelper.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 import 'package:iris_tools/widgets/text/customRich.dart';
 
@@ -23,11 +22,12 @@ class _WalletIncreaseSheetState extends State<WalletIncreaseSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView (
-      physics: const ClampingScrollPhysics(),
-      child: MySheetLayout(
+    return MySheetLayout (
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        //physics: const ClampingScrollPhysics(),
         //primary: false,
-        body: Column(
+        child: Column(
           children: [
             Row(
               children: [
@@ -130,6 +130,7 @@ class _WalletIncreaseSheetState extends State<WalletIncreaseSheet> {
                           ),
                           onChanged: (v){
                             amountCtr.text = CurrencyTools.formatCurrencyString(v);
+                            TextFieldHelper.cursorToEnd(amountCtr);
                           },
                         ),
                       ),

@@ -206,7 +206,6 @@ class _WelcomePageState extends StateBase<WelcomePage> {
   }
 
   void onShowNewVersionOptionsClick() {
-    print('ggg');
   }
 
   void onGotoWebViewClick() {

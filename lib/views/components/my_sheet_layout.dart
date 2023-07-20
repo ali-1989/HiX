@@ -21,42 +21,45 @@ class _MySheetLayoutState extends State<MySheetLayout> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: onCloseClick,
-            child: CustomCard(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Transform.translate(
-                    offset: const Offset(0, -3),
-                    child: const RotatedBox(
-                      quarterTurns: 1,
-                        child: Icon(AppIcons.arrowLeftIos, size: 14)
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: onCloseClick,
+              child: CustomCard(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Transform.translate(
+                      offset: const Offset(0, -3),
+                      child: const RotatedBox(
+                        quarterTurns: 1,
+                          child: Icon(AppIcons.arrowLeftIos, size: 14)
+                      ),
                     ),
                   ),
-                ),
-            ),
-          ),
-
-          const SizedBox(
-            height: 12,
-          ),
-
-          SizedBox(
-            width: double.infinity,
-            child: CustomCard(
-              color: Colors.white,
-              radius: 12,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
-                child: widget.body,
               ),
             ),
-          ),
-        ],
+
+            const SizedBox(
+              height: 12,
+            ),
+
+            SizedBox(
+              width: double.infinity,
+              child: CustomCard(
+                color: Colors.white,
+                radius: 12,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+                  child: widget.body,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
