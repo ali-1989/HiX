@@ -25,8 +25,6 @@ class _WalletIncreaseSheetState extends State<WalletIncreaseSheet> {
     return MySheetLayout (
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        //physics: const ClampingScrollPhysics(),
-        //primary: false,
         child: Column(
           children: [
             Row(

@@ -1,5 +1,3 @@
-// ignore_for_file: empty_catches
-
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appLocale.dart';
 import 'package:flutter/material.dart';

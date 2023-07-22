@@ -62,9 +62,8 @@ android {
     }
 
     signingConfigs {
-
         release {
-            storeFile file('E:\\Programming\\Projects\\FlutterProjects\\VosateZehn\\VosateZehn\\android\\app\\key.keystore')
+            storeFile file('E:\\FlutterProjects\\HiX\\android\\app\\key.keystore')
             keyAlias 'b4a'
             keyPassword 'a6987@7896b'
             storePassword 'a6987@7896b'
@@ -110,7 +109,7 @@ android {
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

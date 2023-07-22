@@ -316,7 +316,6 @@ class _WalletPageState extends StateBase<WalletPage> {
     requester.httpRequestEvents.onStatusOk = (req, data) async {
 
 
-
       assistCtr.addStateAndUpdateHead('');
     };
 

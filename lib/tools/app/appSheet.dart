@@ -295,8 +295,7 @@ class AppSheet {
     required Color contentColor,
     EdgeInsets padding = EdgeInsets.zero,
       }) {
-    //final theme = Theme.of(ctx);
-
+    
     return AppSheetView(childBuilder: builder, contentColor: contentColor,);
   }
 

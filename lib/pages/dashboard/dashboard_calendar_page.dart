@@ -65,10 +65,10 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
             ),
 
             const SizedBox(height: 15),
-            buildInfoSection(),
+            buildAdviceSection(),
 
             const SizedBox(height: 15),
-            buildAdviceSection(),
+            buildInfoSection(),
 
             const SizedBox(height: 5),
           ],
@@ -99,28 +99,32 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
                   ],
                 ),
 
-                GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: onChangeStateClick,
-                  child: Row(
-                    children: [
-                      CustomCard(
-                          padding: const EdgeInsets.all(5),
-                          color: AppDecoration.gray,
-                          child: Image.asset(AppImages.questionMarkFaIco, width: 18, height: 18,)
-                      ),
-                      const SizedBox(width: 5),
+                Row(
+                  children: [
+                    CustomCard(
+                        padding: const EdgeInsets.all(5),
+                        color: AppDecoration.gray,
+                        child: Image.asset(AppImages.questionMarkFaIco, width: 18, height: 18,)
+                    ),
+                    const SizedBox(width: 5),
 
-                      CustomCard(
-                          padding: const EdgeInsets.all(5),
-                          color: AppDecoration.gray,
-                          child: Image.asset(AppImages.changeValueIco, width: 18)
-                      ),
-                      const SizedBox(width: 5),
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: onChangeStateClick,
+                      child: Row(
+                        children: [
+                          CustomCard(
+                              padding: const EdgeInsets.all(5),
+                              color: AppDecoration.gray,
+                              child: Image.asset(AppImages.changeValueIco, width: 18)
+                          ),
+                          const SizedBox(width: 5),
 
-                      const Text('تغییر\nوضعیت').font(AppDecoration.morabbaFont).fsR(-4),
-                    ],
-                  ),
+                          const Text('تغییر\nوضعیت').font(AppDecoration.morabbaFont).fsR(-4),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
