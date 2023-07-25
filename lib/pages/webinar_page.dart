@@ -42,7 +42,6 @@ class WebinarPageState extends StateBase<WebinarPage> {
           Text('webinar'),
           SizedBox(height: 200),
 
-          Text('webinar'),
           SizedBox(height: 200),
 
 
@@ -52,3 +51,5 @@ class WebinarPageState extends StateBase<WebinarPage> {
     );
   }
 }
+
+

@@ -1,3 +1,4 @@
+import 'package:app/tools/app/appToast.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/widgets/customCard.dart';
@@ -23,6 +24,7 @@ class PregnantChangeStateSheet extends StatefulWidget {
 class _PregnantChangeStateSheetState extends State<PregnantChangeStateSheet> {
   String selectedDateText = '-- / -- / --';
   DateTime? selectedDate;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +41,51 @@ class _PregnantChangeStateSheetState extends State<PregnantChangeStateSheet> {
 
           const SizedBox(height: 8),
 
-          Row(
-            children: [
-              TabPageSelectorIndicator(
-                  backgroundColor: AppDecoration.danger,
-                  borderColor: AppDecoration.danger,
-                  size: 8
-              ),
+          GestureDetector(
+            onTap: (){
+              selectedIndex = 0;
+              setState(() {});
+            },
+            child: Row(
+              children: [
+                TabPageSelectorIndicator(
+                    backgroundColor: selectedIndex == 0? AppDecoration.danger : Colors.transparent,
+                    borderColor: AppDecoration.danger,
+                    size: 16
+                ),
 
-              CustomRich(
-                  children: [
-                    const Text('اعلام زمان ').fsR(-3).bold(),
-                    const Text('بارداری').color(AppDecoration.danger).bold().fsR(-3),
-                    const Text(' غیر منتظره').bold().fsR(-3),
-                  ]
-              ),
-            ],
+                CustomRich(
+                    children: [
+                      const Text('اعلام زمان ').fsR(-3).bold(),
+                      const Text('تولد').color(AppDecoration.danger).bold().fsR(-3),
+                      const Text(' زودتر از موعد').bold().fsR(-3),
+                    ]
+                ),
+              ],
+            ),
+          ),
+
+          GestureDetector(
+            onTap: (){
+              selectedIndex = 1;
+              setState(() {});
+            },
+            child: Row(
+              children: [
+                TabPageSelectorIndicator(
+                    backgroundColor: selectedIndex == 1? AppDecoration.danger : Colors.transparent,
+                    borderColor: AppDecoration.danger,
+                    size: 16
+                ),
+
+                CustomRich(
+                    children: [
+                      const Text('اعلام زمان ').fsR(-3).bold(),
+                      const Text('سقط جنین').color(AppDecoration.danger).bold().fsR(-3),
+                    ]
+                ),
+              ],
+            ),
           ),
 
           const SizedBox(height: 25),
@@ -91,6 +122,9 @@ class _PregnantChangeStateSheetState extends State<PregnantChangeStateSheet> {
   }
 
   void onRegisterClick() {
+    if(selectedDate == null){
+      AppToast.showToast(context, 'لطفا تاریخ را مشخص کنید');
+    }
   }
 
   void onCalendarClick() async {

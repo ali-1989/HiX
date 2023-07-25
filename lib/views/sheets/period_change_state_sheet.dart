@@ -1,3 +1,4 @@
+import 'package:app/tools/app/appToast.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/widgets/customCard.dart';
@@ -91,6 +92,9 @@ class _PeriodChangeStateSheetState extends State<PeriodChangeStateSheet> {
   }
 
   void onRegisterClick() {
+    if(selectedDate == null){
+      AppToast.showToast(context, 'لطفا تاریخ را مشخص کنید');
+    }
   }
 
   void onCalendarClick() async {

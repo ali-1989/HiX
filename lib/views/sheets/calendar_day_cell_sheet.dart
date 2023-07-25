@@ -200,7 +200,7 @@ class _CalendarDayCellSheetState extends State<CalendarDayCellSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('تاریخ و زمان').fsR(-4.2),
-                    const Text('1402/05/12  18:30', textDirection: TextDirection.ltr,).fsR(-4.2),
+                    const Text('1402/05/12  18:30', textDirection: TextDirection.ltr).fsR(-4.2),
                   ],
                 ),
 
@@ -210,7 +210,7 @@ class _CalendarDayCellSheetState extends State<CalendarDayCellSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('وضعیت').fsR(-4.2),
-                    const Text('----', textDirection: TextDirection.ltr,).fsR(-4.2),
+                    const Text('----', textDirection: TextDirection.ltr).fsR(-4.2),
                   ],
                 ),
 
