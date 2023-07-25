@@ -1,3 +1,11 @@
+import 'package:flutter/material.dart';
+
+import 'package:iris_notifier/iris_notifier.dart';
+import 'package:iris_tools/modules/stateManagers/assist.dart';
+import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/widgets/icon/circularIcon.dart';
+import 'package:iris_tools/widgets/page_switcher.dart';
+
 import 'package:app/managers/dashboard_manager.dart';
 import 'package:app/managers/layout_manager.dart';
 import 'package:app/pages/calendar_page.dart';
@@ -5,9 +13,12 @@ import 'package:app/pages/consultation_page.dart';
 import 'package:app/pages/dashboard_page.dart';
 import 'package:app/pages/notification_page.dart';
 import 'package:app/pages/webinar_page.dart';
+import 'package:app/services/session_service.dart';
+import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/structures/enums/appEvents.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
 import 'package:app/system/extensions.dart';
+import 'package:app/system/keys.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
@@ -15,17 +26,6 @@ import 'package:app/tools/dateTools.dart';
 import 'package:app/views/baseComponents/drawerMenuBuilder.dart';
 import 'package:app/views/baseComponents/layoutScaffold.dart';
 import 'package:app/views/widgets/my_divider.dart';
-import 'package:flutter/material.dart';
-import 'package:iris_notifier/iris_notifier.dart';
-
-import 'package:iris_tools/modules/stateManagers/assist.dart';
-
-import 'package:app/services/session_service.dart';
-import 'package:app/structures/abstract/stateBase.dart';
-import 'package:app/system/keys.dart';
-import 'package:iris_tools/widgets/customCard.dart';
-import 'package:iris_tools/widgets/icon/circularIcon.dart';
-import 'package:iris_tools/widgets/page_switcher.dart';
 
 class LayoutPage extends StatefulWidget {
 

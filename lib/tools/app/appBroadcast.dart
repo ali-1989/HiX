@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:app/pages/layout_page.dart';
-import 'package:app/views/baseComponents/splashPage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/api/notifiers/extendValueNotifier.dart';
 import 'package:iris_tools/modules/stateManagers/refresh.dart';
 
+import 'package:app/pages/layout_page.dart';
 import 'package:app/tools/app/appThemes.dart';
+import 'package:app/views/baseComponents/splashPage.dart';
 
 class AppBroadcast {
   AppBroadcast._();

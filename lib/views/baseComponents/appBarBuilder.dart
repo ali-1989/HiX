@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/tools/app/appSizes.dart';
+
 /*class GenAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar child;
 
@@ -78,7 +81,7 @@ class AppBarCustom extends AppBar {
     // AppBar().preferredSize.height;
 
     if(isWeb()){
-      return Size.fromHeight(60);
+      return const Size.fromHeight(60);
     }
 
     return const Size.fromHeight(kToolbarHeight);
@@ -86,5 +89,28 @@ class AppBarCustom extends AppBar {
 
   bool isWeb(){
     return kIsWeb;
+  }
+}
+///=====================================================================================================================
+class AppBarCustom2 extends StatefulWidget implements PreferredSizeWidget {
+
+  const AppBarCustom2({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return AppBarCustomState();
+  }
+
+  @override
+  Size get preferredSize {
+    return Size.fromHeight((kToolbarHeight + 40) * AppSizes.instance.powerHeight);
+  }
+}
+///---------------------------------------------------------------------------------------------------------------
+class AppBarCustomState extends StateBase<AppBarCustom> {
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand();
   }
 }

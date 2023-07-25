@@ -1,6 +1,12 @@
+import 'package:flutter/material.dart';
+
+import 'package:iris_notifier/iris_notifier.dart';
+import 'package:iris_tools/modules/stateManagers/assist.dart';
+import 'package:iris_tools/widgets/customCard.dart';
+
 import 'package:app/managers/dashboard_manager.dart';
-import 'package:app/pages/dashboard/dashboard_calendar_page.dart';
 import 'package:app/pages/dashboard/chart_page.dart';
+import 'package:app/pages/dashboard/dashboard_calendar_page.dart';
 import 'package:app/pages/dashboard/repetitive_symptoms_page.dart';
 import 'package:app/pages/dashboard/sex_page.dart';
 import 'package:app/structures/abstract/stateBase.dart';
@@ -8,10 +14,6 @@ import 'package:app/structures/enums/appEvents.dart';
 import 'package:app/structures/models/dashboardNavigateModel.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
-import 'package:flutter/material.dart';
-import 'package:iris_notifier/iris_notifier.dart';
-import 'package:iris_tools/modules/stateManagers/assist.dart';
-import 'package:iris_tools/widgets/customCard.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);

@@ -1,13 +1,15 @@
+import 'package:flutter/material.dart';
+
+import 'package:fl_chart/fl_chart.dart';
+import 'package:iris_tools/modules/stateManagers/assist.dart';
+import 'package:iris_tools/widgets/customCard.dart';
+
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appDialogIris.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-import 'package:iris_tools/modules/stateManagers/assist.dart';
-import 'package:iris_tools/widgets/customCard.dart';
 
 class RepetitiveSymptomsPage extends StatefulWidget {
   const RepetitiveSymptomsPage({Key? key}) : super(key: key);

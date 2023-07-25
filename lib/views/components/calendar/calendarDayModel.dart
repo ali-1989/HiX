@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:iris_tools/api/generator.dart';
 
+import 'package:iris_tools/api/generator.dart';
 
 typedef OnDayClick = void Function(CalendarDayModel day);
 ///=========================================================================================

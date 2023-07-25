@@ -1,6 +1,8 @@
-import 'package:app/structures/abstract/stateBase.dart';
 import 'package:flutter/material.dart';
+
 import 'package:iris_tools/modules/stateManagers/assist.dart';
+
+import 'package:app/structures/abstract/stateBase.dart';
 
 class ConsultationPage extends StatefulWidget {
   const ConsultationPage({Key? key}) : super(key: key);

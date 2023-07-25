@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:app/pages/layout_page.dart';
 import 'package:app/pages/welcome_page.dart';
 import 'package:app/tools/app/appBroadcast.dart';
-import 'package:flutter/material.dart';
-
 
 class RouteDispatcher {
   RouteDispatcher._();
