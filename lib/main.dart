@@ -12,7 +12,6 @@ import 'package:iris_tools/widgets/maxWidth.dart';
 import 'package:app/constants.dart';
 import 'package:app/managers/font_manager.dart';
 import 'package:app/managers/settings_manager.dart';
-import 'package:app/services/firebase_service.dart';
 import 'package:app/structures/models/settingsModel.dart';
 import 'package:app/tools/app/appBroadcast.dart';
 import 'package:app/tools/app/appDirectories.dart';
@@ -20,26 +19,30 @@ import 'package:app/tools/app/appLocale.dart';
 import 'package:app/tools/app/appSizes.dart';
 import 'package:app/tools/app/appThemes.dart';
 import 'package:app/tools/app/appToast.dart';
+import 'package:app/tools/deviceInfoTools.dart';
 import 'package:app/tools/log_tools.dart';
 import 'package:app/tools/routeTools.dart';
 import 'package:app/views/baseComponents/splashPage.dart';
 
 ///================ call on any hot restart
 Future<void> main() async {
-  if (defaultTargetPlatform != TargetPlatform.linux && defaultTargetPlatform != TargetPlatform.windows) {
-    WidgetsFlutterBinding.ensureInitialized();
-  }
+  PlatformDispatcher.instance.onError = mainIsolateError;
+  FlutterError.onError = onErrorCatch;
 
-  final initOk = await prepareDirectoriesAndLogger();
+  void zoneFn() async {
+    if (defaultTargetPlatform != TargetPlatform.linux && defaultTargetPlatform != TargetPlatform.windows) {
+      WidgetsFlutterBinding.ensureInitialized();
+    }
 
-  if(!initOk.$1){
-    runApp(MyErrorApp(errorLog: initOk.$2));
-    return;
-  }
+    final initOk = await prepareDirectoriesAndLogger();
 
-  await mainInitialize();
+    if(!initOk.$1){
+      runApp(MyErrorApp(errorLog: initOk.$2));
+      return;
+    }
 
-  void zoneFn() {
+    await mainInitialize();
+
     runApp(
         StreamBuilder<bool>(
             initialData: true,
@@ -70,13 +73,11 @@ Future<void> main() async {
     );
   }
 
-  //runZonedGuarded(zone, zonedGuardedCatch);
-  zoneFn();
+  runZonedGuarded(zoneFn, zonedGuardedCatch);
+  //zoneFn();
 }
 
 Future<void> mainInitialize() async {
-  PlatformDispatcher.instance.onError = mainIsolateError;
-  FlutterError.onError = onErrorCatch;
   //await FireBaseService.initializeApp();
 
   usePathUrlStrategy();
@@ -147,7 +148,7 @@ class MyApp extends StatelessWidget {
   }
 
   Widget materialHomeBuilder(){
-    double factor = PlatformDispatcher.instance.textScaleFactor.clamp(0.85, 2.0);
+    double factor = PlatformDispatcher.instance.textScaleFactor.clamp(0.85, 1.7);
 
     return Builder(
       builder: (context) {
@@ -214,17 +215,29 @@ void onErrorCatch(FlutterErrorDetails errorDetails) {
   txt += '\n**************************************** [END CATCH]';
 
   LogTools.logger.logToAll(txt);
+
+  final eMap = DeviceInfoTools.mapDeviceInfo();
+  eMap['catcher'] = 'mainIsolateError';
+  eMap['error'] = txt;
+
+  LogTools.reportError(eMap);
 }
 ///==============================================================================================
 bool mainIsolateError(error, sTrace) {
   var txt = 'main-isolate CAUGHT AN ERROR:: ${error.toString()}';
 
-  if(!kDebugMode/* && !kIsWeb*/) {
+  if(!(kDebugMode || kIsWeb)) {
     txt += '\n STACK TRACE:: $sTrace';
   }
 
   txt += '\n**************************************** [END MAIN-ISOLATE]';
   LogTools.logger.logToAll(txt);
+
+  final eMap = DeviceInfoTools.mapDeviceInfo();
+  eMap['catcher'] = 'mainIsolateError';
+  eMap['error'] = txt;
+
+  LogTools.reportError(eMap);
 
   if(kDebugMode) {
     return false;
@@ -236,12 +249,18 @@ bool mainIsolateError(error, sTrace) {
 void zonedGuardedCatch(error, sTrace) {
   var txt = 'ZONED-GUARDED CAUGHT AN ERROR:: ${error.toString()}';
 
-  if(!kDebugMode/* && !kIsWeb*/) {
+  if(!(kDebugMode || kIsWeb)) {
     txt += '\n STACK TRACE:: $sTrace';
   }
 
   txt += '\n**************************************** [END ZONED-GUARDED]';
   LogTools.logger.logToAll(txt);
+
+  final eMap = DeviceInfoTools.mapDeviceInfo();
+  eMap['catcher'] = 'zonedGuardedCatch';
+  eMap['error'] = txt;
+
+  LogTools.reportError(eMap);
 
   if(kDebugMode) {
     throw error;
