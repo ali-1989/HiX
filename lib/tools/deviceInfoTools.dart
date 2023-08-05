@@ -9,6 +9,9 @@ import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/api/system.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
+import 'package:app/constants.dart';
+import 'package:app/services/session_service.dart';
+import 'package:app/structures/models/userModel.dart';
 import 'package:app/system/keys.dart';
 import 'package:app/tools/app/appDb.dart';
 
@@ -95,7 +98,7 @@ class DeviceInfoTools {
       js['device_type'] = 'Web';
       js['model'] = webDeviceInfo?.appName;
       js['brand'] = uAgent?.substring(0, min(50, uAgent.length));
-      js['api'] = webDeviceInfo?.platform;
+      js['sdk'] = webDeviceInfo?.platform;
 
       return js;
     }
@@ -104,18 +107,34 @@ class DeviceInfoTools {
       js['device_type'] = 'Android';
       js['model'] = androidDeviceInfo?.model;
       js['brand'] = androidDeviceInfo?.brand;
-      js['api'] = androidDeviceInfo?.version.sdkInt.toString();
+      js['sdk'] = androidDeviceInfo?.version.sdkInt.toString();
     }
     else if (System.isIOS()) {
       js['device_type'] = 'iOS';
       js['model'] = iosDeviceInfo?.model; //utsname.machine
       js['brand'] = iosDeviceInfo?.systemName;
-      js['api'] = iosDeviceInfo?.utsname.version.toString();
+      js['sdk'] = iosDeviceInfo?.utsname.version.toString();
     }
     else {
       js['device_type'] = 'unKnow';
     }
 
+    js['app_name'] = Constants.appName;
+    js['app_version_name'] = Constants.appVersionName;
+    js['app_version_code'] = Constants.appVersionCode;
+    js[Keys.deviceId] = deviceId;
+
     return js;
+  }
+  static Map attachDeviceInfo(Map src, {UserModel? curUser}) {
+    src.addAll(mapDeviceInfo());
+
+    final token = curUser?.token ?? SessionService.getLastLoginUser()?.token;
+
+    if (token?.token != null) {
+      src[Keys.token] = token?.token;
+    }
+
+    return src;
   }
 }
