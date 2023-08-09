@@ -5,12 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:iris_notifier/iris_notifier.dart';
 import 'package:iris_tools/dateSection/dateHelper.dart';
 
-import 'package:app/managers/api_manager.dart';
-import 'package:app/managers/settings_manager.dart';
 import 'package:app/structures/enums/appEvents.dart';
-import 'package:app/system/keys.dart';
-import 'package:app/tools/app/appDb.dart';
-import 'package:app/tools/app/appNotification.dart';
 
 // https://firebase.google.com/docs/cloud-messaging/flutter/receive
 // https://firebase.google.com/docs/cloud-messaging/flutter/client
@@ -36,15 +31,6 @@ Future<void> _onNewNotification(RemoteMessage message) async {
   try{
     id = message.data['id'];
 
-    final ids = AppDB.fetchAsList(Keys.setting$dailyTextIds);
-
-    if(!ids.contains(id)) {
-      if (SettingsManager.localSettings.notificationDailyText) {
-        AppNotification.sendNotification(message.notification!.title, message.notification!.body!);
-      }
-
-      AppDB.addToList(Keys.setting$dailyTextIds, id ?? 0);
-    }
   }
   catch (e){/**/}
 }

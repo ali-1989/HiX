@@ -14,7 +14,7 @@ class FontManager {
   static late final FontManager _instance;
   static bool useFlutterFontSize = true;
   static const double defaultFontSize = 13;
-  static const double maxDeviceFontSize = 14.5;
+  static const double maxDeviceFontSize = 14.2;
   static double deviceFontSize = 13;
 
   static final List<Font> _fontList = [];

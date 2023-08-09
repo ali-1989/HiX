@@ -18,7 +18,6 @@ class LayoutManager {
   static final calendarNavigateModel = LayoutNavigateModel();
   static final webinarNavigateModel = LayoutNavigateModel();
   static final consultantNavigateModel = LayoutNavigateModel();
-  static final notificationsNavigateModel = LayoutNavigateModel();
 
   static Future<void> init() async {
     dashboardNavigateModel.title = 'پیشخوان';
@@ -38,15 +37,11 @@ class LayoutManager {
     consultantNavigateModel.index = 3;
     consultantNavigateModel.iconAddress = AppImages.navIco$consultant;
 
-    notificationsNavigateModel.title = 'اعلانات';
-    notificationsNavigateModel.index = 4;
-    notificationsNavigateModel.iconAddress = AppImages.navIco$notification;
 
     navigateList.add(dashboardNavigateModel);
     navigateList.add(calendarNavigateModel);
     navigateList.add(webinarNavigateModel);
     navigateList.add(consultantNavigateModel);
-    navigateList.add(notificationsNavigateModel);
   }
 
   static void selectNavigateItem(LayoutNavigateModel model) {

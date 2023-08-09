@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_notifier/iris_notifier.dart';
@@ -82,39 +83,34 @@ class LayoutPageState extends StateBase<LayoutPage> {
         ),
         image: DecorationImage(image: AssetImage(AppImages.backgroundPlusColored), fit: BoxFit.fill),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-            mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: 15 * pw),
-            buildMenuKeySection(),
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 15 * pw),
+          buildMenuKeySection(),
 
-            SizedBox(height: 15 * pw),
-            buildAvatarSection(),
+          //SizedBox(height: 30 * pw),
+          //buildNavigationSection(),
 
-            SizedBox(height: 30 * pw),
-            buildNavigationSection(),
+          SizedBox(height: 10 * pw),
 
-            SizedBox(height: 30 * pw),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.0 * pw),
-              child: const MyDivider(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: PageSwitcher(
+                controller: pageCtr,
+                pages: [
+                  const DashboardPage(),
+                  const CalendarPage(),
+                  const WebinarPage(),
+                  const ConsultationPage(),
+                  NotificationPage(),
+                ]
+              ),
             ),
+          ),
 
-            SizedBox(height: 20 * pw),
-
-            PageSwitcher(
-              controller: pageCtr,
-              pages: [
-                DashboardPage(),
-                CalendarPage(),
-                WebinarPage(),
-                ConsultationPage(),
-                NotificationPage(),
-              ]
-            ),
-          ],
-        ),
+          buildNavigationSection(),
+        ],
       ),
     );
   }
@@ -148,154 +144,67 @@ class LayoutPageState extends StateBase<LayoutPage> {
         ),
 
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 17.0 * pw),
-          child: CustomCard(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Image.asset(AppImages.calendarIcon, width: 14),
-                  const SizedBox(width: 6),
-                  Text('امروز:  ${DateTools.ymdWithMonthNameRelative(DateTime.now())}'.localeNum()).fsR(-1),
-                ],
-              )
+          padding: EdgeInsets.symmetric(horizontal: 13.0 * pw),
+          child: Row(
+            children: [
+              CustomCard(
+                radius: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Image.asset(AppImages.notificationIco, color: Colors.black, width: 20, height: 20),
+                  )
+              ),
+
+              const SizedBox(width: 5),
+
+              const Padding(
+                padding: EdgeInsets.all(5.0),
+                child: CircleAvatar(
+                  foregroundImage: AssetImage(AppImages.avatar),
+                  radius: 17,
+                ),
+              ),
+            ],
           ),
         ),
       ],
     );
   }
 
-  Widget buildAvatarSection(){
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 17.0 * pw),
-      child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          /// avatar
-          DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: CircleBorder(side: BorderSide(color: AppDecoration.mainColor, width: 1.5)),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.all(5.0),
-              child: CircleAvatar(
-                foregroundImage: AssetImage(AppImages.avatar),
-                radius: 30,
-              ),
-            ),
-          ),
-
-          const SizedBox(width: 14),
-
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                /// name
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(AppImages.userIco,),
-                        const SizedBox(width: 3),
-                        const Text('سمیرا حسن پور').bold(),
-                      ],
-                    ),
-
-                    const SizedBox(height: 14),
-                    const Text('تاریخ تولد:').fsR(-2),
-                  ],
-                ),
-
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        RotatedBox(
-                          quarterTurns: 2,
-                          child: CircularIcon(
-                            backColor: AppDecoration.mainColor,
-                            icon: AppIcons.arrowDown,
-                            size: 20,
-                          ),
-                        ),
-
-                        const SizedBox(width: 5),
-
-                        CustomCard(
-                          radius: 14,
-                          padding: const EdgeInsets.fromLTRB(7, 2, 7, 3),
-                          child: const Text('کاربر عادی').color(AppDecoration.mainColor).font(AppDecoration.morabbaFont).fsR(-3),
-                        ).wrapBoxBorder(
-                          padding: const EdgeInsets.all(1),
-                          radius: 14
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 14),
-                    Text('1300/12/12'.localeNum()).bold().fsR(-2),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget buildNavigationSection(){
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0 * pw),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: LayoutManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
+    return ColoredBox(
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 35.0 * pw),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: LayoutManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
+        ),
       ),
     );
   }
 
   Widget buildNavigationItem(LayoutNavigateModel model){
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: (){
-            onNavigateItemClick(model);
-          },
-          child: CustomCard(
-            padding: const EdgeInsets.all(1.2),
-              radius: 17,
-              color: Colors.white,
-              child: CustomCard(
-                padding: const EdgeInsets.all(12),
-                radius: 17,
-                color: model.isSelected? AppDecoration.mainColor : Colors.white,
-                child: Image.asset(model.iconAddress, width: 24, color: model.isSelected? Colors.white: Colors.black),
-              )
-          ),
-        ),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: (){
+        onNavigateItemClick(model);
+      },
+      child:Column(
+        children: [
+          const SizedBox(height: 6),
+          
+          Image.asset(model.iconAddress, width: 20, color: model.isSelected? AppDecoration.mainColor: Colors.black),
 
-        const SizedBox(height: 15),
+          const SizedBox(height: 6),
 
-        Text(model.title)
-            .font(AppDecoration.morabbaFont)
-            .color(model.isSelected? AppDecoration.mainColor : Colors.black),
+          Text(model.title)
+              .font(AppDecoration.morabbaFont).fsR(-2)
+              .color(model.isSelected? AppDecoration.mainColor : Colors.black),
 
-        const SizedBox(height: 10),
-
-        ClipRRect(
-          borderRadius: BorderRadius.circular(2),
-          child: SizedBox(
-            height: 4,
-            width: 20,
-            child: ColoredBox(
-              color: model.isSelected? AppDecoration.mainColor : AppDecoration.mainColor.withAlpha(30),
-            ),
-          ),
-        )
-      ],
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 
