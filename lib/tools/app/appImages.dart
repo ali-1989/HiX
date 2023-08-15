@@ -39,6 +39,8 @@ class AppImages {
   static const supportIco = 'assets/images/supportIco.png';
   static const textIco = 'assets/images/textIco.png';
   static const sexRelationIco = 'assets/images/sexRelationIco.png';
+  static const searchIco = 'assets/images/searchIco.png';
+  static const filteringIco = 'assets/images/filteringIco.png';
 }
 
 
