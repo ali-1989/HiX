@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:app/services/session_service.dart';
-import 'package:app/tools/deviceInfoTools.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
@@ -10,11 +8,12 @@ import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/api/helpers/jsonHelper.dart';
 import 'package:iris_tools/api/logger/logger.dart';
 import 'package:iris_tools/api/logger/reporter.dart';
-import 'package:iris_tools/api/tools.dart';
 import 'package:iris_tools/plugins/javaBridge.dart';
 
 import 'package:app/managers/api_manager.dart';
+import 'package:app/services/session_service.dart';
 import 'package:app/tools/app/appDirectories.dart';
+import 'package:app/tools/deviceInfoTools.dart';
 
 class LogTools {
   LogTools._();
@@ -50,6 +49,8 @@ class LogTools {
     avoidReport.add('\'hasSize\': RenderBox');
     avoidReport.add('has a negative minimum');
     avoidReport.add('slot == null');
+    avoidReport.add('FIS_AUTH_ERROR'); // firebase
+    avoidReport.add('RenderFlex overflowed by');
 
     _errorBridge = JavaBridge();
     assistanceBridge = JavaBridge();
@@ -77,7 +78,7 @@ class LogTools {
         return;
       }
     }
-
+    
     void fn(){
       final url = Uri.parse(ApiManager.errorReportApi);
 
@@ -110,7 +111,7 @@ class LogTools {
 /*
 echo
 echo_arg
-throw_error
+throw_error   'throw_error', [{'delay': 15000}]
 set_kv
 get_kv
 setAppIsRun

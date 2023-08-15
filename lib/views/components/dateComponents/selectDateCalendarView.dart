@@ -5,9 +5,8 @@ import 'package:iris_tools/dateSection/ADateStructure.dart';
 import 'package:iris_tools/dateSection/calendarTools.dart';
 import 'package:numberpicker/numberpicker.dart';
 
+import 'package:app/managers/settings_manager.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appSizes.dart';
 import 'package:app/tools/app/appSnack.dart';
 import 'package:app/tools/app/appThemes.dart';
 import 'package:app/tools/dateTools.dart';
@@ -25,6 +24,7 @@ class SelectDateCalendarView extends StatefulWidget {
   final int? maxYearAsGregorian;
   final int? minYearAsGregorian;
   final bool showButton;
+  final bool showCalendar;
   final bool lockYear;
   final bool lockMonth;
   final bool lockDay;
@@ -41,6 +41,7 @@ class SelectDateCalendarView extends StatefulWidget {
     this.minYearAsGregorian,
     this.onSelect,
     this.showButton = true,
+    this.showCalendar = false,
     this.lockYear = false,
     this.lockMonth = false,
     this.lockDay = false,
@@ -96,7 +97,7 @@ class SelectDateCalendarViewState extends State<SelectDateCalendarView> {
     }
     else {
       final cDate = DateTools.convertToADateByCalendar(curDate)!;
-      minOfYear = MathHelper.minInt(toDay.getYear()-100, cDate.getYear());
+      minOfYear = MathHelper.minInt(toDay.getYear(), cDate.getYear());
     }
 
     selectedYear = curDateRelative.getYear();
@@ -125,179 +126,217 @@ class SelectDateCalendarViewState extends State<SelectDateCalendarView> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-
-          /// title
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-
-              Visibility(
-                visible: messageView != null,
-                child: Column(
-                  children: [
-                    messageView?? const SizedBox(),
-                    const SizedBox(height: 4),
-                  ],
-                ),
-              ),
-
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: onCloseClick,
-                  child: const Icon(AppIcons.close)
-              )
-            ],
-          ),
-
           Visibility(
-            visible: widget.title != null,
+            visible: widget.showButton || widget.showCalendar,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-              child: Text('${widget.title}', style: titleStyle),
-            ),
-          ),
-
-          const SizedBox(height: 20,),
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: SizedBox(
-              height: AppSizes.webFontSize(120),
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 2),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IgnorePointer(
-                    ignoring: widget.lockYear,
-                    child: NumberPicker(
-                      minValue: minOfYear,
-                      maxValue: maxOfYear,
-                      value: selectedYear,
-                      axis: Axis.vertical,
-                      haptics: true,
-                      zeroPad: true,
-                      itemWidth: 50,
-                      itemHeight: 40,
-                      textStyle: AppThemes.baseTextStyle().copyWith(
-                        fontSize: AppSizes.webFontSize(16),
-                        fontWeight: FontWeight.bold,
-                      ),
-                      selectedTextStyle: TextStyle(
-                        fontSize: AppSizes.webFontSize(16),
-                        fontWeight: FontWeight.bold,
-                        color: AppThemes.instance.currentTheme.activeItemColor,
-                      ),
-                      textMapper: (t){
-                        return t.toString().localeNum();
-                      },
-                      onChanged: (val){
-                        selectedYear = val;
-                        final max = DateTools.calMaxMonthDay(selectedYear, selectedMonth);
-
-                        if((maxDayOfMonth - max).abs() > 1){
-                          selectedDay = MathHelper.backwardStepInRing(selectedDay, 1, max, true);
-                        }
-
-                        calcDate();
-
-                        setState(() {});
+                  Visibility(
+                    visible: widget.showButton,
+                    child: TextButton(
+                      child: Text('انتخاب'),
+                      onPressed: (){
+                        onButtonClick();
                       },
                     ),
                   ),
 
-                  ///--- month
-                  IgnorePointer(
-                    ignoring: widget.lockMonth,
-                    child: NumberPicker(
-                      minValue: 1,
-                      maxValue: 12,
-                      value: selectedMonth,
-                      axis: Axis.vertical,
-                      haptics: true,
-                      zeroPad: true,
-                      infiniteLoop: true,
-                      itemWidth: 40,
-                      itemHeight: 40,
-                      textStyle: AppThemes.baseTextStyle().copyWith(
-                        fontSize: AppSizes.webFontSize(15),
-                        fontWeight: FontWeight.bold,
-                      ),
-                      selectedTextStyle: TextStyle(
-                        fontSize: AppSizes.webFontSize(16),
-                        fontWeight: FontWeight.bold,
-                        color: AppThemes.instance.currentTheme.activeItemColor,//AppThemes.checkPrimaryByWB(AppThemes.currentTheme.primaryColor, AppThemes.currentTheme.differentColor),
-                      ),
-                      textMapper: (t){
-                        return t.toString().localeNum();
-                      },
-                      onChanged: (val){
-                        selectedMonth = val;
-                        final max = DateTools.calMaxMonthDay(selectedYear, selectedMonth);
+                  Visibility(
+                    visible: widget.showCalendar,
+                    child: SizedBox(
+                      height: 46,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: Colors.grey[400],
+                            borderRadius: BorderRadius.circular(10.0)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                              //borderRadius: BorderRadius.circular(10),
+                              dropdownColor: Colors.grey[400],
+                              value: SettingsManager.localSettings.calendarType,
+                              onChanged: (newValue) {
+                                changeCalendar(newValue as CalendarType);
 
-                        if((maxDayOfMonth - max).abs() > 1){
-                          selectedDay = MathHelper.backwardStepInRing(selectedDay, 1, max, true);
-                        }
-                        calcDate();
-
-                        setState(() {});
-                      },
+                                setState(() {});
+                              },
+                              items: DateTools.calendarList.map((cal) => DropdownMenuItem(
+                                value: cal,
+                                child: Text('هجری شمسی'),
+                              ))
+                                  .toList(),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-
-                  ///--- day
-                  IgnorePointer(
-                    ignoring: widget.lockDay,
-                    child: NumberPicker(
-                      minValue: 1,
-                      maxValue: maxDayOfMonth,
-                      value: selectedDay,
-                      axis: Axis.vertical,
-                      haptics: true,
-                      zeroPad: true,
-                      infiniteLoop: true,
-                      itemWidth: 40,
-                      itemHeight: 40,
-                      textStyle: AppThemes.baseTextStyle().copyWith(
-                        fontSize: AppSizes.webFontSize(15),
-                        fontWeight: FontWeight.bold,
-                      ),
-                      selectedTextStyle: TextStyle(
-                        fontSize: AppSizes.webFontSize(16),
-                        fontWeight: FontWeight.bold,
-                        color: AppThemes.instance.currentTheme.activeItemColor,//AppThemes.checkPrimaryByWB(AppThemes.currentTheme.primaryColor, AppThemes.currentTheme.differentColor),
-                      ),
-                      textMapper: (t){
-                        return t.toString().localeNum();
-                      },
-                      onChanged: (val){
-                        selectedDay = val;
-                        calcDate();
-
-                        setState(() {});
-                      },
-                    ),
-                  )
                 ],
               ),
             ),
           ),
 
-          const SizedBox(height: 20),
-
-          /// button
-          Visibility(
-            visible: widget.showButton,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 12, 20, 2),
-                child: TextButton(
-                  child: Text('${widget.buttonText?? context.t('select')}'),
-                  onPressed: (){
-                    onButtonClick();
-                  },
+          const SizedBox(height: 5),
+          Row(
+            children: [
+              Visibility(
+                visible: messageView != null,
+                child: Column(
+                  children: [
+                    messageView?? SizedBox(),
+                    const SizedBox(height: 4),
+                  ],
                 ),
               ),
-            ),
+            ],
           ),
+
+          Scrollbar(
+            thumbVisibility: true,
+            controller: scrollCtr,
+            child: ListView(
+              shrinkWrap: true,
+              controller: scrollCtr,
+              children: [
+                Visibility(
+                  visible: widget.title != null,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                    child: Text('${widget.title}', style: titleStyle),
+                  ),
+                ),
+
+                const SizedBox(height: 20,),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: SizedBox(
+                    height: 120,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IgnorePointer(
+                          ignoring: widget.lockYear,
+                          child: NumberPicker(
+                            minValue: minOfYear,
+                            maxValue: maxOfYear,
+                            value: selectedYear,
+                            axis: Axis.vertical,
+                            haptics: true,
+                            zeroPad: true,
+                            itemWidth: 50,
+                            itemHeight: 40,
+                            textStyle: AppThemes.baseTextStyle().copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            selectedTextStyle: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppThemes.instance.currentTheme.activeItemColor,
+                            ),
+                            textMapper: (t){
+                              return t.toString().localeNum();
+                            },
+                            onChanged: (val){
+                              selectedYear = val;
+                              final max = DateTools.calMaxMonthDay(selectedYear, selectedMonth);
+
+                              if((maxDayOfMonth - max).abs() > 1){
+                                selectedDay = MathHelper.backwardStepInRing(selectedDay, 1, max, true);
+                              }
+
+                              calcDate();
+
+                              setState(() {});
+                            },
+                          ),
+                        ),
+
+                        ///--- month
+                        IgnorePointer(
+                          ignoring: widget.lockMonth,
+                          child: NumberPicker(
+                            minValue: 1,
+                            maxValue: 12,
+                            value: selectedMonth,
+                            axis: Axis.vertical,
+                            haptics: true,
+                            zeroPad: true,
+                            infiniteLoop: true,
+                            itemWidth: 40,
+                            itemHeight: 40,
+                            textStyle: AppThemes.baseTextStyle().copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            selectedTextStyle: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppThemes.instance.currentTheme.activeItemColor,//AppThemes.checkPrimaryByWB(AppThemes.currentTheme.primaryColor, AppThemes.currentTheme.differentColor),
+                            ),
+                            textMapper: (t){
+                              return t.toString().localeNum();
+                            },
+                            onChanged: (val){
+                              selectedMonth = val;
+                              final max = DateTools.calMaxMonthDay(selectedYear, selectedMonth);
+
+                              if((maxDayOfMonth - max).abs() > 1){
+                                selectedDay = MathHelper.backwardStepInRing(selectedDay, 1, max, true);
+                              }
+                              calcDate();
+
+                              setState(() {});
+                            },
+                          ),
+                        ),
+
+                        ///--- day
+                        IgnorePointer(
+                          ignoring: widget.lockDay,
+                          child: NumberPicker(
+                            minValue: 1,
+                            maxValue: maxDayOfMonth,
+                            value: selectedDay,
+                            axis: Axis.vertical,
+                            haptics: true,
+                            zeroPad: true,
+                            infiniteLoop: true,
+                            itemWidth: 40,
+                            itemHeight: 40,
+                            textStyle: AppThemes.baseTextStyle().copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            selectedTextStyle: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppThemes.instance.currentTheme.activeItemColor,//AppThemes.checkPrimaryByWB(AppThemes.currentTheme.primaryColor, AppThemes.currentTheme.differentColor),
+                            ),
+                            textMapper: (t){
+                              return t.toString().localeNum();
+                            },
+                            onChanged: (val){
+                              selectedDay = val;
+                              calcDate();
+
+                              setState(() {});
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -307,7 +346,7 @@ class SelectDateCalendarViewState extends State<SelectDateCalendarView> {
     ADateStructure date = DateTools.getADateByCalendar(selectedYear, selectedMonth, selectedDay)!;
 
     if(!date.isValidDate()){
-      AppSnack.showError(context, context.tInMap('dateSection', 'dateIsNotValid')!);
+      AppSnack.showError(context, 'تاریخ نامعتبر است');
       return;
     }
 
@@ -364,9 +403,5 @@ class SelectDateCalendarViewState extends State<SelectDateCalendarView> {
     if(selectedYear > maxOfYear){
       selectedYear = maxOfYear;
     }
-  }
-
-  void onCloseClick() {
-    RouteTools.popTopView(context: context);
   }
 }

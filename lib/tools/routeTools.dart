@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:iris_route/iris_route.dart';
 import 'package:iris_tools/api/stackList.dart';
 
-import 'package:app/pages/e404_page.dart';
-import 'package:app/pages/layout_page.dart';
-import 'package:app/pages/profile/profile_page.dart';
 import 'package:app/tools/app/appNavigator.dart';
+import 'package:app/views/pages/e404_page.dart';
+import 'package:app/views/pages/layout_page.dart';
+import 'package:app/views/pages/profile/profile_page.dart';
 
 class RouteTools {
   static BuildContext? materialContext;

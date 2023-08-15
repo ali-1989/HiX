@@ -1,3 +1,6 @@
+import 'package:app/tools/app/appSheet.dart';
+import 'package:app/views/components/backBtn.dart';
+import 'package:app/views/components/my_sheet_layout.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/api/generator.dart';
@@ -50,7 +53,9 @@ class _NotificationPageState extends StateBase<NotificationPage> {
     return Assist(
         controller: assistCtr,
         builder: (context, ctr, data) {
-          return buildBody();
+          return Scaffold(
+            body: buildBody(),
+          );
         }
     );
   }
@@ -70,7 +75,9 @@ class _NotificationPageState extends StateBase<NotificationPage> {
               child: buildTopSection(),
             ),
 
-            buildNotificationList()
+            Expanded(
+                child: buildNotificationList()
+            )
           ],
         );
       }
@@ -96,39 +103,41 @@ class _NotificationPageState extends StateBase<NotificationPage> {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: CustomCard(
-        color: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        radius: 14,
-        child: Column(
+    return Column(
+      children: [
+        const SizedBox(height: 15),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    //Image.asset(AppImages.notificationIco),
-                    const Circle(color: Colors.red, size: 9),
-                    const SizedBox(width: 5),
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Row(
+                children: [
+                  //Image.asset(AppImages.notificationIco),
+                  const Circle(color: Colors.red, size: 9),
+                  const SizedBox(width: 5),
 
-                    const Text('اعلانات شما').font(AppDecoration.morabbaFont).fsR(2.5),
-                  ],
-                ),
-              ],
+                  const Text('اعلانات').font(AppDecoration.morabbaFont).fsR(2.5),
+                ],
+              ),
             ),
 
-            ListView.builder(
-                itemCount: list.length +1,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.only(top: 10),
-                itemBuilder: itemBuilder
-            ),
+            const BackBtn(),
           ],
         ),
-      ),
+
+        const SizedBox(height: 10),
+
+        Expanded(
+          child: ListView.builder(
+              itemCount: list.length +1,
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+              itemBuilder: itemBuilder
+          ),
+        ),
+      ],
     );
   }
 
@@ -149,15 +158,20 @@ class _NotificationPageState extends StateBase<NotificationPage> {
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Column(
         children: [
-          CustomCard(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-            radius: 12,
-            color: AppDecoration.gray,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(itm.description).boldFont().fsR(-1),
-              ],
+          GestureDetector(
+            onTap: (){
+              onTitleClick(itm);
+            },
+            child: CustomCard(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              radius: 12,
+              color: AppDecoration.gray,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(itm.title).boldFont().fsR(-1),
+                ],
+              ),
             ),
           ),
 
@@ -172,8 +186,6 @@ class _NotificationPageState extends StateBase<NotificationPage> {
                   isSelected: itm.isSeen,
                   //onChanged: (v){}
               ),
-
-
             ],
           )
         ],
@@ -204,6 +216,7 @@ class _NotificationPageState extends StateBase<NotificationPage> {
   void addItem() {
     List.generate(10, (index) {
       final t = NotificationModel();
+      t.title = Generator.getRandomFrom(['حواست باشه فردا دوره قاعدگیت شروع میشه', 'پولت برگشت داده شد']);
       t.description = Generator.getRandomFrom(['حواست باشه فردا دوره قاعدگیت شروع میشه', 'پولت برگشت داده شد']);
       t.isSeen = Generator.getRandomFrom([true, false]);
       t.date = DateTime.now();
@@ -219,6 +232,40 @@ class _NotificationPageState extends StateBase<NotificationPage> {
     addItem();
     await hideLoading();
     assistCtr.updateHead();
+  }
+
+  void onTitleClick(NotificationModel itm) {
+    Widget b(_){
+      return MySheetLayout(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(child: Text(itm.title, maxLines: 1).bold().fsR(-2).fitWidthOverflow(minOfFontSize: 12)),
+                  const SizedBox(width: 15),
+                  Text(DateTools.hmAndDateRelative(itm.date)).fsR(-3.5),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+              Text(itm.description).fsR(-3),
+            ],
+          ),
+        ),
+      );
+    }
+
+    AppSheet.showSheetCustom(
+      context,
+      builder: b,
+      contentColor: Colors.transparent,
+      routeName: 'onNotificationTitleClick',
+      isScrollControlled: true,
+    );
   }
 }
 ///==============================================================================

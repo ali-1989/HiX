@@ -24,7 +24,10 @@ public class MyApplication extends FlutterApplication {
         Thread.setDefaultUncaughtExceptionHandler(this::handleUncaughtException);
 
         flutterEngine = new FlutterEngine(this);
-        flutterEngine.getDartExecutor().executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault());
+
+        // this is call main() method in dart
+        //flutterEngine.getDartExecutor().executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault());
+
         //FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine);
         //flutterEngine.getNavigationChannel().setInitialRoute("/");
     }
@@ -43,19 +46,21 @@ public class MyApplication extends FlutterApplication {
             try {
                 PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
                 txt += "packageName: " + info.packageName;
-                txt += " | versionName: " + info.versionName;
+                txt += " | app_version_name: " + info.versionName;
 
-                report.put("packageName", info.packageName);
-                report.put("versionName", info.versionName);
+                report.put("app_name", info.packageName);
+                report.put("app_version_name", info.versionName);
             }
             catch (Exception ignored) {}
             //catch (PackageManager.NameNotFoundException ignored) {}
 
-            txt += " | SDK_INT: " + Build.VERSION.SDK_INT;
+            txt += " | SDK: " + Build.VERSION.SDK_INT;
             txt += " | model: " + model;
             txt += " | error: " + e.toString();
 
-            report.put("SDK_INT", Build.VERSION.SDK_INT + "");
+            report.put("device_type", "android");
+            report.put("catcher", "java");
+            report.put("SDK", Build.VERSION.SDK_INT + "");
             report.put("model", model);
             report.put("error", e.toString());
 

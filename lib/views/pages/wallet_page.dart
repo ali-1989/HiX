@@ -8,7 +8,7 @@ import 'package:iris_tools/widgets/icon/circularIcon.dart';
 import 'package:app/services/session_service.dart';
 import 'package:app/structures/abstract/stateBase.dart';
 import 'package:app/structures/middleWares/requester.dart';
-import 'package:app/structures/models/transactionModel.dart';
+import 'package:app/structures/models/transaction_model.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/system/keys.dart';
 import 'package:app/tools/app/appDecoration.dart';

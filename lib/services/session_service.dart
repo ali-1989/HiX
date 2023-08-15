@@ -4,7 +4,6 @@ import 'package:iris_tools/api/checker.dart';
 import 'package:iris_tools/dateSection/dateHelper.dart';
 
 import 'package:app/structures/enums/appEvents.dart';
-import 'package:app/structures/enums/userType.dart';
 import 'package:app/structures/models/userModel.dart';
 import 'package:app/tools/app/appDb.dart';
 import 'package:app/tools/app/appLocale.dart';
@@ -62,7 +61,7 @@ class SessionService {
 			return false;
 		}
 
-		return getLastLoginUser()!.userType == UserType.guest;
+		return false;
 	}
 
 	static bool isLogin(String userId){
@@ -303,10 +302,7 @@ class SessionService {
 	static UserModel getGuestUser(){
 		final g = UserModel();
 		g.userId = '0';
-		g.userName = 'مهمان';
-		g.userType = UserType.guest;
 		g.name = 'مهمان';
-		g.family = '';
 
 		return g;
 	}

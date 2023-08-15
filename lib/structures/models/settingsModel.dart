@@ -8,11 +8,11 @@ import 'package:app/tools/app/appThemes.dart';
 import 'package:app/tools/dateTools.dart';
 
 class SettingsModel {
-  static const defaultHttpAddress = 'http://vosatezehn.com:7436'; // http://vosatezehn.com, http://192.168.43.140, 1.103
-  static const defaultWsAddress = 'ws://vosatezehn.com:7438/ws';
+  static const defaultHttpAddress = 'https://bigbangoappapi.nicode.org/v1';
+  static const defaultWsAddress = 'https://bigbangoappapi.nicode.org/v1';
   static const defaultProxyAddress = '95.174.67.50:18080';
   static const Locale defaultAppLocale = Locale('fa', 'IR');
-  static const CalendarType defaultCalendarType = CalendarType.solarHijri;
+  static final CalendarType defaultCalendarType = CalendarType.solarHijri;
   static final defaultDateFormat = DateFormat.yyyyMmDd.format();
   static int webSocketPeriodicHeartMinutes = 3;
   static int drawerMenuTimeMill = 350;
@@ -30,7 +30,7 @@ class SettingsModel {
   String proxyAddress = defaultProxyAddress;
   Orientation? appRotationState; // null: free
   int? currentVersion;
-  bool notificationDailyText = true;
+  
 
 
   SettingsModel();
@@ -46,7 +46,7 @@ class SettingsModel {
     calendarType = CalendarTypeHelper.calendarTypeFrom(map['calendar_type_name']);
     dateFormat = map['date_format']?? defaultDateFormat;
     colorTheme = map[Keys.setting$colorThemeName];
-    lastToBackgroundTs = map[Keys.setting$toBackgroundTs];
+    //lastToBackgroundTs = map[Keys.setting$toBackgroundTs];
     confirmOnExit = map[Keys.setting$confirmOnExit]?? true;
     httpAddress = map['http_address']?? defaultHttpAddress;
     wsAddress = map['ws_address']?? defaultWsAddress;
@@ -64,13 +64,13 @@ class SettingsModel {
     map['calendar_type_name'] = calendarType.name;
     map['date_format'] = dateFormat;
     map[Keys.setting$colorThemeName] = colorTheme;
-    map[Keys.setting$toBackgroundTs] = lastToBackgroundTs;
+    //map[Keys.setting$toBackgroundTs] = lastToBackgroundTs;
     map[Keys.setting$confirmOnExit] = confirmOnExit;
     map[Keys.setting$currentVersion] = currentVersion;
     map['http_address'] = httpAddress;
     map['ws_address'] = wsAddress;
     map['proxy_address'] = proxyAddress;
-
+    
     return map;
   }
 
@@ -85,10 +85,10 @@ class SettingsModel {
     httpAddress = other.httpAddress;
     wsAddress = other.wsAddress;
     proxyAddress = other.proxyAddress;
-    notificationDailyText = other.notificationDailyText;
   }
 
   void _prepareSettings() {
+    //final locale = System.getCurrentLocalizationsLocale(context);
     colorTheme ??= AppThemes.instance.currentTheme.themeName;
 
     FontManager.fetchFontThemeData(appLocale.languageCode);

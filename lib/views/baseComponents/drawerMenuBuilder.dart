@@ -8,8 +8,6 @@ import 'package:iris_tools/widgets/icon/circularIcon.dart';
 import 'package:iris_tools/widgets/irisImageView.dart';
 
 import 'package:app/managers/layout_manager.dart';
-import 'package:app/pages/profile/profile_page.dart';
-import 'package:app/pages/wallet_page.dart';
 import 'package:app/services/login_service.dart';
 import 'package:app/services/session_service.dart';
 import 'package:app/structures/enums/appEvents.dart';
@@ -22,7 +20,9 @@ import 'package:app/tools/app/appMessages.dart';
 import 'package:app/tools/app/appSizes.dart';
 import 'package:app/tools/app/appThemes.dart';
 import 'package:app/tools/routeTools.dart';
-import 'package:app/views/widgets/my_divider.dart';
+import 'package:app/views/components/my_divider.dart';
+import 'package:app/views/pages/profile/profile_page.dart';
+import 'package:app/views/pages/wallet_page.dart';
 
 class DrawerMenuBuilder {
   DrawerMenuBuilder._();
@@ -291,7 +291,7 @@ class DrawerMenuBuilder {
 
   static void gotoProfilePage() async {
     await LayoutManager.toggleDrawer();
-    RouteTools.pushPage(RouteTools.getTopContext()!, const ProfilePage());
+    RouteTools.pushPage(RouteTools.getTopContext()!, ProfilePage());
   }
 
   static void gotoWalletPage() async {
@@ -301,26 +301,60 @@ class DrawerMenuBuilder {
 
   static void gotoAboutPage() async {
     await LayoutManager.toggleDrawer();
-    RouteTools.pushPage(RouteTools.getTopContext()!, const ProfilePage());
+    RouteTools.pushPage(RouteTools.getTopContext()!, ProfilePage());
   }
 
 
   static void _onLogoffClick() async {
     await LayoutManager.hideDrawer(millSec: 100);
 
-    bool yesFn(ctx){
+    bool yesFn(){
       LoginService.forceLogoff(SessionService.getLastLoginUser()!.userId);
       return false;
     }
 
-    AppDialogIris.instance.showYesNoDialog(
+    final decor = AppDialogIris.instance.dialogDecoration.copy();
+    decor.negativeButtonBackColor = Colors.transparent;
+    decor.positiveButtonBackColor = Colors.green;
+
+    AppDialogIris.instance.showIrisDialog(
       RouteTools.getBaseContext()!,
-      desc: AppMessages.doYouWantLogoutYourAccount,
+      canDismissible: true,
       dismissOnButtons: true,
-      yesText: AppMessages.yes,
-      noText: AppMessages.no,
-      yesFn: yesFn,
-      decoration: AppDialogIris.instance.dialogDecoration.copy()..positiveButtonBackColor = Colors.green,
+      descView: Column(
+        children: [
+
+          Text(AppMessages.doYouWantLogoutYourAccount),
+
+          const SizedBox(height: 40),
+
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              SizedBox(
+                width: 90,
+                height: 38,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(0),
+                  ),
+                    onPressed: yesFn,
+                    child: Text(AppMessages.yes)
+                ),
+              ),
+
+              const SizedBox(width: 10),
+
+              TextButton(
+                  onPressed: (){
+                    Navigator.of(RouteTools.getBaseContext()!).pop();
+                  },
+                  child: Text(AppMessages.no)
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

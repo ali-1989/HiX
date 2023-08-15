@@ -25,7 +25,7 @@ class Keys {
   static const key = 'key';
   static const lastName = 'lastName';
   static const userId = 'id';
-  static const sex = 'sex';
+  static const gender = 'gender';
   static const birthdate = 'birthDate';
   static const title = 'title';
   static const type = 'type';

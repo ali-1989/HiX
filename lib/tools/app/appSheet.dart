@@ -296,7 +296,7 @@ class AppSheet {
     EdgeInsets padding = EdgeInsets.zero,
       }) {
     
-    return AppSheetView(childBuilder: builder, contentColor: contentColor,);
+    return AppSheetView(childBuilder: builder, contentColor: contentColor);
   }
 
   ///=======================================================================================================

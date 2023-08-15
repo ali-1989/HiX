@@ -51,7 +51,7 @@ class Requester {
     _bodyJs = js;
 
     /*if(js != null) {
-      PublicAccess.addAppInfo(_bodyJs!);
+      DeviceInfoTools.attachDeviceInfo(_bodyJs!);
     }*/
   }
 
@@ -127,7 +127,7 @@ class Requester {
           str = str.substring(0, 15);
         }
 
-        Tools.verbosePrint('@@@>> [$url] [$request]  response ======= [${_httpRequester.responseData?.statusCode}] $val');
+        Tools.verbosePrint('@@@ API CALLED >>> url:[$url]  request:[$request]  response ====>>  status:[${_httpRequester.responseData?.statusCode}] data:$val');
       }
 
       if(_httpRequester.responseData?.statusCode == 401 && SessionService.getLastLoginUser() != null){
