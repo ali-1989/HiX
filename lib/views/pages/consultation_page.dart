@@ -1,8 +1,10 @@
+import 'package:app/structures/models/meetingModel.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_tools/api/generator.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 
@@ -19,10 +21,27 @@ class ConsultationPage extends StatefulWidget {
 ///====================================================================================
 class ConsultationPageState extends StateBase<ConsultationPage> {
   int currentTabIndex = 0;
+  List<MeetingModel> meetingList = [];
 
   @override
   void initState(){
     super.initState();
+
+    final c = ConsultantMeetingModel();
+    c.id = Generator.generateKey(5);
+    c.name = Generator.generateName(5);
+    c.positionTitle = Generator.generateName(5);
+
+    for(int i=0; i < 20; i++){
+      MeetingModel mm = MeetingModel();
+      mm.date = DateTime.now();
+      mm.title = Generator.generateName(14);
+      mm.id = Generator.generateKey(5);
+      mm.state = 1;
+      mm.consultant = c;
+
+      meetingList.add(mm);
+    }
   }
 
   @override
@@ -104,8 +123,9 @@ class ConsultationPageState extends StateBase<ConsultationPage> {
             searchBarBuilder(),
 
             ListView.builder(
-                itemCount: 3,
+                itemCount: meetingList.length,
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: itemBuilder
             )
           ]
@@ -249,7 +269,43 @@ class ConsultationPageState extends StateBase<ConsultationPage> {
   }
 
   Widget? itemBuilder(BuildContext context, int index) {
+    final itm = meetingList[index];
 
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: CustomCard(
+        color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal:14, vertical: 14),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(AppImages.pointIco),
+                        const SizedBox(width: 8),
+                        Text(itm.title)
+                      ],
+                    ),
+
+                    Row(
+                      children: [
+                        Image.asset(AppImages.noteIco, scale: 1.2),
+                        const SizedBox(width: 12),
+                        Image.asset(AppImages.starIco, scale: 1.2),
+                        const SizedBox(width: 12),
+                        Icon(AppIcons.dotsVer, size: 20,)
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+      ),
+    );
   }
 
   Widget searchBarBuilder() {

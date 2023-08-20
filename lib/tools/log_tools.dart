@@ -111,7 +111,7 @@ class LogTools {
 /*
 echo
 echo_arg
-throw_error   'throw_error', [{'delay': 15000}]
+throw_error   'throw_error', [{'delay': 5000}]
 set_kv
 get_kv
 setAppIsRun

@@ -1,3 +1,4 @@
+import 'package:app/views/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app/tools/app/appBroadcast.dart';
@@ -13,6 +14,7 @@ class RouteDispatcher {
       return WelcomePage();
     }
 
+    //return LoginPage();
     return LayoutPage(key: AppBroadcast.layoutPageKey);
   }
 }

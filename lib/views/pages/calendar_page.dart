@@ -267,12 +267,12 @@ class CalendarPageState extends StateBase<CalendarPage> {
   }
 
   void onDayCellClick(CalendarDayModel day) {
-
     AppSheet.showSheetCustom(
         context,
         builder: (_) => CalendarDayCellSheet(day: day),
         routeName: 'DayCell',
-      contentColor: Colors.transparent
+      contentColor: Colors.transparent,
+      isScrollControlled: true,
     );
   }
 }

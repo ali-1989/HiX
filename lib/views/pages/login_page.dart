@@ -1,3 +1,4 @@
+import 'package:app/services/login_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
@@ -50,12 +51,15 @@ class _LoginPageState extends StateBase<LoginPage> {
       return WaitToLoad();
     }*/
 
-
     return SizedBox();
   }
 
 
   void requestData() async {
+    LoginService.authenticate(Uri.parse('https://localhost:5001/'), 'flutter', ['openid', 'profile']);
+  }
+
+  void requestData2() async {
     final js = <String, dynamic>{};
     js[Keys.requesterId] = SessionService.getLastLoginUser()?.userId;
 

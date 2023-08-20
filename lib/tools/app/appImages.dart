@@ -41,6 +41,9 @@ class AppImages {
   static const sexRelationIco = 'assets/images/sexRelationIco.png';
   static const searchIco = 'assets/images/searchIco.png';
   static const filteringIco = 'assets/images/filteringIco.png';
+  static const noteIco = 'assets/images/note.png';
+  static const pointIco = 'assets/images/point.png';
+  static const starIco = 'assets/images/star.png';
 }
 
 

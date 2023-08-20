@@ -1,24 +1,19 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 
-import 'package:dio/dio.dart';
 import 'package:iris_notifier/iris_notifier.dart';
 import 'package:iris_tools/api/helpers/jsonHelper.dart';
-import 'package:iris_tools/models/twoStateReturn.dart';
 
-import 'package:app/managers/api_manager.dart';
 import 'package:app/managers/settings_manager.dart';
 import 'package:app/services/session_service.dart';
 import 'package:app/structures/enums/appEvents.dart';
-import 'package:app/structures/models/countryModel.dart';
 import 'package:app/structures/models/userModel.dart';
 import 'package:app/system/keys.dart';
 import 'package:app/tools/app/appBroadcast.dart';
 import 'package:app/tools/app/appHttpDio.dart';
-import 'package:app/tools/app/appSheet.dart';
-import 'package:app/tools/deviceInfoTools.dart';
 import 'package:app/tools/routeTools.dart';
+import 'package:openid_client/openid_client.dart';
+import 'package:openid_client/openid_client_io.dart';
 
 class LoginService {
   LoginService._();
@@ -101,7 +96,7 @@ class LoginService {
     }
   }
 
-  static Future<Map?> requestSendOtp({required CountryModel countryModel, required String phoneNumber}) async {
+  /*static Future<Map?> requestSendOtp({required CountryModel countryModel, required String phoneNumber}) async {
     final http = HttpItem();
     final result = Completer<Map?>();
 
@@ -133,118 +128,26 @@ class LoginService {
 
     return result.future;
   }
+*/
 
-  static Future<TwoStateReturn<Map, Exception>> requestVerifyOtp({required CountryModel countryModel, required String phoneNumber, required String code}) async {
-    final http = HttpItem();
-    final result = Completer<TwoStateReturn<Map, Exception>>();
+  static void authenticate(Uri uri, String clientId, List<String> scopes) async {
+    final issuer = await Issuer.discover(uri);
+    final client = Client(issuer, clientId);
 
-    final js = {};
-    js[Keys.mobileNumber] = phoneNumber;
-    js['code'] = code;
-    js.addAll(countryModel.toMap());
-    js.addAll(DeviceInfoTools.mapDeviceInfo());
+    var authenticator = Authenticator(
+        client,
+        scopes: scopes,
+        //port: 4000,
+    );
 
-    http.fullUrl = ApiManager.serverApi;
-    http.method = 'POST';
-    http.setBodyJson(js);
+    final res = await authenticator.authorize();
+    print(res.toString());
 
-    final request = AppHttpDio.send(http);
+    //return await c.getUserInfo();
 
-    var f = request.response.catchError((e){
-      result.complete(TwoStateReturn(r2: e));
-
-      return null;
-    });
-
-    f = f.then((Response? response){
-      if(response == null || !request.isOk) {
-        result.complete(TwoStateReturn(r2: Exception()));
-        return;
-      }
-
-      final resJs = request.getBodyAsJson()!;
-      result.complete(TwoStateReturn(r1: resJs));
-      return null;
-    });
-
-    return result.future;
-  }
-
-  static Future<TwoStateReturn<Map, Exception>> requestVerifyEmail({required String email}) async {
-    final http = HttpItem();
-    final result = Completer<TwoStateReturn<Map, Exception>>();
-
-    final js = {};
-    js['email'] = email;
-    js.addAll(DeviceInfoTools.mapDeviceInfo());
-
-    http.fullUrl = ApiManager.serverApi;
-    http.method = 'POST';
-    http.setBodyJson(js);
-
-    final request = AppHttpDio.send(http);
-
-    var f = request.response.catchError((e){
-      result.complete(TwoStateReturn(r2: e));
-
-      return null;
-    });
-
-    f = f.then((Response? response){
-      if(response == null || !request.isOk) {
-        result.complete(TwoStateReturn(r2: Exception()));
-        return;
-      }
-
-      final resJs = request.getBodyAsJson()!;
-
-      result.complete(TwoStateReturn(r1: resJs));
-      return null;
-    });
-
-    return result.future;
-  }
-  
-  static Future<HttpRequester?> requestOnSplash() async {
-    final http = HttpItem();
-    final result = Completer<HttpRequester?>();
-
-    http.fullUrl = '';
-    http.method = 'GET';
-    //http.setBodyJson(js);
-
-    final request = AppHttpDio.send(http);
-
-    var f = request.response.catchError((e){
-      result.complete(null);
-
-      return null;
-    });
-
-    f = f.then((Response? response){
-      if(response == null || response.statusCode == null) {
-        result.complete(null);
-        return;
-      }
-
-      result.complete(request);
-      return null;
-    });
-
-    return result.future;
-  }
-
-  static loginGuestUser(BuildContext context) async {
-    final gUser = SessionService.getGuestUser();
-    final userModel = await SessionService.login$newProfileData(gUser.toMap());
-
-    if(userModel != null) {
-      AppBroadcast.reBuildMaterial();
-    }
-    else {
-      if(context.mounted) {
-        AppSheet.showSheet$OperationFailed(context);
-      }
-    }
+    /*final result = await FlutterWebAuth.authenticate(
+      url: "https://api.worldoftanks.eu/wot/auth/login/?application_id=XXXe272eXXXac833eXXXf093d032c7fe&display=popup",
+      callbackUrlScheme: "",
+    );*/
   }
 }

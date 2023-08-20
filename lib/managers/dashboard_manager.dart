@@ -27,7 +27,7 @@ class DashboardManager {
     sexNavigateModel.title = 'رابطه جنسی';
     sexNavigateModel.iconAddress = AppImages.dashboardIco$sex;
 
-    chartNavigateModel.title = 'زیست آهنگ';
+    chartNavigateModel.title = 'بیوریتم';
     chartNavigateModel.iconAddress = AppImages.dashboardIco$chart;
 
     navigateList.add(calendarNavigateModel);
