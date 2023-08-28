@@ -20,7 +20,7 @@ import 'package:app/tools/app/appImages.dart';
 import 'package:app/views/baseComponents/drawerMenuBuilder.dart';
 import 'package:app/views/baseComponents/layoutScaffold.dart';
 import 'package:app/views/pages/calendar_page.dart';
-import 'package:app/views/pages/consultation_page.dart';
+import 'package:app/views/pages/consultant_page/consultation_page.dart';
 import 'package:app/views/pages/dashboard_page.dart';
 import 'package:app/views/pages/notification_page.dart';
 import 'package:app/views/pages/webinar_page.dart';

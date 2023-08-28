@@ -1,18 +1,26 @@
 import 'package:app/structures/models/mediaModel.dart';
 import 'package:iris_tools/api/generator.dart';
 
-class ConsultantForMeetingModel {
+class ConsultantModel {
   String id = '';
   String name = '';
+  String doctorNumber = '';
+  int countOfConsultation = 0;
+  double rate = 0;
+  bool isBookmark = false;
   MediaModel? avatar;
   String positionTitle = '';
 
-  ConsultantForMeetingModel() : id = Generator.generateName(10);
+  ConsultantModel() : id = Generator.generateName(10);
 
-  ConsultantForMeetingModel.fromMap(Map map) {
+  ConsultantModel.fromMap(Map map) {
     id = map['id'];
     name = map['name']?? '';
+    doctorNumber = map['doctorNumber']?? '';
     positionTitle = map['positionTitle']?? '';
+    countOfConsultation = map['countOfConsultation']?? 0;
+    isBookmark = map['isBookmark']?? false;
+    rate = map['rate']?? 0;
 
     if(map['avatar'] is Map) {
       avatar = MediaModel.fromMap(map['avatar']);
@@ -25,6 +33,10 @@ class ConsultantForMeetingModel {
     map['id'] = id;
     map['name'] = name;
     map['positionTitle'] = positionTitle;
+    map['doctorNumber'] = doctorNumber;
+    map['countOfConsultation'] = countOfConsultation;
+    map['isBookmark'] = isBookmark;
+    map['rate'] = rate;
     map['avatar'] = avatar?.toMap();
 
     return map;
