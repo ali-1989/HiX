@@ -171,13 +171,20 @@ class LayoutPageState extends StateBase<LayoutPage> {
   }
 
   Widget buildNavigationSection(){
-    return ColoredBox(
-      color: Colors.white,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 35.0 * pw),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: LayoutManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(color: Colors.black38, offset: Offset(0, 3), blurStyle: BlurStyle.outer, spreadRadius: 0, blurRadius: 4)
+        ]
+      ),
+      child: ColoredBox(
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 35.0 * pw),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: LayoutManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
+          ),
         ),
       ),
     );

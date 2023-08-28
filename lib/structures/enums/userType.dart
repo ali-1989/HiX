@@ -7,11 +7,13 @@ enum UserType {
 
   const UserType(this._type);
 
-  static UserType from(int type){
-    for(final k in UserType.values){
-      if(k._type == type){
-        return k;
-      }
+  factory UserType.from(dynamic numberOrString){
+    if(numberOrString is String){
+      return values.firstWhere((element) => element.name == numberOrString, orElse: ()=> common);
+    }
+
+    if(numberOrString is int){
+      return values.firstWhere((element) => element._type == numberOrString, orElse: ()=> common);
     }
 
     return UserType.common;

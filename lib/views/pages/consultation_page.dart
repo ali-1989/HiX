@@ -1,8 +1,11 @@
-import 'package:app/structures/models/meetingModel.dart';
+import 'package:app/structures/enums/consultant_meeting_status.dart';
+import 'package:app/structures/models/consultant_for_meeting_model.dart';
+import 'package:app/structures/models/meeting_model.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/dateTools.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/api/generator.dart';
 
@@ -27,7 +30,7 @@ class ConsultationPageState extends StateBase<ConsultationPage> {
   void initState(){
     super.initState();
 
-    final c = ConsultantMeetingModel();
+    final c = ConsultantForMeetingModel();
     c.id = Generator.generateKey(5);
     c.name = Generator.generateName(5);
     c.positionTitle = Generator.generateName(5);
@@ -37,7 +40,7 @@ class ConsultationPageState extends StateBase<ConsultationPage> {
       mm.date = DateTime.now();
       mm.title = Generator.generateName(14);
       mm.id = Generator.generateKey(5);
-      mm.state = 1;
+      mm.status = ConsultantMeetingStatus.from(Generator.getRandomInt(1, 3));
       mm.consultant = c;
 
       meetingList.add(mm);
@@ -296,7 +299,48 @@ class ConsultationPageState extends StateBase<ConsultationPage> {
                         const SizedBox(width: 12),
                         Image.asset(AppImages.starIco, scale: 1.2),
                         const SizedBox(width: 12),
-                        Icon(AppIcons.dotsVer, size: 20,)
+                        const Icon(AppIcons.dotsVer, size: 18, color: Colors.black87)
+                      ],
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 8),
+                Row(
+                  children: [
+
+                  ],
+                ),
+
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('وضعیت'),
+
+                    Row(
+                      children: [
+                        Circle(
+                          size: 6,
+                          color: Colors.green,
+                        ),
+
+                        Text(itm.status.getHumanMessage())
+                      ],
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('تاریخ جلسه'),
+
+                    Row(
+                      children: [
+                        Text('  ${DateTools.hmOnlyRelative(itm.date)}  ').bold(),
+                        Text(DateTools.dateOnlyRelative(itm.date)),
                       ],
                     ),
                   ],
