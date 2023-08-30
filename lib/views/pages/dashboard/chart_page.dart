@@ -257,7 +257,7 @@ class _ChartPageState extends StateBase<ChartPage> {
   void onHelpClick() {
     AppDialogIris.instance.showIrisDialog(
         context,
-        descView: Text('lorm'),//todo.
+        descView: Text('راهنما \nراهنما'),//todo.
         canDismissible:  true
     );
   }

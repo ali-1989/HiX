@@ -1,4 +1,5 @@
 import 'package:app/views/pages/consultant_page/consultant_reserve.dart';
+import 'package:app/views/pages/consultant_page/medicine_docs.dart';
 import 'package:app/views/pages/consultant_page/my_file.dart';
 import 'package:flutter/material.dart';
 
@@ -97,9 +98,12 @@ class ConsultationPageState extends StateBase<ConsultationPage> {
 
             PageSwitcher(
                 controller: pageSwitcherCtr,
+                // ignore: prefer_const_literals_to_create_immutables
                 pages: [
+                  // ignore: prefer_const_constructors
                   MyFile(),
                   ConsultantReserve(),
+                  MedicineDocuments()
                 ]
             ),
           ]

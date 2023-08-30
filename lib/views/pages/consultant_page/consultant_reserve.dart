@@ -6,7 +6,6 @@ import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/api/generator.dart';
-import 'package:iris_tools/widgets/circle.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
 class ConsultantReserve extends StatefulWidget {
@@ -46,8 +45,8 @@ class _ConsultantReserveState extends StateBase<ConsultantReserve> {
 
   Widget buildBody() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 20),
         const Text('لیست مشاوران').font(AppDecoration.morabbaFont).fsR(2),
 
         searchBarBuilder(),
@@ -107,6 +106,16 @@ class _ConsultantReserveState extends StateBase<ConsultantReserve> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const Text('شماره نظام پزشکی'),
+
+                    Text(itm.doctorNumber).bold(),
+                  ],
+                ),
+
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                     const Text('تعداد مشاوره'),
 
                     Text('${itm.countOfConsultation}')
@@ -117,9 +126,19 @@ class _ConsultantReserveState extends StateBase<ConsultantReserve> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('شماره نظام پزشکی'),
+                    const Text('نظرات و رتبه'),
 
-                    Text(itm.doctorNumber).bold(),
+                    Row(
+                      textDirection: TextDirection.ltr,
+                      children: [
+                        Image.asset(AppImages.starIco, height: 17),
+                        const Text('3.5 ').bold().fsR(-1),
+
+                        const SizedBox(width: 10),
+                        Image.asset(AppImages.commentIco),
+                        const Text('25 '),
+                      ],
+                    )
                   ],
                 ),
 

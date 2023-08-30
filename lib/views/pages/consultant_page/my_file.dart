@@ -58,6 +58,7 @@ class _MyFileState extends StateBase<MyFile> {
 
   Widget buildBody() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildHeader(),
 

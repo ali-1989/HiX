@@ -42,8 +42,12 @@ class AppImages {
   static const searchIco = 'assets/images/searchIco.png';
   static const filteringIco = 'assets/images/filteringIco.png';
   static const noteIco = 'assets/images/note.png';
+  static const commentIco = 'assets/images/commentIco.png';
   static const pointIco = 'assets/images/point.png';
   static const starIco = 'assets/images/star.png';
+  static const doctorDocIco = 'assets/images/doctorDocIco.png';
+  static const recycleBinIco = 'assets/images/recycleBinIco.png';
+  static const fileUploadIco = 'assets/images/fileUploadIco.png';
 }
 
 

@@ -63,6 +63,7 @@ dependencies:
   simple_circular_progress_bar: ^1.0.2
   fl_chart: ^0.63.0
   openid_client: ^0.4.7
+  file_sizes: ^1.0.6
 
 
   iris_tools:
