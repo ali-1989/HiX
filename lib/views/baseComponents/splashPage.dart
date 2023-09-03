@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/services/native_call_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +27,7 @@ import 'package:app/views/baseComponents/routeDispatcher.dart';
 import 'package:app/views/baseComponents/splashView.dart';
 import 'package:app/views/states/waitToLoad.dart';
 
-bool isInitialOk = false;
-bool mustWaitToSplashTimer = true;
-
 class SplashPage extends StatefulWidget {
-
   SplashPage({super.key});
 
   @override
@@ -38,12 +35,6 @@ class SplashPage extends StatefulWidget {
 }
 ///======================================================================================================
 class SplashPageState extends StateBase<SplashPage> {
-  static bool _callInSplashInit = false;
-  static bool _callLazyInit = false;
-  static bool _isInit = false;
-  static bool _isInLoadingSettings = true;
-  bool _isConnectToServer = true;
-  int splashWaitingMil = 4000;
   Timer? timer;
 
   @override
@@ -51,12 +42,12 @@ class SplashPageState extends StateBase<SplashPage> {
     splashWaitTimer();
     startInit();
 
-    if (mustWaitInSplash()) {
+    if (SplashManager.mustWaitInSplash()) {
       //System.hideBothStatusBarOnce();
       return getSplashView();
     }
     else {
-      return getFirstPage();
+      return getRoutePage();
     }
   }
 
@@ -68,44 +59,46 @@ class SplashPageState extends StateBase<SplashPage> {
     return const SplashView();
   }
 
-  Widget getFirstPage(){
-    if(kIsWeb && !isInitialOk){
+  Widget getRoutePage(){
+    if(kIsWeb && !SplashManager.isFullInitialOk){
       return const SizedBox();
     }
 
     return RouteDispatcher.dispatch();
   }
 
-  bool mustWaitInSplash(){
-    return !kIsWeb && (mustWaitToSplashTimer || _isInLoadingSettings || !_isConnectToServer);
-  }
-
   void splashWaitTimer() async {
-    if(mustWaitToSplashTimer || timer == null){
-      timer = Timer(Duration(milliseconds: splashWaitingMil), (){
-        mustWaitToSplashTimer = false;
-        callState();
+    final dur = Duration(milliseconds: SplashManager.splashWaitingMil);
+
+    if(SplashManager.mustWaitToSplashTimer && timer == null){
+      timer = Timer(dur, (){
+        SplashManager.mustWaitToSplashTimer = false;
+        timer = null;
+
+        if(context.mounted){
+          callState();
+        }
       });
     }
   }
 
   void startInit() async {
-    if (_isInit) {
+    if (SplashManager.isFirstInitOk) {
       return;
     }
 
-    _isInit = true;
+    SplashManager.isFirstInitOk = true;
 
-    await inSplashInit(context);
+    await appInitial(context);
     final settingsLoad = SettingsManager.loadSettings();
 
     if (settingsLoad) {
+      appLazyInit();
       await SessionService.fetchLoginUsers();
       await VersionManager.checkVersionOnLaunch();
       connectToServer();
 
-      appLazyInit();
-      _isInLoadingSettings = false;
+      SplashManager.isInLoadingSettings = false;
       AppBroadcast.reBuildMaterialBySetTheme();
     }
   }
@@ -118,7 +111,7 @@ class SplashPageState extends StateBase<SplashPage> {
         RouteTools.materialContext!,
         AppMessages.errorCommunicatingServer,
         onButton: () {
-          AppBroadcast.gotoSplash();
+          SplashManager.gotoSplash();
           connectToServer();
         },
         buttonText: AppMessages.tryAgain,
@@ -126,21 +119,18 @@ class SplashPageState extends StateBase<SplashPage> {
       );
     }
     else {
-      _isConnectToServer = true;
+      SplashManager.isConnectToServer = true;
 
       SessionService.fetchLoginUsers();
-      callState();
+
+      if(context.mounted){
+        callState();
+      }
     }*/
   }
 
-  static Future<void> inSplashInit(BuildContext? context) async {
-    if (_callInSplashInit) {
-      return;
-    }
-
+  static Future<void> appInitial(BuildContext? context) async {
     try {
-      _callInSplashInit = true;
-
       await AppDB.init();
       AppThemes.init();
       await AppLocale.init();
@@ -160,10 +150,10 @@ class SplashPageState extends StateBase<SplashPage> {
         await precacheImage(AppCache.screenBack!, context);
       }
 
-      isInitialOk = true;
+      SplashManager.isFullInitialOk = true;
     }
     catch (e){
-      LogTools.logger.logToAll('error in inSplashInit >> $e');
+      LogTools.logger.logToAll('error in appInitial >> $e');
     }
 
     return;
@@ -172,29 +162,29 @@ class SplashPageState extends StateBase<SplashPage> {
   static Future<void> appLazyInit() {
     final c = Completer<void>();
 
-    if (!_callLazyInit) {
-      Timer.periodic(const Duration(milliseconds: 50), (Timer timer) async {
-        if (isInitialOk) {
-          timer.cancel();
-          await _lazyInitCommands();
-          c.complete();
-        }
-      });
-    }
-    else {
+    if (SplashManager.callLazyInit) {
       c.complete();
+      return c.future;
     }
+
+    SplashManager.callLazyInit = true;
+
+    Timer.periodic(const Duration(milliseconds: 50), (Timer timer) async {
+      if (SplashManager.isFullInitialOk) {
+        timer.cancel();
+        await _lazyInitCommands();
+        c.complete();
+      }
+    });
 
     return c.future;
   }
 
   static Future<void> _lazyInitCommands() async {
-    if (_callLazyInit) {
-      return;
-    }
-
     try {
-      _callLazyInit = true;
+      //WakeupService.init();
+      NativeCallService.init();
+      NativeCallService.assistanceBridge!.invokeMethod('setAppIsRun');
 
       ApplicationSignal.start();
       SettingsManager.init();
@@ -216,7 +206,7 @@ class SplashPageState extends StateBase<SplashPage> {
       }
     }
     catch (e){
-      _callLazyInit = false;
+      SplashManager.callLazyInit = false;
       LogTools.logger.logToAll('error in lazyInitCommands >> $e');
     }
   }
