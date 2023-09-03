@@ -11,7 +11,7 @@ class SplashManager {
   static bool callLazyInit = false;
   static bool isFirstInitOk = false;
   static bool isInLoadingSettings = true;
-  static bool isConnectToServer = false;
+  static bool isConnectToServer = true;
 
   static bool mustWaitInSplash(){
     return !kIsWeb && (mustWaitToSplashTimer || isInLoadingSettings || !isConnectToServer);

@@ -37,12 +37,12 @@ class _MyFileState extends StateBase<MyFile> {
     final c2 = ConsultantForMeetingModel();
     c2.id = Generator.generateKey(5);
     c2.name = Generator.getRandomFrom(['مهناز باقری', 'حسینعلی هاشمی']);
-    c2.positionTitle = Generator.getRandomFrom(['روان پزشک', 'الاف بی کار']);
+    c2.positionTitle = Generator.getRandomFrom(['روان پزشک', 'ماما']);
 
     for(int i=0; i < 20; i++){
       MeetingModel mm = MeetingModel();
       mm.date = DateTime.now();
-      mm.title = Generator.getRandomFrom(['چگونه همسرم را بکشم', 'چرا دوستم ندارد']);
+      mm.title = Generator.getRandomFrom(['آیا می توانم با شرایطی که دارم باردار شوم', 'چرا نامنظم پریود می شوم']);
       mm.id = Generator.generateKey(5);
       mm.status = ConsultantMeetingStatus.from(Generator.getRandomInt(1, 3));
       mm.consultant = Generator.getRandomFrom([c1, c2]);
@@ -220,12 +220,14 @@ class _MyFileState extends StateBase<MyFile> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Image.asset(AppImages.pointIco),
-                        const SizedBox(width: 8),
-                        Text(itm.title)
-                      ],
+                    Flexible(
+                      child: Row(
+                        children: [
+                          Image.asset(AppImages.pointIco),
+                          const SizedBox(width: 8),
+                          Flexible(child: Text(itm.title, maxLines: 1,))
+                        ],
+                      ),
                     ),
 
                     Row(
@@ -271,7 +273,7 @@ class _MyFileState extends StateBase<MyFile> {
                       children: [
                         Circle(
                           size: 6 * pw,
-                          color: Colors.green,
+                          color: itm.status.getColor(),
                         ),
 
                         Text(itm.status.getHumanMessage())

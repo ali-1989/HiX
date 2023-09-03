@@ -1,6 +1,6 @@
-import 'package:app/tools/app/appNavigator.dart';
 import 'package:app/tools/app/appToast.dart';
 import 'package:app/tools/permissionTools.dart';
+import 'package:app/views/components/bottom_text_field_input_state.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -106,6 +106,7 @@ class _MedicineDocumentAddSheetState extends State<MedicineDocumentAddSheet> {
       file = MediaModel();
       file!.path = pFile.files[0].path;
       file!.fileName = pFile.files[0].name;
+      file!.title = pFile.files[0].name;
       file!.extension = pFile.files[0].extension;
       file!.volume = pFile.files[0].size;
 
@@ -114,14 +115,26 @@ class _MedicineDocumentAddSheetState extends State<MedicineDocumentAddSheet> {
   }
 
   void onRegisterClick() {
+    Navigator.pop(context, file);
   }
 
   void onChangeTitleClick() {
     final route = PageRouteBuilder(
-      opaque: false,
-        barrierColor: Colors.blue,
+        opaque: false,
+        fullscreenDialog: false,
+        barrierColor: null,
         pageBuilder: (_, anim1, anim2){
-          return TextFieldInput();
+          return BottomTextFieldInput(
+            title :'نام فایل',
+            onConfirm: (_, txt){
+              Navigator.of(context).pop();
+
+              if(txt.isNotEmpty){
+                file!.title = txt;
+                setState(() {});
+              }
+            },
+          );
         }
     );
 
@@ -129,30 +142,3 @@ class _MedicineDocumentAddSheetState extends State<MedicineDocumentAddSheet> {
   }
 }
 
-class TextFieldInput extends StatefulWidget {
-
-  const TextFieldInput({super.key});
-
-  @override
-  State<StatefulWidget> createState() {
-    return TextFieldInputState();
-  }
-}
-///========================================================================
-class TextFieldInputState extends State {
-
-  @override
-  Widget build(BuildContext context) {
-   return Material(
-     color: Colors.transparent,
-     child: CustomCard(
-       color: Colors.transparent,
-       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-         child: TextField(
-           decoration: AppDecoration.outlineBordersInputDecoration,
-         ),
-     ),
-   );
-  }
-
-}

@@ -48,6 +48,7 @@ class AppImages {
   static const doctorDocIco = 'assets/images/doctorDocIco.png';
   static const recycleBinIco = 'assets/images/recycleBinIco.png';
   static const fileUploadIco = 'assets/images/fileUploadIco.png';
+  static const comingSoonIco = 'assets/images/coming.png';
 }
 
 

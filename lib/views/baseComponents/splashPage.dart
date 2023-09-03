@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/managers/splash_manager.dart';
 import 'package:app/services/native_call_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

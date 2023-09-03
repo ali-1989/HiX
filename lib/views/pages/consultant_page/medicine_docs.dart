@@ -4,10 +4,7 @@ import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:app/tools/app/appSheet.dart';
-import 'package:app/tools/app/appToast.dart';
-import 'package:app/tools/permissionTools.dart';
 import 'package:app/views/sheets/medicine_document_add_sheet.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:file_sizes/file_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/models/dataModels/mediaModel.dart';
@@ -15,7 +12,6 @@ import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 import 'package:iris_tools/widgets/icon/circularIcon.dart';
 import 'package:iris_tools/widgets/sizePosition/sizeInInfinity.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class MedicineDocuments extends StatefulWidget {
 
@@ -119,7 +115,7 @@ class _MedicineDocumentsState extends StateBase<MedicineDocuments> {
                       child: Row(
                         children: [
                           Flexible(
-                              child: Text('${itm.fileName}', maxLines: 1,)
+                              child: Text('${itm.title}', maxLines: 1,)
                           )
                         ],
                       ),
@@ -162,8 +158,10 @@ class _MedicineDocumentsState extends StateBase<MedicineDocuments> {
       isScrollControlled: true,
     );
 
-    //docList.add(f);
-    assistCtr.updateHead();
+    if(res is MediaModel) {
+      docList.add(res);
+      assistCtr.updateHead();
+    }
   }
 
 }

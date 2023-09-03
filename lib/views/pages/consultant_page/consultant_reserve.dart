@@ -4,6 +4,8 @@ import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/appDecoration.dart';
 import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/routeTools.dart';
+import 'package:app/views/pages/consultant_page/consultant_more_info.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/widgets/customCard.dart';
@@ -157,7 +159,7 @@ class _ConsultantReserveState extends StateBase<ConsultantReserve> {
                           side: BorderSide(color: AppDecoration.mainColor, style: BorderStyle.solid),
                         ),
                           onPressed: (){
-                            onReserveClick(itm);
+                            onMoreInfoClick(itm);
                           },
                           child: const Text('اطلاعات بیشتر').fsR(-1)
                       ),
@@ -215,4 +217,8 @@ class _ConsultantReserveState extends StateBase<ConsultantReserve> {
   }
 
   void onReserveClick(ConsultantModel itm) {}
+
+  void onMoreInfoClick(ConsultantModel itm) {
+    RouteTools.pushPage(context, const ConsultantMoreInfo());
+  }
 }

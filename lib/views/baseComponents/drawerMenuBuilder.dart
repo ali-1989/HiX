@@ -146,10 +146,10 @@ class DrawerMenuBuilder {
                                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4.0),
                                 ),
 
-                                const Opacity(
+                                /*const Opacity(
                                     opacity: 0.3,
                                     child: MyDivider()
-                                ),
+                                ),*/
 
                                 ListTile(
                                   title: const Text('درباره ما').boldFont(),

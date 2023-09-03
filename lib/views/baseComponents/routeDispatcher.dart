@@ -14,7 +14,6 @@ class RouteDispatcher {
       return WelcomePage();
     }
 
-    //return LoginPage();
     return LayoutPage(key: AppBroadcast.layoutPageKey);
   }
 }

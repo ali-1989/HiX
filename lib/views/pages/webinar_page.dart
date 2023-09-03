@@ -1,3 +1,4 @@
+import 'package:app/tools/app/appImages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
@@ -36,17 +37,11 @@ class WebinarPageState extends StateBase<WebinarPage> {
   Widget buildBody() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 18 * pw),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('webinar'),
-          SizedBox(height: 200),
-
-          SizedBox(height: 200),
-
-
-          Text('webinar'),
-        ]
+      child: SizedBox(
+        height: sh/2,
+        child: Center(
+          child: Image.asset(AppImages.comingSoonIco),
+        ),
       ),
     );
   }

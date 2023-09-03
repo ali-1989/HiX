@@ -91,7 +91,7 @@ class _ChartPageState extends StateBase<ChartPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('عاطفی').bold().fsR(-1),
-                          const Text('8').color(Colors.white),
+                          const Text('35').color(Colors.white),
                         ],
                       ),
                     )
@@ -139,7 +139,7 @@ class _ChartPageState extends StateBase<ChartPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('ذهنی').bold().fsR(-1),
-                          const Text('12').color(Colors.white),
+                          const Text('60').color(Colors.white),
                         ],
                       ),
                     )
@@ -183,7 +183,7 @@ class _ChartPageState extends StateBase<ChartPage> {
                                 ),
 
                                 const SizedBox(height: 2),
-                                const Text('فردا زودتر از خواب نازت بیدارشو و یکم به فکر باشی.\nتا کی بی فکری\nتا کی غفلت').fsR(-1),
+                                const Text('امروز روز شانس تو هست.کمی تلاشت را بیشتر کن، فردا فصل درو هست').fsR(-1),
 
                                 const SizedBox(height: 5),
                                 CustomCard(
@@ -257,7 +257,7 @@ class _ChartPageState extends StateBase<ChartPage> {
   void onHelpClick() {
     AppDialogIris.instance.showIrisDialog(
         context,
-        descView: Text('راهنما \nراهنما'),//todo.
+        descView: Text('راهنما \n متن راهنما بعدا قرار داده می شود'),//todo.
         canDismissible:  true
     );
   }

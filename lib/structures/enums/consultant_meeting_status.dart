@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 enum ConsultantMeetingStatus {
   unKnow(-1),
   reserved(1),
@@ -36,5 +38,18 @@ enum ConsultantMeetingStatus {
     }
 
     return 'نامشخص';
+  }
+
+  Color getColor(){
+    switch(_number){
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.red;
+      case 3:
+        return Colors.blue;
+    }
+
+    return Colors.green;
   }
 }

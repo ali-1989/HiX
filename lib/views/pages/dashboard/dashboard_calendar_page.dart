@@ -319,6 +319,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
               ListView.separated(
                 itemCount: 10,
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: infoItemBuilder,
                 separatorBuilder: (_, idx) {
                   if(idx == 0 || idx == 8){
@@ -399,8 +400,8 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
       return Divider(color: AppDecoration.gray,);
     }
 
-    if(idx == 3) {
-      return buildInfoLine('به زندگی امیدوار باش و به پیش برو.به زندگی امیدوار باش و به پیش برو');
+    if(idx == 3 || idx == 5) {
+      return buildInfoLine('به زندگی امیدوار باش و به پیش برو.تو روزی قرمان داستان میشی');
     }
 
     return buildInfoLine('دنیا بدون تو هم ادامه دارد. پس فرد مفیدی باش');
