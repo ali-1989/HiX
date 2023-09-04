@@ -35,6 +35,7 @@ class AppImages {
   static const tickIco = 'assets/images/tickIco.png';
   static const walletPlus = 'assets/images/wallet_plus.png';
   static const infoIco2 = 'assets/images/infoIco2.png';
+  static const infoIco3 = 'assets/images/infoIco3.png';
   static const consultationIco = 'assets/images/consultationIco.png';
   static const supportIco = 'assets/images/supportIco.png';
   static const textIco = 'assets/images/textIco.png';
@@ -49,6 +50,7 @@ class AppImages {
   static const recycleBinIco = 'assets/images/recycleBinIco.png';
   static const fileUploadIco = 'assets/images/fileUploadIco.png';
   static const comingSoonIco = 'assets/images/coming.png';
+  static const aboutIco = 'assets/images/aboutIco.png';
 }
 
 
