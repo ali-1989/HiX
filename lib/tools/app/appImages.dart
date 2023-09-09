@@ -51,6 +51,9 @@ class AppImages {
   static const fileUploadIco = 'assets/images/fileUploadIco.png';
   static const comingSoonIco = 'assets/images/coming.png';
   static const aboutIco = 'assets/images/aboutIco.png';
+  static const registerReserveIco = 'assets/images/registerReserveIco.png';
+  static const addIco = 'assets/images/add.png';
+  static const fileIco = 'assets/images/fileIco.png';
 }
 
 

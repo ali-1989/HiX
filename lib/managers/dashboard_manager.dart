@@ -16,8 +16,8 @@ class DashboardManager {
   static final chartNavigateModel = DashboardNavigateModel();
 
   static Future<void> init() async {
-    //calendarNavigateModel.title = 'تقویم قائدگی';
-    calendarNavigateModel.title = 'تقویم بارداری';
+    calendarNavigateModel.title = 'تقویم قائدگی';
+    //calendarNavigateModel.title = 'تقویم بارداری';
     calendarNavigateModel.iconAddress = AppImages.dashboardIco$calendar;
     calendarNavigateModel.isSelected = true;
 

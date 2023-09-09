@@ -6,6 +6,7 @@ import 'package:app/tools/app/appIcons.dart';
 import 'package:app/tools/app/appImages.dart';
 import 'package:app/tools/routeTools.dart';
 import 'package:app/views/pages/consultant_page/consultant_more_info.dart';
+import 'package:app/views/pages/consultant_page/consultant_reserving_page.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/widgets/customCard.dart';
@@ -176,7 +177,7 @@ class _ConsultantReserveState extends StateBase<ConsultantReserve> {
                             padding: EdgeInsets.zero
                           ),
                           onPressed: (){
-                            onReserveClick(itm);
+                            onReserveInfoClick(itm);
                           },
                           child: const Text('رزرو نوبت').fsR(-1)
                       ),
@@ -220,5 +221,9 @@ class _ConsultantReserveState extends StateBase<ConsultantReserve> {
 
   void onMoreInfoClick(ConsultantModel itm) {
     RouteTools.pushPage(context, const ConsultantMoreInfo());
+  }
+
+  void onReserveInfoClick(ConsultantModel itm) {
+    RouteTools.pushPage(context, const ConsultantReservingPage());
   }
 }

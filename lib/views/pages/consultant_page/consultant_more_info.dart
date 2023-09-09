@@ -236,7 +236,7 @@ class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
           Stack(
             children: [
               GradientShader(
-                isActive: aboutCollapse,
+                isActive: aboutCollapse /* && text.length > 50 */,
                 gradient: const LinearGradient(
                   colors: [
                     Colors.black,
@@ -256,32 +256,35 @@ class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
                   bottom: 5,
                   left: 0,
                   right: 0,
-                  child: GestureDetector(
-                    onTap: showMoreAboutClick,
-                    child: Center(
-                      child: CustomCard(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        color: Colors.grey.shade100,
-                        child: Builder(
-                            builder: (context) {
-                              if(!aboutCollapse){
-                                return const Text('بستن');
+                  child: Visibility(
+                    visible: true /* && text.length > 50 */,
+                    child: GestureDetector(
+                      onTap: onShowMoreAboutClick,
+                      child: Center(
+                        child: CustomCard(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          color: Colors.grey.shade100,
+                          child: Builder(
+                              builder: (context) {
+                                if(!aboutCollapse){
+                                  return const Text('بستن');
+                                }
+
+                                return Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    CustomCard(
+                                        border: Border.all(style: BorderStyle.solid),
+                                        radius: 3,
+                                        child: const Icon(AppIcons.add, size: 11)
+                                    ),
+
+                                    const SizedBox(width: 7),
+                                    const Text('مشاهده بیشتر').fsR(-2)
+                                  ],
+                                );
                               }
-
-                              return Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CustomCard(
-                                      border: Border.all(style: BorderStyle.solid),
-                                      radius: 3,
-                                      child: const Icon(AppIcons.add, size: 11)
-                                  ),
-
-                                  const SizedBox(width: 7),
-                                  const Text('مشاهده بیشتر').fsR(-2)
-                                ],
-                              );
-                            }
+                          ),
                         ),
                       ),
                     ),
@@ -309,7 +312,7 @@ class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
     );
   }
 
-  void showMoreAboutClick() {
+  void onShowMoreAboutClick() {
     aboutCollapse = !aboutCollapse;
     assistCtr.updateHead();
   }

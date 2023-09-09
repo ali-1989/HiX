@@ -28,7 +28,7 @@ class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
   Color pmsColor = const Color(0xffFFEC94);
   Color periodColor = const Color(0xffEDC6FF);
   Color ovulationColor = const Color(0xffABFFEF);
-  bool isPregnant = true;
+  bool isPregnant = false;
 
   @override
   void initState(){
