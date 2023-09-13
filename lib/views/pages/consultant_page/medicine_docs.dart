@@ -1,17 +1,19 @@
-import 'package:app/structures/abstract/stateBase.dart';
-import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/app/appSheet.dart';
-import 'package:app/views/sheets/medicine_document_add_sheet.dart';
-import 'package:file_sizes/file_sizes.dart';
 import 'package:flutter/material.dart';
+
+import 'package:file_sizes/file_sizes.dart';
 import 'package:iris_tools/models/dataModels/mediaModel.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
-import 'package:iris_tools/widgets/icon/circularIcon.dart';
-import 'package:iris_tools/widgets/sizePosition/sizeInInfinity.dart';
+import 'package:iris_tools/widgets/icon/circular_icon.dart';
+import 'package:iris_tools/widgets/sizePosition/size_inInfinity.dart';
+
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/system/extensions.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/app/app_sheet.dart';
+import 'package:app/views/sheets/medicine_document_add_sheet.dart';
 
 class MedicineDocuments extends StatefulWidget {
 
@@ -23,7 +25,7 @@ class MedicineDocuments extends StatefulWidget {
   State createState() => _MedicineDocumentsState();
 }
 ///=========================================================================================
-class _MedicineDocumentsState extends StateBase<MedicineDocuments> {
+class _MedicineDocumentsState extends StateSuper<MedicineDocuments> {
   List<MediaModel> docList = [];
 
   @override

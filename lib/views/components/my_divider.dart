@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:app/tools/app/appDecoration.dart';
+import 'package:app/tools/app/app_decoration.dart';
 
 class MyDivider extends StatelessWidget {
   const MyDivider({Key? key}) : super(key: key);

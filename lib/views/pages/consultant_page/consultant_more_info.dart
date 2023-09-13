@@ -1,14 +1,16 @@
-import 'package:app/structures/abstract/stateBase.dart';
-import 'package:app/structures/models/consultant/consultant_comment_model.dart';
-import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/views/components/my_divider.dart';
 import 'package:flutter/material.dart';
+
 import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
+
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/structures/models/consultant/consultant_comment_model.dart';
+import 'package:app/system/extensions.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/views/components/my_divider.dart';
 
 class ConsultantMoreInfo extends StatefulWidget {
   const ConsultantMoreInfo({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class ConsultantMoreInfo extends StatefulWidget {
   State<ConsultantMoreInfo> createState() => _ConsultantMoreInfoState();
 }
 ///====================================================================================
-class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
+class _ConsultantMoreInfoState extends StateSuper<ConsultantMoreInfo> {
   bool aboutCollapse = true;
   List<ConsultantCommentModel> commentList = [];
 
@@ -146,7 +148,7 @@ class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
         children: [
           Expanded(
             child: CustomCard(
-              border: Border.all(color: Colors.black12, style: BorderStyle.solid),
+              //todo. border: Border.all(color: Colors.black12, style: BorderStyle.solid),
                 padding: EdgeInsets.zero,
                 child: SizedBox(
                   height: 35,
@@ -164,7 +166,7 @@ class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
           const SizedBox(width: 6),
           Expanded(
             child: CustomCard(
-                border: Border.all(color: Colors.black12, style: BorderStyle.solid),
+              //todo. border: Border.all(color: Colors.black12, style: BorderStyle.solid),
                 padding: const EdgeInsets.all(0),
                 child: SizedBox(
                   height: 35,
@@ -183,7 +185,7 @@ class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
           const SizedBox(width: 8),
           Expanded(
             child: CustomCard(
-                border: Border.all(color: Colors.black12, style: BorderStyle.solid),
+              //todo. border: Border.all(color: Colors.black12, style: BorderStyle.solid),
                 padding: EdgeInsets.zero,
                 child: SizedBox(
                   height: 35,
@@ -274,7 +276,7 @@ class _ConsultantMoreInfoState extends StateBase<ConsultantMoreInfo> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     CustomCard(
-                                        border: Border.all(style: BorderStyle.solid),
+                                      //todo. border: Border.all(style: BorderStyle.solid),
                                         radius: 3,
                                         child: const Icon(AppIcons.add, size: 11)
                                     ),

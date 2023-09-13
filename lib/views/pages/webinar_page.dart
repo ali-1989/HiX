@@ -1,9 +1,9 @@
-import 'package:app/tools/app/appImages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/tools/app/app_images.dart';
 
 class WebinarPage extends StatefulWidget {
   const WebinarPage({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class WebinarPage extends StatefulWidget {
   State createState() => WebinarPageState();
 }
 ///====================================================================================
-class WebinarPageState extends StateBase<WebinarPage> {
+class WebinarPageState extends StateSuper<WebinarPage> {
 
   @override
   void initState(){

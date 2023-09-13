@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 
 import 'package:app/services/session_service.dart';
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/middleWares/requester.dart';
 import 'package:app/system/keys.dart';
-import 'package:app/tools/app/appMessages.dart';
-import 'package:app/views/baseComponents/appBarBuilder.dart';
+import 'package:app/tools/app/app_messages.dart';
+import 'package:app/views/baseComponents/appbar_builder.dart';
 import 'package:app/views/states/errorOccur.dart';
 import 'package:app/views/states/waitToLoad.dart';
 
@@ -19,7 +19,7 @@ class AboutUsPage extends StatefulWidget{
   State<AboutUsPage> createState() => _AboutUsPageState();
 }
 ///=================================================================================================
-class _AboutUsPageState extends StateBase<AboutUsPage> {
+class _AboutUsPageState extends StateSuper<AboutUsPage> {
   Requester requester = Requester();
   bool isInFetchData = true;
   String? htmlData;

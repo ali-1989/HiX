@@ -1,19 +1,19 @@
 import 'dart:async';
 
-
 import 'package:iris_notifier/iris_notifier.dart';
 import 'package:iris_tools/api/helpers/jsonHelper.dart';
+import 'package:iris_tools/modules/stateManagers/assistState.dart';
+import 'package:openid_client/openid_client.dart';
+import 'package:openid_client/openid_client_io.dart';
 
 import 'package:app/managers/settings_manager.dart';
 import 'package:app/services/session_service.dart';
-import 'package:app/structures/enums/appEvents.dart';
-import 'package:app/structures/models/userModel.dart';
+import 'package:app/structures/enums/app_events.dart';
+import 'package:app/structures/models/user_model.dart';
 import 'package:app/system/keys.dart';
-import 'package:app/tools/app/appBroadcast.dart';
-import 'package:app/tools/app/appHttpDio.dart';
-import 'package:app/tools/routeTools.dart';
-import 'package:openid_client/openid_client.dart';
-import 'package:openid_client/openid_client_io.dart';
+import 'package:app/tools/app/app_broadcast.dart';
+import 'package:app/tools/app/app_http_dio.dart';
+import 'package:app/tools/route_tools.dart';
 
 class LoginService {
   LoginService._();
@@ -56,7 +56,7 @@ class LoginService {
 
       await SessionService.logoff(userId);
 
-      AppBroadcast.drawerMenuRefresher.update();
+      AssistController.forId(AppBroadcast.drawerMenuRefresherId)!.update();
       //AppBroadcast.layoutPageKey.currentState?.scaffoldState.currentState?.closeDrawer();
 
       if (isCurrent && RouteTools.materialContext != null) {
@@ -83,7 +83,7 @@ class LoginService {
 
     await SessionService.logoffAll();
 
-    AppBroadcast.drawerMenuRefresher.update();
+    AssistController.forId(AppBroadcast.drawerMenuRefresherId)!.update();
     //AppBroadcast.layoutPageKey.currentState?.scaffoldState.currentState?.closeDrawer();
 
     if (RouteTools.materialContext != null) {

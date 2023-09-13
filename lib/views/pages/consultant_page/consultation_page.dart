@@ -1,12 +1,12 @@
-import 'package:app/views/pages/consultant_page/consultant_reserve.dart';
-import 'package:app/views/pages/consultant_page/medicine_docs.dart';
-import 'package:app/views/pages/consultant_page/my_file.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
-
-import 'package:app/structures/abstract/stateBase.dart';
 import 'package:iris_tools/widgets/page_switcher.dart';
+
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/views/pages/consultant_page/consultant_reserve.dart';
+import 'package:app/views/pages/consultant_page/medicine_docs.dart';
+import 'package:app/views/pages/consultant_page/my_file.dart';
 
 class ConsultationPage extends StatefulWidget {
   const ConsultationPage({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class ConsultationPage extends StatefulWidget {
   State createState() => ConsultationPageState();
 }
 ///====================================================================================
-class ConsultationPageState extends StateBase<ConsultationPage> {
+class ConsultationPageState extends StateSuper<ConsultationPage> {
   int currentTabIndex = 0;
   PageSwitcherController pageSwitcherCtr = PageSwitcherController();
 

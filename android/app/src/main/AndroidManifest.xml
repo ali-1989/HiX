@@ -50,15 +50,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-
-    <!-- ..........................  FCM/GCM -->
-    <!--
-    <uses-permission android:name="com.google.android.gms.gcm.GcmReceiver"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
-    <uses-permission android:name="com.google.android.c2dm.intent.RECEIVE"/>
-    <uses-permission android:name="com.google.android.c2dm.intent.REGISTRATION"/>
-    -->
-
+   
     <!-- ..........................  uses-permission Storage -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -112,7 +104,7 @@
     <!-- <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/> -->
 
     <!-- need for launch app from services -->
-    <uses-permission  android:name="android.permission.GET_TASKS"/>
+    <!--<uses-permission  android:name="android.permission.GET_TASKS"/> -->
 
     <!-- ============================== uses-feature ============================================== -->
     <uses-feature
@@ -216,15 +208,15 @@
 
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/notif" />
+                android:resource="@drawable/firebase_icon" />
 
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_color"
-                android:resource="@color/colorAccent" />
+                android:resource="@color/firebaseNotification"/>
 
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
-                android:value="@string/default_notification_channel_id"/>
+                android:value="@string/firebase_notification_channel_id"/>
 
     </application>
 </manifest>

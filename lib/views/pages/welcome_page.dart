@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:iris_tools/api/helpers/mathHelper.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
-import 'package:iris_tools/widgets/text/customRich.dart';
+import 'package:iris_tools/widgets/text/custom_rich.dart';
 
-import 'package:app/constants.dart';
 import 'package:app/services/session_service.dart';
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/middleWares/requester.dart';
+import 'package:app/system/constants.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/system/keys.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/app/appLocale.dart';
-import 'package:app/tools/app/appThemes.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/app/app_locale.dart';
+import 'package:app/tools/app/app_themes.dart';
 
 class WelcomePage extends StatefulWidget {
 
@@ -25,7 +25,7 @@ class WelcomePage extends StatefulWidget {
   State<WelcomePage> createState() => _WelcomePageState();
 }
 ///==================================================================================
-class _WelcomePageState extends StateBase<WelcomePage> {
+class _WelcomePageState extends StateSuper<WelcomePage> {
   Requester requester = Requester();
 
   @override

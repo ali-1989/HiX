@@ -4,13 +4,13 @@ import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/models/calendarDayModel.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/app/appSheet.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/app/app_sheet.dart';
 import 'package:app/views/sheets/calendar_day_cell_sheet.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class CalendarPage extends StatefulWidget {
   State createState() => CalendarPageState();
 }
 ///====================================================================================
-class CalendarPageState extends StateBase<CalendarPage> {
+class CalendarPageState extends StateSuper<CalendarPage> {
   Color pmsColor = const Color(0xffFFEC94);
   Color periodColor = const Color(0xffEDC6FF);
   Color ovulationColor = const Color(0xffABFFEF);

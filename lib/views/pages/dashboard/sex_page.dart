@@ -4,10 +4,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
 
 class SexPage extends StatefulWidget {
   const SexPage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class SexPage extends StatefulWidget {
   State createState() => _SexPageState();
 }
 ///============================================================================================
-class _SexPageState extends StateBase<SexPage> {
+class _SexPageState extends StateSuper<SexPage> {
 
   @override
   void initState(){

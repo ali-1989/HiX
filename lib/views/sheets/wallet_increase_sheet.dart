@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:iris_tools/api/helpers/textFieldHelper.dart';
 import 'package:iris_tools/widgets/customCard.dart';
-import 'package:iris_tools/widgets/text/customRich.dart';
+import 'package:iris_tools/widgets/text/custom_rich.dart';
 
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/currencyTools.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/currency_tools.dart';
 import 'package:app/views/components/my_sheet_layout.dart';
 
 class WalletIncreaseSheet extends StatefulWidget {

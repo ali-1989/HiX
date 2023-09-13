@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:iris_notifier/iris_notifier.dart';
 
-import 'package:app/structures/enums/appEvents.dart';
+import 'package:app/structures/enums/app_events.dart';
 import 'package:app/structures/models/dashboardNavigateModel.dart';
-import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/app_images.dart';
 
 class DashboardManager {
   DashboardManager._();

@@ -9,9 +9,10 @@ import 'package:iris_tools/api/tools.dart';
 import 'package:app/managers/api_manager.dart';
 import 'package:app/services/jwt_service.dart';
 import 'package:app/services/session_service.dart';
-import 'package:app/system/commonHttpHandler.dart';
-import 'package:app/tools/app/appHttpDio.dart';
-import 'package:app/tools/app/appSheet.dart';
+import 'package:app/system/common_http_handler.dart';
+import 'package:app/tools/app/app_http_dio.dart';
+import 'package:app/tools/app/app_messages.dart';
+import 'package:app/tools/app/app_sheet.dart';
 
 ///=============================================================================================
 enum MethodType {
@@ -185,7 +186,7 @@ class Requester {
 
         if(context != null && context.mounted) {
           if (promptErrors && !CommonHttpHandler.processCommonRequestError(context, _httpRequester, js)) {
-            await AppSheet.showSheet$ServerNotRespondProperly(context);
+            await AppSheet.showSheetOneAction(context, AppMessages.serverNotRespondProperly);
           }
         }
       }

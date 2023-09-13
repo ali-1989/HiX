@@ -1,4 +1,3 @@
-import 'package:app/tools/routeTools.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_notifier/iris_notifier.dart';
@@ -9,14 +8,15 @@ import 'package:iris_tools/widgets/page_switcher.dart';
 import 'package:app/managers/dashboard_manager.dart';
 import 'package:app/managers/layout_manager.dart';
 import 'package:app/services/session_service.dart';
-import 'package:app/structures/abstract/stateBase.dart';
-import 'package:app/structures/enums/appEvents.dart';
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/structures/enums/app_events.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/system/keys.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/route_tools.dart';
 import 'package:app/views/baseComponents/drawerMenuBuilder.dart';
 import 'package:app/views/baseComponents/layoutScaffold.dart';
 import 'package:app/views/pages/calendar_page.dart';
@@ -35,7 +35,7 @@ class LayoutPage extends StatefulWidget {
   State<LayoutPage> createState() => LayoutPageState();
 }
 ///==================================================================================
-class LayoutPageState extends StateBase<LayoutPage> {
+class LayoutPageState extends StateSuper<LayoutPage> {
   //Requester requester = Requester();
   PageSwitcherController pageCtr = PageSwitcherController();
 

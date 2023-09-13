@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appDialogIris.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/app/appSheet.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_dialog_iris.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/app/app_sheet.dart';
 import 'package:app/views/sheets/biometric_chart_sheet.dart';
 
 class ChartPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class ChartPage extends StatefulWidget {
   State createState() => _ChartPageState();
 }
 ///============================================================================================
-class _ChartPageState extends StateBase<ChartPage> {
+class _ChartPageState extends StateSuper<ChartPage> {
   late Border border;
 
   @override

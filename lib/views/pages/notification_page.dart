@@ -1,6 +1,3 @@
-import 'package:app/tools/app/appSheet.dart';
-import 'package:app/views/components/backBtn.dart';
-import 'package:app/views/components/my_sheet_layout.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/api/generator.dart';
@@ -10,14 +7,17 @@ import 'package:iris_tools/widgets/circle.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
 import 'package:app/services/session_service.dart';
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/middleWares/requester.dart';
 import 'package:app/structures/models/notificationModel.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/system/keys.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/dateTools.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/app/app_sheet.dart';
+import 'package:app/tools/date_tools.dart';
+import 'package:app/views/components/backBtn.dart';
+import 'package:app/views/components/my_sheet_layout.dart';
 
 class NotificationPage extends StatefulWidget {
 
@@ -29,7 +29,7 @@ class NotificationPage extends StatefulWidget {
   State<NotificationPage> createState() => _NotificationPageState();
 }
 ///==================================================================================
-class _NotificationPageState extends StateBase<NotificationPage> {
+class _NotificationPageState extends StateSuper<NotificationPage> {
   Requester requester = Requester();
   List<NotificationModel> list = [];
 

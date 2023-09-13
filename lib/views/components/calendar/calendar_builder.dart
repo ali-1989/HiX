@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:app/tools/app/appDecoration.dart';
+import 'package:app/tools/app/app_decoration.dart';
 import 'package:app/views/components/calendar/calendarDayModel.dart';
 import 'package:app/views/components/calendar/circle_number.dart';
 

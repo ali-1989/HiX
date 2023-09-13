@@ -1,15 +1,17 @@
-import 'package:app/structures/abstract/stateBase.dart';
-import 'package:app/structures/models/consultant_model.dart';
-import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/routeTools.dart';
-import 'package:app/views/pages/consultant_page/consultant_more_info.dart';
-import 'package:app/views/pages/consultant_page/consultant_reserving_page.dart';
 import 'package:flutter/material.dart';
+
 import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/widgets/customCard.dart';
+
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/structures/models/consultant_model.dart';
+import 'package:app/system/extensions.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/route_tools.dart';
+import 'package:app/views/pages/consultant_page/consultant_more_info.dart';
+import 'package:app/views/pages/consultant_page/consultant_reserving_page.dart';
 
 class ConsultantReserve extends StatefulWidget {
 
@@ -21,7 +23,7 @@ class ConsultantReserve extends StatefulWidget {
   State createState() => _ConsultantReserveState();
 }
 ///=========================================================================================
-class _ConsultantReserveState extends StateBase<ConsultantReserve> {
+class _ConsultantReserveState extends StateSuper<ConsultantReserve> {
   List<ConsultantModel> consultantList = [];
 
   @override

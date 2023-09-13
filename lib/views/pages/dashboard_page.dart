@@ -5,11 +5,11 @@ import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
 import 'package:app/managers/dashboard_manager.dart';
-import 'package:app/structures/abstract/stateBase.dart';
-import 'package:app/structures/enums/appEvents.dart';
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/structures/enums/app_events.dart';
 import 'package:app/structures/models/dashboardNavigateModel.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
+import 'package:app/tools/app/app_decoration.dart';
 import 'package:app/views/pages/dashboard/chart_page.dart';
 import 'package:app/views/pages/dashboard/dashboard_calendar_page.dart';
 import 'package:app/views/pages/dashboard/repetitive_symptoms_page.dart';
@@ -22,7 +22,7 @@ class DashboardPage extends StatefulWidget {
   State createState() => DashboardPageState();
 }
 ///====================================================================================
-class DashboardPageState extends StateBase<DashboardPage> {
+class DashboardPageState extends StateSuper<DashboardPage> {
   Color selectColor = const Color(0xff001949);
 
   @override

@@ -4,12 +4,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appDialogIris.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_dialog_iris.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
 
 class RepetitiveSymptomsPage extends StatefulWidget {
   const RepetitiveSymptomsPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class RepetitiveSymptomsPage extends StatefulWidget {
   State createState() => _RepetitiveSymptomsPageState();
 }
 ///============================================================================================
-class _RepetitiveSymptomsPageState extends StateBase<RepetitiveSymptomsPage> {
+class _RepetitiveSymptomsPageState extends StateSuper<RepetitiveSymptomsPage> {
   late Border border;
 
   @override

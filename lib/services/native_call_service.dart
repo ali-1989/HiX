@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:iris_tools/api/system.dart';
-
-import 'package:app/tools/log_tools.dart';
 import 'package:iris_tools/plugins/javaBridge.dart';
 
+import 'package:app/tools/log_tools.dart';
 
 @pragma('vm:entry-point')
 Future onBridgeCall(call) async {

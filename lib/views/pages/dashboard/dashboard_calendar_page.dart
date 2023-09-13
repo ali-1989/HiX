@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
-import 'package:iris_tools/widgets/text/customRich.dart';
+import 'package:iris_tools/widgets/text/custom_rich.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:app/tools/app/appSheet.dart';
-import 'package:app/tools/app/appThemes.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
+import 'package:app/tools/app/app_sheet.dart';
+import 'package:app/tools/app/app_themes.dart';
 import 'package:app/views/components/calendar/calendarDayModel.dart';
 import 'package:app/views/components/calendar/calendar_builder.dart';
 import 'package:app/views/sheets/period_change_state_sheet.dart';
@@ -24,7 +24,7 @@ class DashboardCalendarPage extends StatefulWidget {
   State createState() => _DashboardCalendarPageState();
 }
 ///============================================================================================
-class _DashboardCalendarPageState extends StateBase<DashboardCalendarPage> {
+class _DashboardCalendarPageState extends StateSuper<DashboardCalendarPage> {
   Color pmsColor = const Color(0xffFFEC94);
   Color periodColor = const Color(0xffEDC6FF);
   Color ovulationColor = const Color(0xffABFFEF);

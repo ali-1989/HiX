@@ -1,7 +1,9 @@
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
 import 'package:flutter/material.dart';
+
 import 'package:iris_tools/widgets/customCard.dart';
+
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
 
 typedef OnConfirm = void Function(BuildContext context, String text);
 

@@ -1,13 +1,15 @@
-import 'package:app/structures/abstract/stateBase.dart';
-import 'package:app/system/extensions.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appIcons.dart';
-import 'package:app/tools/app/appImages.dart';
-import 'package:file_sizes/file_sizes.dart';
 import 'package:flutter/material.dart';
+
+import 'package:file_sizes/file_sizes.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:iris_tools/widgets/customCard.dart';
 import 'package:iris_tools/widgets/optionsRow/checkRow.dart';
+
+import 'package:app/structures/abstract/state_super.dart';
+import 'package:app/system/extensions.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_icons.dart';
+import 'package:app/tools/app/app_images.dart';
 
 class ConsultantReservingPage extends StatefulWidget {
   const ConsultantReservingPage({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class ConsultantReservingPage extends StatefulWidget {
   State<ConsultantReservingPage> createState() => _ConsultantReservingPageState();
 }
 ///====================================================================================
-class _ConsultantReservingPageState extends StateBase<ConsultantReservingPage> {
+class _ConsultantReservingPageState extends StateSuper<ConsultantReservingPage> {
 
   @override
   void initState(){
@@ -270,7 +272,7 @@ class _ConsultantReservingPageState extends StateBase<ConsultantReservingPage> {
                       height: 28,
                       child: CustomCard(
                         color: Colors.blue,
-                          border: Border.all(style: BorderStyle.solid, color: Colors.white),
+                          //todo. border: Border.all(style: BorderStyle.solid, color: Colors.white),
                           child: Center(
                             child: const Text('25').color(Colors.white).bold(),
                           )

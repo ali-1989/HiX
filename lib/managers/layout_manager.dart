@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:iris_notifier/iris_notifier.dart';
 
-import 'package:app/structures/enums/appEvents.dart';
+import 'package:app/structures/enums/app_events.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
-import 'package:app/tools/app/appImages.dart';
+import 'package:app/tools/app/app_images.dart';
 import 'package:app/views/baseComponents/layoutScaffold.dart';
 
 class LayoutManager {

@@ -11,13 +11,13 @@ import 'package:iris_tools/features/overlayDialog.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:app/structures/abstract/stateBase.dart';
+import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/enums/enums.dart';
-import 'package:app/structures/models/userModel.dart';
-import 'package:app/tools/app/appDecoration.dart';
-import 'package:app/tools/app/appDirectories.dart';
-import 'package:app/tools/app/appSheet.dart';
-import 'package:app/tools/permissionTools.dart';
+import 'package:app/structures/models/user_model.dart';
+import 'package:app/tools/app/app_decoration.dart';
+import 'package:app/tools/app/app_directories.dart';
+import 'package:app/tools/app/app_sheet.dart';
+import 'package:app/tools/permission_tools.dart';
 
 class ProfilePage extends StatefulWidget {
   //final UserModel userModel;
@@ -30,7 +30,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 ///===================================================================================================================
-class _ProfilePageState extends StateBase<ProfilePage> {
+class _ProfilePageState extends StateSuper<ProfilePage> {
   TextEditingController nameTextCtr = TextEditingController();
   TextEditingController familyTextCtr = TextEditingController();
   TextEditingController emailTextCtr = TextEditingController();
