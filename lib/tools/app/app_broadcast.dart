@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-
 import 'package:app/tools/app/app_themes.dart';
 import 'package:app/views/pages/layout_page.dart';
 
