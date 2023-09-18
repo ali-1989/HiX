@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/widgets/custom_card.dart';
 import 'package:iris_tools/widgets/icon/circular_icon.dart';
 
 import 'package:app/structures/abstract/state_super.dart';

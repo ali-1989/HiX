@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:iris_tools/models/dataModels/mediaModel.dart';
-import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/models/dataModels/media_model.dart';
+import 'package:iris_tools/widgets/custom_card.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:app/system/extensions.dart';

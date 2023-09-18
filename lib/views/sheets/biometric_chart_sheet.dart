@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:iris_tools/widgets/circle.dart';
-import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/widgets/custom_card.dart';
 
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/app_decoration.dart';

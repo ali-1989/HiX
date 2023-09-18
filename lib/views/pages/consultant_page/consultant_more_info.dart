@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:iris_tools/api/generator.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
-import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/widgets/custom_card.dart';
 
 import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/models/consultant/consultant_comment_model.dart';
@@ -148,7 +148,7 @@ class _ConsultantMoreInfoState extends StateSuper<ConsultantMoreInfo> {
         children: [
           Expanded(
             child: CustomCard(
-              //todo. border: Border.all(color: Colors.black12, style: BorderStyle.solid),
+               border: Border.all(color: Colors.black12, style: BorderStyle.solid),
                 padding: EdgeInsets.zero,
                 child: SizedBox(
                   height: 35,
@@ -166,7 +166,7 @@ class _ConsultantMoreInfoState extends StateSuper<ConsultantMoreInfo> {
           const SizedBox(width: 6),
           Expanded(
             child: CustomCard(
-              //todo. border: Border.all(color: Colors.black12, style: BorderStyle.solid),
+              border: Border.all(color: Colors.black12, style: BorderStyle.solid),
                 padding: const EdgeInsets.all(0),
                 child: SizedBox(
                   height: 35,
@@ -185,7 +185,7 @@ class _ConsultantMoreInfoState extends StateSuper<ConsultantMoreInfo> {
           const SizedBox(width: 8),
           Expanded(
             child: CustomCard(
-              //todo. border: Border.all(color: Colors.black12, style: BorderStyle.solid),
+              border: Border.all(color: Colors.black12, style: BorderStyle.solid),
                 padding: EdgeInsets.zero,
                 child: SizedBox(
                   height: 35,
@@ -276,7 +276,7 @@ class _ConsultantMoreInfoState extends StateSuper<ConsultantMoreInfo> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     CustomCard(
-                                      //todo. border: Border.all(style: BorderStyle.solid),
+                                    border: Border.all(style: BorderStyle.solid),
                                         radius: 3,
                                         child: const Icon(AppIcons.add, size: 11)
                                     ),

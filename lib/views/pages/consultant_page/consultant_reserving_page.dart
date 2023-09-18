@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:file_sizes/file_sizes.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
-import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/widgets/custom_card.dart';
 import 'package:iris_tools/widgets/optionsRow/checkRow.dart';
 
 import 'package:app/structures/abstract/state_super.dart';
@@ -272,7 +272,7 @@ class _ConsultantReservingPageState extends StateSuper<ConsultantReservingPage> 
                       height: 28,
                       child: CustomCard(
                         color: Colors.blue,
-                          //todo. border: Border.all(style: BorderStyle.solid, color: Colors.white),
+                          border: Border.all(style: BorderStyle.solid, color: Colors.white),
                           child: Center(
                             child: const Text('25').color(Colors.white).bold(),
                           )

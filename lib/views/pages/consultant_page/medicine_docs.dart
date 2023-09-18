@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:file_sizes/file_sizes.dart';
-import 'package:iris_tools/models/dataModels/mediaModel.dart';
+import 'package:iris_tools/models/dataModels/media_model.dart';
 import 'package:iris_tools/modules/stateManagers/assist.dart';
-import 'package:iris_tools/widgets/customCard.dart';
+import 'package:iris_tools/widgets/custom_card.dart';
 import 'package:iris_tools/widgets/icon/circular_icon.dart';
 import 'package:iris_tools/widgets/sizePosition/size_inInfinity.dart';
 

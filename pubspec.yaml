@@ -1,5 +1,5 @@
-# Flutter: 3.10.0      old:
-# Dart: 3.0.0        old:
+# Flutter: 3.14.3      old: 3.10.0
+# Dart: 3.1.0        old: 3.0.0
 # Java: 17
 
 name: app     		  # Hi_X
@@ -51,7 +51,7 @@ dependencies:
   firebase_messaging: ^14.6.7
   firebase_core: ^2.15.1
   simple_animations: ^5.0.2
-  animate_do: ^3.0.2                   # https://animate.style/
+  animate_do: ^3.1.2                   # https://animate.style/
   animator: ^3.3.0
   jwt_decoder: ^2.0.1
   dart_jsonwebtoken: ^2.11.0
