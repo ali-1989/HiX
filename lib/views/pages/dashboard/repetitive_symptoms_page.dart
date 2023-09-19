@@ -115,7 +115,7 @@ class _RepetitiveSymptomsPageState extends StateSuper<RepetitiveSymptomsPage> {
              textDirection: TextDirection.ltr,
              child: SizedBox(//parent: SingleChildScrollView
                width: 250,
-               height: 150 * pw,
+               height: 150 * hr,
                child: buildChartSection(),
              ),
            ),

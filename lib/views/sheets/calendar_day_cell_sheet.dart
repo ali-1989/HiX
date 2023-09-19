@@ -36,7 +36,7 @@ class _CalendarDayCellSheetState extends StateSuper<CalendarDayCellSheet> {
     const rr = Radius.circular(15);
 
     return SizedBox(
-      height: sh * 3/4,
+      height: hs * 3/4,
       child: ClipRRect(
         borderRadius: const BorderRadius.only(topLeft: rr, topRight: rr),
         child: ColoredBox(

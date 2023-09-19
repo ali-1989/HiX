@@ -13,7 +13,8 @@ class AppBroadcast {
   //static final ExtendValueNotifier<int> changeFavoriteNotifier = ExtendValueNotifier<int>(0);
 
   //---------------------- keys
-  static const String drawerMenuRefresherId = 'drawerMenuRefresherId';
+  static const String drawerRefresherId = 'drawerMenuRefresherId';
+  static const String bottomNavbarRefresherId = 'bottomNavbarRefresherId';
   static LocalKey materialAppKey = UniqueKey();
   static final rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   static final rootNavigatorKey = GlobalKey<NavigatorState>();

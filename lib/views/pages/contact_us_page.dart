@@ -13,7 +13,7 @@ import 'package:app/tools/app/app_messages.dart';
 import 'package:app/tools/app/app_sheet.dart';
 import 'package:app/tools/app/app_snack.dart';
 import 'package:app/tools/route_tools.dart';
-import 'package:app/views/baseComponents/appbar_builder.dart';
+
 
 class ContactUsPage extends StatefulWidget{
 
@@ -41,9 +41,7 @@ class _ContactUsPageState extends StateSuper<ContactUsPage> {
         controller: assistCtr,
         builder: (context, ctr, data) {
           return Scaffold(
-            appBar: AppBarCustom(
-              title: Text(AppMessages.contactUs),
-            ),
+
             body: SafeArea(
                 child: buildBody()
             ),

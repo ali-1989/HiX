@@ -27,7 +27,8 @@ import 'package:app/views/pages/wallet_page.dart';
 class DrawerMenuBuilder {
   DrawerMenuBuilder._();
 
-  static Widget buildDrawer(){
+  /// can refresh by use :AppBroadcast.drawerRefresherId
+  static Widget buildDrawerView(){
     return SizedBox(
       width: MathHelper.minDouble(400, MathHelper.percent(AppSizes.instance.appWidth, 75)),
       child: DecoratedBox(
@@ -284,11 +285,6 @@ class DrawerMenuBuilder {
     );
   }
 
-  /*static void shareAppCall() {
-    AppBroadcast.homeScreenKey.currentState?.scaffoldState.currentState?.closeDrawer();
-    ShareExtend.share('https://cafebazaar.ir/app/ir.vosatezehn.com', 'text');
-  }*/
-
   static void gotoProfilePage() async {
     await LayoutManager.toggleDrawer();
     RouteTools.pushPage(RouteTools.getTopContext()!, ProfilePage());
@@ -303,7 +299,6 @@ class DrawerMenuBuilder {
     await LayoutManager.toggleDrawer();
     RouteTools.pushPage(RouteTools.getTopContext()!, ProfilePage());
   }
-
 
   static void _onLogoffClick() async {
     await LayoutManager.hideDrawer(millSec: 100);

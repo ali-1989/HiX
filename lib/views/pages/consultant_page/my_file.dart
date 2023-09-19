@@ -274,7 +274,7 @@ class _MyFileState extends StateSuper<MyFile> {
                     Row(
                       children: [
                         Circle(
-                          size: 6 * pw,
+                          size: 6 * hr,
                           color: itm.status.getColor(),
                         ),
 

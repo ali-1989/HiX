@@ -52,7 +52,7 @@ class _WelcomePageState extends StateSuper<WelcomePage> {
   }
 
   Widget buildBody(){
-    double imgHeight = MathHelper.between(160, 750, 130, 550, sh);
+    double imgHeight = MathHelper.between(160, 750, 130, 550, hs);
 
     return SizedBox.expand(
       child: DecoratedBox(
@@ -78,10 +78,10 @@ class _WelcomePageState extends StateSuper<WelcomePage> {
                 ]
             ),
 
-            SizedBox(height: 50 * pw),
+            SizedBox(height: 50 * hr),
             Image.asset(AppImages.vector$welcomePage, height: imgHeight),
 
-            SizedBox(height: 40 * pw),
+            SizedBox(height: 40 * hr),
             Expanded(
               child: DecoratedBox(
                   decoration: const BoxDecoration(

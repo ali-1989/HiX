@@ -77,7 +77,7 @@ class _SexPageState extends StateSuper<SexPage> {
               textDirection: TextDirection.ltr,
               child: SizedBox(
                 width: 250,
-                height: 150 * pw,
+                height: 150 * hr,
                 child: buildChartSection(),
               ),
             ),

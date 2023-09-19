@@ -55,7 +55,7 @@ class _ConsultantReservingPageState extends StateSuper<ConsultantReservingPage> 
 
               const SizedBox(height: 20),
               SizedBox(
-                width: sw -40,
+                width: ws -40,
                 child: ElevatedButton.icon(
                     onPressed: null,//onRegisterClick,
                     icon: Image.asset(AppImages.registerReserveIco),

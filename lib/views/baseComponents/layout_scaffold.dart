@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:animator/animator.dart';
 import 'package:iris_tools/api/helpers/mathHelper.dart';
-import 'package:iris_tools/modules/stateManagers/assistState.dart';
 
 import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/tools/app/app_broadcast.dart';
 import 'package:app/tools/app/app_sizes.dart';
+import 'package:iris_tools/modules/stateManagers/updater_state.dart';
 
 class LayoutScaffold extends StatefulWidget {
   final Widget body;
@@ -64,8 +64,8 @@ class LayoutScaffoldState extends StateSuper<LayoutScaffold> {
 
        return true;
       },
-      child: AssistBuilder(
-        id: AppBroadcast.drawerMenuRefresherId,
+      child: UpdaterBuilder(
+        id: AppBroadcast.drawerRefresherId,
         builder: (_, ctr, data) {
           return SafeArea(
             top: true,
@@ -145,7 +145,7 @@ class LayoutScaffoldState extends StateSuper<LayoutScaffold> {
     _isOpen = true;
     _withAnimation = true;
 
-    AssistController.forId(AppBroadcast.drawerMenuRefresherId)!.update();
+    UpdaterController.forId(AppBroadcast.drawerRefresherId)!.update();
     await Future.delayed(Duration(milliseconds: _drawerTime), (){});
 
     return;
@@ -162,7 +162,7 @@ class LayoutScaffoldState extends StateSuper<LayoutScaffold> {
     final old = _drawerTime;
     _drawerTime = millSec?? _drawerTime;
 
-    AssistController.forId(AppBroadcast.drawerMenuRefresherId)!.update();
+    UpdaterController.forId(AppBroadcast.drawerRefresherId)!.update();
 
     await Future.delayed(Duration(milliseconds: _drawerTime), (){});
 

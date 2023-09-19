@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 
 import 'package:iris_notifier/iris_notifier.dart';
@@ -16,7 +18,7 @@ import 'package:app/views/pages/dashboard/repetitive_symptoms_page.dart';
 import 'package:app/views/pages/dashboard/sex_page.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  DashboardPage({Key? key}) : super(key: key);
 
   @override
   State createState() => DashboardPageState();
@@ -51,13 +53,13 @@ class DashboardPageState extends StateSuper<DashboardPage> {
 
   Widget buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18 * pw),
+      padding: EdgeInsets.symmetric(horizontal: 18 * hr),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// vertical rail
           SizedBox(
-            width: 65 * pw,
+            width: 65 * hr,
             child: CustomCard(
               color: Colors.white,
               padding: const EdgeInsets.all(8),

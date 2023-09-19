@@ -7,7 +7,7 @@ import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/middleWares/requester.dart';
 import 'package:app/system/keys.dart';
 import 'package:app/tools/app/app_messages.dart';
-import 'package:app/views/baseComponents/appbar_builder.dart';
+
 import 'package:app/views/states/errorOccur.dart';
 import 'package:app/views/states/waitToLoad.dart';
 
@@ -46,9 +46,6 @@ class _AboutUsPageState extends StateSuper<AboutUsPage> {
       controller: assistCtr,
       builder: (context, ctr, data) {
         return Scaffold(
-          appBar: AppBarCustom(
-            title: Text(AppMessages.aboutUsTitle),
-          ),
           body: SafeArea(
               child: buildBody()
           ),

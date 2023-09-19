@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
@@ -9,7 +11,7 @@ import 'package:app/views/pages/consultant_page/medicine_docs.dart';
 import 'package:app/views/pages/consultant_page/my_file.dart';
 
 class ConsultationPage extends StatefulWidget {
-  const ConsultationPage({Key? key}) : super(key: key);
+  ConsultationPage({Key? key}) : super(key: key);
 
   @override
   State createState() => ConsultationPageState();
@@ -41,7 +43,7 @@ class ConsultationPageState extends StateSuper<ConsultationPage> {
 
   Widget buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18 * pw),
+      padding: EdgeInsets.symmetric(horizontal: 18 * hr),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

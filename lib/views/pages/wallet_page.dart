@@ -187,7 +187,7 @@ class _WalletPageState extends StateSuper<WalletPage> {
       child: Column(
         children: [
 
-          SizedBox(height: 30 * pw),
+          SizedBox(height: 30 * hr),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

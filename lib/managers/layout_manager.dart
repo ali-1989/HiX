@@ -7,13 +7,13 @@ import 'package:iris_notifier/iris_notifier.dart';
 import 'package:app/structures/enums/app_events.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
 import 'package:app/tools/app/app_images.dart';
-import 'package:app/views/baseComponents/layoutScaffold.dart';
+import 'package:app/views/baseComponents/layout_scaffold.dart';
 
 class LayoutManager {
   LayoutManager._();
 
   static final layoutScaffoldKey = GlobalKey<LayoutScaffoldState>();
-  static final List<LayoutNavigateModel> navigateList = [];
+  static final List<LayoutNavigateModel> layoutPageList = [];
   static final dashboardNavigateModel = LayoutNavigateModel();
   static final calendarNavigateModel = LayoutNavigateModel();
   static final webinarNavigateModel = LayoutNavigateModel();
@@ -38,14 +38,14 @@ class LayoutManager {
     consultantNavigateModel.iconAddress = AppImages.navIco$consultant;
 
 
-    navigateList.add(dashboardNavigateModel);
-    navigateList.add(calendarNavigateModel);
-    navigateList.add(webinarNavigateModel);
-    navigateList.add(consultantNavigateModel);
+    layoutPageList.add(dashboardNavigateModel);
+    layoutPageList.add(calendarNavigateModel);
+    layoutPageList.add(webinarNavigateModel);
+    layoutPageList.add(consultantNavigateModel);
   }
 
   static void selectNavigateItem(LayoutNavigateModel model) {
-    for (final nav in navigateList) {
+    for (final nav in layoutPageList) {
       nav.isSelected = false;
     }
 
@@ -62,7 +62,7 @@ class LayoutManager {
   }
 
   static LayoutNavigateModel currentPage() {
-    for (final nav in navigateList) {
+    for (final nav in layoutPageList) {
       if(nav.isSelected){
         return nav;
       }

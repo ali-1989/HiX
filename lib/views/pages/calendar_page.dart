@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/api/generator.dart';
@@ -14,7 +16,7 @@ import 'package:app/tools/app/app_sheet.dart';
 import 'package:app/views/sheets/calendar_day_cell_sheet.dart';
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({Key? key}) : super(key: key);
+  CalendarPage({Key? key}) : super(key: key);
 
   @override
   State createState() => CalendarPageState();
@@ -50,7 +52,7 @@ class CalendarPageState extends StateSuper<CalendarPage> {
 
   Widget buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18 * pw),
+      padding: EdgeInsets.symmetric(horizontal: 18 * hr),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

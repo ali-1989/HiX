@@ -265,7 +265,7 @@ class _DashboardCalendarPageState extends StateSuper<DashboardCalendarPage> {
     final list = <CalendarDayModel>[];
 
     for(int i =1; i < 31; i++){
-      list.add(CalendarDayModel(text: '$i', color: Colors.grey,)..size = 37*pw);
+      list.add(CalendarDayModel(text: '$i', color: Colors.grey,)..size = 37*hr);
     }
 
     for(int i =0; i < 9; i++){
@@ -408,7 +408,7 @@ class _DashboardCalendarPageState extends StateSuper<DashboardCalendarPage> {
   }
 
   Widget buildInfoLine(String txt){
-    final st = AppThemes.instance.currentTheme.baseTextStyle.copyWith(height: 2.0 *pw, fontSize: 12 *pw);
+    final st = AppThemes.instance.currentTheme.baseTextStyle.copyWith(height: 2.0 *hr, fontSize: 12 *hr);
 
     /*var tp = TextPainter(
       textAlign: AppThemes.getTextAlign(),

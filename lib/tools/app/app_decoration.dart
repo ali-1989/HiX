@@ -18,6 +18,7 @@ class AppDecoration {
   static Color info = const Color(0xFF79DAE8);
   static Color warning = const Color(0xFFFF5C00);
   static Color gray = Colors.grey.shade200;
+  static Color grayForBottomBar = Colors.grey;
   static Color boxGreenColor = const Color(0xff00FFD1);
 
   static String get morabbaFont {

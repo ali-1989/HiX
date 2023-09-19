@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 
 import 'package:iris_tools/modules/stateManagers/assist.dart';
@@ -6,7 +8,7 @@ import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/tools/app/app_images.dart';
 
 class WebinarPage extends StatefulWidget {
-  const WebinarPage({Key? key}) : super(key: key);
+  WebinarPage({Key? key}) : super(key: key);
 
   @override
   State createState() => WebinarPageState();
@@ -36,9 +38,9 @@ class WebinarPageState extends StateSuper<WebinarPage> {
 
   Widget buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18 * pw),
+      padding: EdgeInsets.symmetric(horizontal: 18 * hr),
       child: SizedBox(
-        height: sh/2,
+        height: hs/2,
         child: Center(
           child: Image.asset(AppImages.comingSoonIco),
         ),

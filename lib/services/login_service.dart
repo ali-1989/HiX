@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:iris_notifier/iris_notifier.dart';
 import 'package:iris_tools/api/helpers/jsonHelper.dart';
-import 'package:iris_tools/modules/stateManagers/assistState.dart';
+import 'package:iris_tools/modules/stateManagers/updater_state.dart';
 import 'package:openid_client/openid_client.dart';
 import 'package:openid_client/openid_client_io.dart';
 
@@ -56,7 +56,7 @@ class LoginService {
 
       await SessionService.logoff(userId);
 
-      AssistController.forId(AppBroadcast.drawerMenuRefresherId)!.update();
+      UpdaterController.forId(AppBroadcast.drawerRefresherId)!.update();
       //AppBroadcast.layoutPageKey.currentState?.scaffoldState.currentState?.closeDrawer();
 
       if (isCurrent && RouteTools.materialContext != null) {
@@ -83,7 +83,7 @@ class LoginService {
 
     await SessionService.logoffAll();
 
-    AssistController.forId(AppBroadcast.drawerMenuRefresherId)!.update();
+    UpdaterController.forId(AppBroadcast.drawerRefresherId)!.update();
     //AppBroadcast.layoutPageKey.currentState?.scaffoldState.currentState?.closeDrawer();
 
     if (RouteTools.materialContext != null) {
