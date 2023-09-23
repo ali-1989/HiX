@@ -1,5 +1,14 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'package:flutter/material.dart';
+
+import 'package:badges/badges.dart' as badge;
+import 'package:iris_tools/api/helpers/mathHelper.dart';
+import 'package:iris_tools/modules/stateManagers/updater_state.dart';
+import 'package:iris_tools/widgets/circle_bordering.dart';
+import 'package:iris_tools/widgets/circle_container.dart';
+import 'package:iris_tools/widgets/custom_card.dart';
+
 import 'package:app/managers/layout_manager.dart';
 import 'package:app/structures/enums/assist_groups.dart';
 import 'package:app/system/extensions.dart';
@@ -10,13 +19,6 @@ import 'package:app/tools/app/app_images.dart';
 import 'package:app/tools/app/app_sizes.dart';
 import 'package:app/tools/route_tools.dart';
 import 'package:app/views/pages/notification_page.dart';
-import 'package:flutter/material.dart';
-import 'package:iris_tools/api/helpers/mathHelper.dart';
-import 'package:iris_tools/modules/stateManagers/updater_state.dart';
-import 'package:iris_tools/widgets/circle_container.dart';
-import 'package:iris_tools/widgets/custom_card.dart';
-import 'package:badges/badges.dart' as badge;
-
 
 class AppbarBuilder extends StatelessWidget {
   AppbarBuilder({Key? key}) : super(key: key);
@@ -51,7 +53,7 @@ class AppbarBuilder extends StatelessWidget {
                 const SizedBox(width: 8),
 
                 // ignore: prefer_const_constructors
-                CircleBorder(
+                CircleBordering(
                   borderColor: AppDecoration.mainColor.withAlpha(85),
                   width: 1,
                   child: const CircleAvatar(

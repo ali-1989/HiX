@@ -14,9 +14,7 @@ enum AssistGroup implements GroupId {
 }
 ///==============================================================================
 enum BadgesGroup implements UpdaterGroupId {
-  notification(100),
-  ww(101),
-  ss(102);
+  notification(100);
 
   final int _number;
 

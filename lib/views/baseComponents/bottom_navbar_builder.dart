@@ -1,14 +1,16 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'package:flutter/material.dart';
+
+import 'package:iris_tools/modules/stateManagers/updater_state.dart';
+import 'package:iris_tools/widgets/colored_space.dart';
+
 import 'package:app/managers/layout_manager.dart';
 import 'package:app/structures/models/layoutNavigateModel.dart';
 import 'package:app/system/extensions.dart';
 import 'package:app/tools/app/app_broadcast.dart';
 import 'package:app/tools/app/app_decoration.dart';
 import 'package:app/tools/app/app_sizes.dart';
-import 'package:flutter/material.dart';
-import 'package:iris_tools/modules/stateManagers/updater_state.dart';
-import 'package:iris_tools/widgets/colored_space.dart';
 
 class BottomNavbarBuilder extends StatelessWidget {
   BottomNavbarBuilder({Key? key}) : super(key: key);

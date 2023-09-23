@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:animator/animator.dart';
 import 'package:iris_tools/api/helpers/mathHelper.dart';
+import 'package:iris_tools/modules/stateManagers/updater_state.dart';
 
 import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/tools/app/app_broadcast.dart';
 import 'package:app/tools/app/app_sizes.dart';
-import 'package:iris_tools/modules/stateManagers/updater_state.dart';
 
 class LayoutScaffold extends StatefulWidget {
   final Widget body;

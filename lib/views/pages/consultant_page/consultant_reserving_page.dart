@@ -193,12 +193,8 @@ class _ConsultantReservingPageState extends StateSuper<ConsultantReservingPage> 
               CheckBoxRow(
                 description: const Text('قائدگی').bold().fsR(-1),
                 value: true,
-                checkbox: Checkbox(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  value: true,
-                  onChanged: (v){},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 mainAxisSize: MainAxisSize.min,
                 onChanged: (v){},
@@ -206,7 +202,8 @@ class _ConsultantReservingPageState extends StateSuper<ConsultantReservingPage> 
 
               CheckBoxRow(
                 description: const Text('روابط جنسی').bold().fsR(-1),
-                value: true,padding: EdgeInsets.zero,
+                value: true,
+                padding: EdgeInsets.zero,
                 mainAxisSize: MainAxisSize.min,
                 onChanged: (v){},
               )

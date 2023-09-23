@@ -1,6 +1,3 @@
-import 'package:app/views/baseComponents/bottom_navbar_builder.dart';
-
-import 'package:app/views/baseComponents/appbar_builder.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iris_notifier/iris_notifier.dart';
@@ -14,6 +11,8 @@ import 'package:app/structures/abstract/state_super.dart';
 import 'package:app/structures/enums/app_events.dart';
 import 'package:app/system/keys.dart';
 import 'package:app/tools/app/app_images.dart';
+import 'package:app/views/baseComponents/appbar_builder.dart';
+import 'package:app/views/baseComponents/bottom_navbar_builder.dart';
 import 'package:app/views/baseComponents/drawer_builder.dart';
 import 'package:app/views/baseComponents/layout_scaffold.dart';
 import 'package:app/views/pages/calendar_page.dart';

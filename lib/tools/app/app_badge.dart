@@ -1,6 +1,6 @@
-import 'package:app/structures/enums/assist_groups.dart';
 import 'package:iris_tools/modules/stateManagers/updater_state.dart';
 
+import 'package:app/structures/enums/assist_groups.dart';
 
 class AppBadge {
   AppBadge._();
