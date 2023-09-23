@@ -149,14 +149,14 @@ class AppNotification {
 	}
 
 	static void startListenTap() {
-		//AwesomeNotifications().actionStream.listen(awesomeTapListener);
+		AwesomeNotifications().actionStream.listen(awesomeTapListener);
 
-		AwesomeNotifications().setListeners(
+		/*AwesomeNotifications().setListeners(
 				onActionReceivedMethod: awesomeTapListener,
 				//onNotificationCreatedMethod: ,
 				//onNotificationDisplayedMethod: ,
 				//onDismissActionReceivedMethod:
-		);
+		);*/
 	}
 
 	static void removeChannel(String channelKey) {

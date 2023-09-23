@@ -106,12 +106,13 @@ class AppbarBuilder extends StatelessWidget {
                 child: UpdaterBuilder(
                   groupIds: const [BadgesGroup.notification],
                   builder: (_, ctr, data) {
-                    final num = AppBadge.getBadge(BadgesGroup.notification).toString();
+                    final num = AppBadge.getBadge(BadgesGroup.notification);
 
                     return badge.Badge(
-                      badgeContent: Text(num.localeNum()).font(AppDecoration.morabbaFont).bold().color(Colors.white).fsR(-5),
+                      badgeContent: Text(num.toString().localeNum()).font(AppDecoration.morabbaFont).bold().color(Colors.white).fsR(-5),
                       badgeStyle: const badge.BadgeStyle(shape: badge.BadgeShape.square,padding: EdgeInsets.all(2)),
-                      position: badge.BadgePosition.bottomStart(bottom: -7, start: -(MathHelper.between(18, 3, 5, 1, num.length.toDouble()))),
+                      position: badge.BadgePosition.bottomStart(bottom: -7, start: -(MathHelper.between(18, 3, 5, 1, num.toString().length.toDouble()))),
+                      showBadge: num > 0,
                       child: CustomCard(
                           radius: 10,
                           border: Border.all(color: Colors.grey, width: 1),
