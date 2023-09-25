@@ -320,7 +320,7 @@ class AppMessages {
     return 'کد کشور را وارد کنید';
   }
 
-  static String get unkNow {
+  static String get unKnow {
     return _getContext().t('unknown')?? _noText;
   }
 

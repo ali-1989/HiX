@@ -54,25 +54,25 @@ class DashboardPageState extends StateSuper<DashboardPage> {
   Widget buildBody() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 18 * hr),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// vertical rail
+
+          /// rail
           SizedBox(
-            width: 65 * hr,
+            height: 100 * hr,
             child: CustomCard(
               color: Colors.white,
               padding: const EdgeInsets.all(8),
-              child: Column(
+              child: Row(
                 children: DashboardManager.navigateList.map((e) => buildNavigationItem(e)).toList(),
               ),
             ),
           ),
 
-
           const SizedBox(width: 17),
 
-          Expanded(child: pickView()),
+          pickView(),
         ]
       ),
     );
