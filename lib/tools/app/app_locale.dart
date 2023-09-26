@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:iris_tools/api/helpers/localeHelper.dart';
 import 'package:iris_tools/api/system.dart';
+import 'package:iris_tools/api/tools.dart';
 import 'package:iris_tools/modules/irisLocalizations.dart';
 
 import 'package:app/system/keys.dart';
@@ -23,7 +24,7 @@ class AppLocale {
   }
 
   static Future<void> init() async {
-    //rint('@@ this line must log once');
+    //Tools.verboseLog('@@ this line must log once');
     if(!_isInit) {
       _isInit = true;
       localeDelegate = IrisLocaleDelegate((locale) => _isLocaleSupported(locale));

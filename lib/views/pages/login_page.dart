@@ -56,7 +56,7 @@ class _LoginPageState extends StateSuper<LoginPage> {
 
 
   void requestData() async {
-    LoginService.authenticate(Uri.parse('https://localhost:5001/'), 'flutter', ['openid', 'profile']);
+    LoginService.authenticate(Uri.parse('https://192.168.70.194:5001/'), 'flutter', ['openid', 'profile']);
   }
 
   void requestData2() async {

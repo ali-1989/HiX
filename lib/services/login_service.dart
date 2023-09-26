@@ -14,6 +14,7 @@ import 'package:app/system/keys.dart';
 import 'package:app/tools/app/app_broadcast.dart';
 import 'package:app/tools/app/app_http_dio.dart';
 import 'package:app/tools/route_tools.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginService {
   LoginService._();
@@ -130,18 +131,34 @@ class LoginService {
   }
 */
 
-  static void authenticate(Uri uri, String clientId, List<String> scopes) async {
+  static void authenticate(Uri uri2, String clientId, List<String> scopes) async {
+    final uri = Uri.parse('https://192.168.70.194:5001/');
+
     final issuer = await Issuer.discover(uri);
-    final client = Client(issuer, clientId);
+    //final client = Client(issuer, clientId, clientSecret: 'rnUsoPf86K');
+    final client = Client(issuer, 'flutter_test');
+
+    urlLauncher(String url) async {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+      else {
+        throw 'Could not launch $url';
+      }
+    }
+
 
     var authenticator = Authenticator(
         client,
-        scopes: scopes,
-        //port: 4000,
+        scopes: ['profile', 'openid'],
+        urlLancher: urlLauncher,
+        //port: 5001,
+        //redirectUri: Uri.parse('gclprojects.chunlin.myapp:/oauth2callback')
     );
 
     final res = await authenticator.authorize();
     print(res.toString());
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 
     //return await c.getUserInfo();
 
